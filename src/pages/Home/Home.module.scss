@@ -1,6 +1,6 @@
 main {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   height: 100dvh;
 }
 
@@ -9,10 +9,15 @@ main {
   flex-direction: column;
   flex: 1;
 
+  max-width: 43.75rem;
+
   align-items: center;
   justify-content: center;
 
   padding: 0.625rem;
+
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .messages {
@@ -22,6 +27,13 @@ main {
   overflow-x: hidden;
   width: 100%;
   height: 100%;
+
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE 10+ */
+
+  &::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
+  }
 }
 
 .message {
@@ -37,19 +49,25 @@ main {
 
   margin-left: auto;
 
+  margin-bottom: 50px;
+
   &:not(:last-child) {
-    margin-bottom: 0.125rem;
+    margin-bottom: 0.625rem;
   }
 
   &.incoming {
     margin-left: 0;
     margin-right: auto;
-    border-radius: 0 20px 20px 20px;
+    border-radius: 0 1.25rem 1.25rem 1.25rem;
   }
 
   & > p {
-    margin: 0;
     white-space: pre-wrap;
+    margin: 0;
+
+    &:not(:last-child) {
+      margin-bottom: 0.625rem;
+    }
   }
 }
 
@@ -59,7 +77,7 @@ main {
   background-clip: text;
   color: transparent;
   font-size: 2rem;
-  padding: 10px;
+  padding: 0.625rem;
 }
 
 .prompt {
@@ -68,4 +86,93 @@ main {
   bottom: 1.25rem;
   justify-content: center;
   width: 100%;
+}
+
+.sidebar {
+  width: 13.75rem;
+  background: #171717;
+  padding: 1rem;
+  overflow-y: auto;
+  max-height: 99vh;
+
+  ul {
+    list-style: none;
+    padding: 0;
+    margin-top: 1rem;
+  }
+
+  li {
+    display: flex;
+
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 0.5rem;
+    cursor: pointer;
+    border-radius: var(--border-radius);
+
+    & > span {
+      width: 100%;
+
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    & > button {
+      opacity: 0;
+    }
+
+    &:hover > button {
+      opacity: 1;
+    }
+  }
+
+  .active {
+    background: var(--surface-color);
+
+    & > button {
+      opacity: 1;
+    }
+  }
+
+  li:hover {
+    opacity: 0.7;
+  }
+
+  .button {
+    width: 100%;
+    padding: 0.5rem;
+    border: none;
+    border-radius: var(--border-radius);
+    background: var(--surface-color);
+    cursor: pointer;
+
+    &:hover {
+      opacity: 0.7;
+    }
+
+    &:active {
+      opacity: 0.5;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    position: absolute;
+    z-index: 1;
+    height: 100%;
+  }
+
+  .SidebarButton {
+    position: fixed;
+    z-index: 2;
+  }
+}
+
+@media (hover: none) {
+  *:hover {
+    opacity: 1;
+  }
 }
