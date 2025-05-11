@@ -8,6 +8,9 @@ import type { Message, Chat } from "../../types/chat.tsx";
 import { getChats, saveChats } from "../../utils/chatsStorage.tsx";
 import { Trash, Menu } from "lucide-react";
 import SvgButton from "../../components/SvgButton/SvgButton.tsx";
+import 'katex/dist/katex.min.css';
+import remarkMath from 'remark-math';
+import rehypeKatex from 'rehype-katex';
 
 const Home = () => {
     const [chats, setChats] = useState<Chat[]>(getChats());
@@ -203,7 +206,10 @@ const Home = () => {
                                     animate={{ opacity: 1, x: 0 }}
                                     exit={message.role === 'user' ? { opacity: 0, x: -100 } : { opacity: 0, x: 100 }}
                                 >
-                                    <ReactMarkdown>{message.content}</ReactMarkdown>
+                                    <ReactMarkdown
+                                        remarkPlugins={[remarkMath]}
+                                        rehypePlugins={[rehypeKatex]}
+                                    >{message.content}</ReactMarkdown>
                                 </motion.div>
                             ))}
                         </AnimatePresence>
