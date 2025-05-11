@@ -126,7 +126,7 @@ const Home = () => {
                     <nav className={styles.sidebar}>
                         <button className={styles.button} onClick={createNewChat}>+ New Chat</button>
                         <ul>
-                            {chats.map(chat => (
+                            {[...chats].reverse().map(chat => (
                                 <li
                                     key={chat.id}
                                     className={chat.id === activeChatId ? styles.active : ''}
