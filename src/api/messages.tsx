@@ -9,7 +9,7 @@ export const sendMessage = async (
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify(messages), // ⬅️ отправляем просто массив сообщений
+        body: JSON.stringify(messages),
     });
 
     if (!response.ok || !response.body) {
