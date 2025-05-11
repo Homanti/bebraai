@@ -4,7 +4,7 @@ export const sendMessage = async (
     messages: Message[],
     onChunk: (chunk: string) => void
 ): Promise<void> => {
-    const response = await fetch('http://192.168.0.194:8000/api/messages', {
+    const response = await fetch('https://bebraai-fastapi-production.up.railway.app/api/messages', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
