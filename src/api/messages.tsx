@@ -1,15 +1,43 @@
-import type {Message} from "../types/chat.tsx";
+import type { Message } from "../types/chat.tsx";
 
 export const sendMessage = async (
     messages: Message[],
     onChunk: (chunk: string) => void
 ): Promise<void> => {
-    const response = await fetch('https://bebraai-fastapi-production.up.railway.app/api/messages', {
+    const formData = new FormData();
+
+    formData.append('messages', JSON.stringify(
+        messages.map((m) => ({
+            role: m.role,
+            content: m.content || "",
+        }))
+    ));
+
+    messages.forEach((msg, msgIndex) => {
+        msg.files?.forEach((item, fileIndex) => {
+            if (item.data.startsWith("data:")) {
+                const [meta, base64] = item.data.split(',');
+                const mimeMatch = meta.match(/data:(.*?);base64/);
+                if (!mimeMatch) return;
+
+                const mime = mimeMatch[1];
+                const binary = atob(base64);
+                const len = binary.length;
+                const buffer = new Uint8Array(len);
+                for (let i = 0; i < len; i++) {
+                    buffer[i] = binary.charCodeAt(i);
+                }
+                const blob = new Blob([buffer], { type: mime });
+                const ext = mime.split('/')[1];
+                const filename = `file-${msgIndex}-${fileIndex}.${ext}`;
+                formData.append('files', blob, filename);
+            }
+        });
+    });
+
+    const response = await fetch('http://192.168.0.194:8000/api/messages', {
         method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(messages),
+        body: formData
     });
 
     if (!response.ok || !response.body) {

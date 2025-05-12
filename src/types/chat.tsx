@@ -1,5 +1,6 @@
 export type Message = {
-    content: string;
+    content?: string;
+    files?: { id: string; data: string }[];
     role: 'user' | 'assistant';
 }
 
