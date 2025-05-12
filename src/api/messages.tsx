@@ -35,7 +35,7 @@ export const sendMessage = async (
         });
     });
 
-    const response = await fetch('https://bebraai-production.up.railway.app/api/messages', {
+    const response = await fetch('https://bebraai-fastapi-production.up.railway.app/api/messages', {
         method: 'POST',
         body: formData
     });
