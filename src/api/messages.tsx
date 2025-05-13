@@ -1,8 +1,10 @@
 import type { Message } from "../types/chat.tsx";
+import { models } from "../data/models.tsx";
 
 export const sendMessage = async (
     messages: Message[],
-    onChunk: (chunk: string) => void
+    modelName: string = "ChatGPT 4o",
+    onChunk: (chunk: string) => void,
 ): Promise<void> => {
     const formData = new FormData();
 
@@ -12,6 +14,10 @@ export const sendMessage = async (
             content: m.content || "",
         }))
     ));
+
+    const model = models.find((m) => m.name === modelName)?.model || "gpt-4o";
+
+    formData.append('model', model);
 
     messages.forEach((msg, msgIndex) => {
         msg.files?.forEach((item, fileIndex) => {

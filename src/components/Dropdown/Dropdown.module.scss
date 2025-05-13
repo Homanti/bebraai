@@ -1,0 +1,35 @@
+.button {
+  background: transparent;
+  border: none;
+
+  font-size: 1.1rem;
+
+  padding: 15px;
+  cursor: pointer;
+
+  border-radius: var(--border-radius);
+
+  &:hover {
+    background: var(--surface-color);
+  }
+}
+
+.content {
+  position: absolute;
+  background: var(--surface-color);
+  border-radius: var(--border-radius);
+  list-style: none;
+  padding: 10px 20px;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.item {
+  padding: 10px;
+  cursor: pointer;
+  border-radius: var(--border-radius);
+
+  &:hover {
+    opacity: 0.5;
+  }
+}

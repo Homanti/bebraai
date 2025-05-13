@@ -44,13 +44,13 @@
   width: 100%;
   overflow-x: auto;
 
-  border-bottom: 1px solid darkgrey;
+  border-bottom: 0.0625rem solid darkgrey;
 }
 
 .contentItem {
-  min-width: 80px;
-  width: 80px;
-  height: 80px;
+  min-width: 5rem;
+  width: 5rem;
+  height: 5rem;
   overflow: hidden;
   position: relative;
   border-radius: var(--border-radius);
@@ -97,8 +97,8 @@
   }
 
   & > svg {
-    width: 18px;
-    height: 18px;
+    width: 1.125rem;
+    height: 1.125rem;
     color: black;
   }
 }

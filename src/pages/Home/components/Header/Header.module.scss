@@ -1,0 +1,20 @@
+.header {
+  display: flex;
+  flex-direction: row;
+  position: absolute;
+
+  border-bottom: 0.0625rem solid #2c2c2c;
+
+  width: 100%;
+
+  height: var(--header-height);
+
+  background: var(--background-color);
+
+  justify-content: start;
+  align-items: center;
+
+  padding-left: 0.625rem;
+  padding-top: 0.3125rem;
+  padding-bottom: 0.3125rem;
+}
