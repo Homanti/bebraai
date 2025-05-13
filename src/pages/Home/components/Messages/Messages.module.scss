@@ -81,6 +81,10 @@
   max-width: 80%;
   margin-bottom: 0.5rem;
 
+  &:first-child {
+    margin-top: calc(var(--header-height) + 0.625rem);
+  }
+
   display: flex;
   justify-content: flex-end;
 
