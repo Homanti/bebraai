@@ -65,6 +65,7 @@
     cursor: pointer;
     border-radius: var(--border-radius);
 
+    user-select: none;
     align-items: center;
 
     justify-content: space-between;

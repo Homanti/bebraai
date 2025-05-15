@@ -62,9 +62,9 @@ const Sidebar = ({ chats, updateChats, setActiveChatId, activeChatId }: SidebarP
             transition: { type: "spring", stiffness: 500, damping: 40 },
         }
         : {
-            initial: { opacity: 0, width: "0rem" },
-            animate: { opacity: 1, width: "18.125rem" },
-            exit: { opacity: 0, width: "0rem" }
+            initial: { width: "0rem" },
+            animate: { width: "18.125rem" },
+            exit: { width: "0rem" }
     };
 
     useEffect(() => {
