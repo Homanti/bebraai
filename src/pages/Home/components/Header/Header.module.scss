@@ -1,13 +1,12 @@
 .header {
   display: flex;
   flex-direction: row;
-  position: absolute;
 
   border-bottom: 0.0625rem solid #2c2c2c;
 
   width: 100%;
 
-  height: var(--header-height);
+  height: 3.75rem;
 
   background: var(--background-color);
 
@@ -18,5 +17,7 @@
   padding-top: 0.3125rem;
   padding-bottom: 0.3125rem;
 
-  z-index: 10;
+  box-sizing: border-box;
+
+  z-index: 5;
 }

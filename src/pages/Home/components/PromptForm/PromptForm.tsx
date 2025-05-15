@@ -5,10 +5,13 @@ import { isMobile } from "react-device-detect";
 import SvgButton from "../../../../components/SvgButton/SvgButton.tsx";
 import type {Message} from "../../../../types/chat.tsx";
 import {AnimatePresence, motion} from "motion/react";
+import {useSettingsStore} from "../../../../store/settingsStore.tsx";
+import {models} from "../../../../data/models.tsx";
 
 const PromptForm = ({ onSubmit }: { onSubmit: (message: Message) => void }) => {
     const [inputValue, setInputValue] = useState<string>('');
     const [inputFocused, setInputFocused] = useState(false);
+    const { modelName } = useSettingsStore();
     const [message, setMessage] = useState<Message>({
         content: '',
         files: [],
@@ -160,9 +163,9 @@ const PromptForm = ({ onSubmit }: { onSubmit: (message: Message) => void }) => {
                 </AnimatePresence>
 
                 <div className={styles.inputContainer}>
-                    <label className={styles.addButton}>
+                    <label className={`${styles.addButton} ${!(models.find((m) => m.name === modelName)?.visionSupport) ? styles.disabled : ''}`}>
                         <Plus />
-                        <input type="file" maxLength={10} accept="image/png, image/jpeg" multiple style={{ display: 'none' }} onChange={handleFileAdd} />
+                        <input disabled={!models.find((m) => m.name === modelName)?.visionSupport} type="file" maxLength={10} accept="image/png, image/jpeg" multiple style={{ display: 'none' }} onChange={handleFileAdd} />
                     </label>
 
                     <textarea

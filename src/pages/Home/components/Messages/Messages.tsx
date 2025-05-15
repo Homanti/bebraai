@@ -55,8 +55,9 @@ const Messages = ({ activeChat }: MessagesProps) => {
 
                                     <ReactMarkdown
                                         remarkPlugins={[remarkMath]}
-                                        rehypePlugins={[rehypeKatex]}
-                                    >{message.content}</ReactMarkdown>
+                                        rehypePlugins={[rehypeKatex]}>
+                                        {message.content}
+                                    </ReactMarkdown>
                                 </motion.div>
                             </>
                         ) : (

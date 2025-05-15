@@ -13,4 +13,6 @@ export type Chat = {
 export type Model = {
     name: string;
     model: string;
+    description: string;
+    visionSupport: boolean;
 };

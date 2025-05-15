@@ -58,14 +58,14 @@ const Sidebar = ({ chats, updateChats, setActiveChatId, activeChatId }: SidebarP
             transition: { type: "spring", stiffness: 500, damping: 40 },
         }
         : {
-            initial: { opacity: 0, width: 0 },
-            animate: { opacity: 1, width: "100%" },
-            exit: { opacity: 0, width: 0 }
-        };
+            initial: { opacity: 0, width: "0rem" },
+            animate: { opacity: 1, width: "18.125rem" },
+            exit: { opacity: 0, width: "0rem" }
+    };
 
     useEffect(() => {
         setSidebarOpened(window.innerWidth > 768);
-    }, []);
+    }, [setSidebarOpened]);
 
     return (
         <>
@@ -74,41 +74,42 @@ const Sidebar = ({ chats, updateChats, setActiveChatId, activeChatId }: SidebarP
                     <motion.nav
                         className={styles.sidebar}
                         {...motionProps}
-                        layout
                     >
-                        <div className={styles.buttonsContainer}>
-                            <SvgButton onClick={() => setSidebarOpened(!sidebarOpened)}>
-                                <Menu />
-                            </SvgButton>
-                            <SvgButton onClick={createNewChat}>
-                                <SquarePen />
-                            </SvgButton>
+                        <div className={styles.inner}>
+                            <div className={styles.buttonsContainer}>
+                                <SvgButton onClick={() => setSidebarOpened(!sidebarOpened)}>
+                                    <Menu />
+                                </SvgButton>
+                                <SvgButton onClick={createNewChat}>
+                                    <SquarePen />
+                                </SvgButton>
+                            </div>
+                            <ul>
+                                <AnimatePresence mode="popLayout">
+                                    {[...chats].reverse().map(chat => (
+                                        <motion.li
+                                            key={chat.id}
+                                            className={chat.id === activeChatId ? styles.active : ''}
+                                            onClick={() => setActiveChatId(chat.id)}
+                                            initial={{ opacity: 0, x: -300 }}
+                                            animate={{ opacity: 1, x: 0 }}
+                                            exit={{ opacity: 0, x: -300 }}
+                                            layout
+                                            transition={{
+                                                layout: { type: "spring", stiffness: 500, damping: 40 },
+                                                x: { type: "spring", stiffness: 500, damping: 30 },
+                                                opacity: { duration: 0.2 }
+                                            }}
+                                        >
+                                            <span>{chat.title || 'New chat'}</span>
+                                            <SvgButton className={styles.trashButton} onClick={() => deleteChat(chat.id)}>
+                                                <Trash />
+                                            </SvgButton>
+                                        </motion.li>
+                                    ))}
+                                </AnimatePresence>
+                            </ul>
                         </div>
-                        <ul>
-                            <AnimatePresence mode="popLayout">
-                                {[...chats].reverse().map(chat => (
-                                    <motion.li
-                                        key={chat.id}
-                                        className={chat.id === activeChatId ? styles.active : ''}
-                                        onClick={() => setActiveChatId(chat.id)}
-                                        initial={{ opacity: 0, x: -300 }}
-                                        animate={{ opacity: 1, x: 0 }}
-                                        exit={{ opacity: 0, x: -300 }}
-                                        layout
-                                        transition={{
-                                            layout: { type: "spring", stiffness: 500, damping: 40 },
-                                            x: { type: "spring", stiffness: 500, damping: 30 },
-                                            opacity: { duration: 0.2 }
-                                        }}
-                                    >
-                                        <span>{chat.title || 'New chat'}</span>
-                                        <SvgButton className={styles.trashButton} onClick={() => deleteChat(chat.id)}>
-                                            <Trash />
-                                        </SvgButton>
-                                    </motion.li>
-                                ))}
-                            </AnimatePresence>
-                        </ul>
                     </motion.nav>
                 )}
             </AnimatePresence>

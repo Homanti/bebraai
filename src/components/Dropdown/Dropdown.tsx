@@ -3,14 +3,15 @@ import styles from './Dropdown.module.scss';
 import { AnimatePresence, motion } from "motion/react";
 
 type DropdownProps = {
-    children: string[];
+    item: string[];
+    description?: string[];
     onSelect: (value: string) => void;
     value?: string;
 };
 
-const Dropdown = ({ children, onSelect, value }: DropdownProps) => {
+const Dropdown = ({ item, description, onSelect, value }: DropdownProps) => {
     const [isOpen, setIsOpen] = useState(false);
-    const [selected, setSelected] = useState(value || children[0]);
+    const [selected, setSelected] = useState(value || item[0]);
 
     const handleSelect = (value: string) => {
         setSelected(value);
@@ -31,9 +32,10 @@ const Dropdown = ({ children, onSelect, value }: DropdownProps) => {
                         animate={{ opacity: 1, height: 'auto' }}
                         exit={{ opacity: 0, height: 0 }}
                     >
-                        {children.map((item, index) => (
+                        {item.map((item, index) => (
                             <li onClick={() => handleSelect(item)} key={index} className={styles.item}>
                                 {item}
+                                {description && <p className={styles.description}>{description[index]}</p>}
                             </li>
                         ))}
                     </motion.ul>

@@ -1,13 +1,26 @@
 .sidebar {
   display: flex;
   flex-direction: column;
-  max-width: 13.75rem;
-  width: 100%;
-  background: var(--nav-color);
-  padding: 1rem;
-  overflow-y: auto;
 
-  z-index: 11;
+  height: 100%;
+  min-width: 0;
+  flex-shrink: 0;
+
+  overflow: hidden;
+
+  background: var(--nav-color);
+
+  z-index: 6;
+
+  .inner {
+    padding: 1rem;
+    overflow-y: auto;
+    height: 100%;
+
+    width: 18.125rem;
+
+    box-sizing: border-box;
+  }
 
   .buttonsContainer {
     display: flex;
@@ -87,7 +100,6 @@
 @media (max-width: 48rem) {
   .sidebar {
     position: absolute;
-    z-index: 11;
     height: 100%;
   }
 }

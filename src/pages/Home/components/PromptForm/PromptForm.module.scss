@@ -154,6 +154,15 @@
   &:active {
     opacity: 0.5;
   }
+
+  &.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+
+    & > svg {
+      color: darkgrey;
+    }
+  }
 }
 
 @keyframes gradientAnimation {

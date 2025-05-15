@@ -81,39 +81,34 @@ const Home = () => {
     };
 
     return (
-        <>
+        <motion.div className={styles.home}>
+            <Sidebar chats={chats} updateChats={updateChats} setActiveChatId={setActiveChatId} activeChatId={activeChatId} />
+
             <main>
-                <Sidebar chats={chats} updateChats={updateChats} setActiveChatId={setActiveChatId} activeChatId={activeChatId} />
+                <Header />
 
-                <motion.section
-                    className={styles.chat}
-                    layout
-                >
-                    <Header />
+                <section className={styles.chat}>
+                    <AnimatePresence>
+                        {activeChat.messages.length === 0 && (
+                            <motion.h1
+                                className={styles.title}
+                                initial={{ opacity: 0, y: -50 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                exit={{ opacity: 0, y: -50 }}
+                            >
+                                Hey! Write your question.
+                            </motion.h1>
+                        )}
+                    </AnimatePresence>
 
-                    <div className={styles.chatContent}>
-                        <AnimatePresence>
-                            {activeChat.messages.length === 0 && (
-                                <motion.h1
-                                    className={styles.title}
-                                    initial={{ opacity: 0, y: -50 }}
-                                    animate={{ opacity: 1, y: 0 }}
-                                    exit={{ opacity: 0, y: -50 }}
-                                >
-                                    Hey! Write your question.
-                                </motion.h1>
-                            )}
-                        </AnimatePresence>
+                    <Messages activeChat={activeChat} />
 
-                        <Messages activeChat={activeChat} />
-
-                        <div className={`${styles.prompt} ${styles.gradientBorder}`}>
-                            <PromptForm onSubmit={submitMessage} />
-                        </div>
+                    <div className={`${styles.prompt} ${styles.gradientBorder}`}>
+                        <PromptForm onSubmit={submitMessage} />
                     </div>
-                </motion.section>
+                </section>
             </main>
-        </>
+        </motion.div>
     );
 };
 
