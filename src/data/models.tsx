@@ -10,7 +10,7 @@ export const models: Model[] = [
     { name: "Gemini 2.5 Flash", model: "gemini-2.5-flash", description: "Very fast Google model. Doesn't support images.", visionSupport: false },
     { name: "Gemini 2.0 Flash Thinking", model: "gemini-2.0-flash-thinking", description: "Best for logic and planning. Doesn't support images.", visionSupport: false },
     { name: "Qwen 2.5 Coder 32B", model: "qwen-2.5-coder-32b", description: "Powerful coding model from Alibaba. Doesn't support images.", visionSupport: false },
-    { name: "LLaMA 3.3 70B", model: "llama-3.3-70b", description: "Large model from Meta. Works only with text.", visionSupport: false },
+    { name: "LLaMA 3.3 70B", model: "llama-3.3-70b", description: "Large model from Meta. Doesn't support images.", visionSupport: false },
     { name: "LLaMA 4 Scout", model: "llama-4-scout", description: "Early LLaMA 4 test model. Doesn't support images.", visionSupport: false },
     { name: "LLaMA 4 Scout 17B", model: "llama-4-scout-17b", description: "Smaller version of LLaMA 4 Scout. Doesn't support images.", visionSupport: false },
     { name: "Mistral Small 3.1 24B", model: "mistral-small-3.1-24b", description: "Fast and general-purpose. Doesn't support images.", visionSupport: false },

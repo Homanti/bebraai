@@ -3,8 +3,9 @@ import {AnimatePresence, motion} from "motion/react";
 import SvgButton from "../../../../components/SvgButton/SvgButton.tsx";
 import {Menu, Trash, SquarePen} from "lucide-react";
 import type {Chat} from "../../../../types/chat.tsx";
-import {useEffect, useState} from "react";
+import {useEffect, useRef, useState} from "react";
 import { useSidebar } from "../../../../store/sidebar.tsx";
+import {useClickOutside} from "../../../../hooks/useClickOutside.tsx";
 
 type SidebarProps = {
     chats: Chat[];
@@ -16,6 +17,9 @@ type SidebarProps = {
 const Sidebar = ({ chats, updateChats, setActiveChatId, activeChatId }: SidebarProps) => {
     const [width, setWidth] = useState(window.innerWidth);
     const { sidebarOpened, setSidebarOpened } = useSidebar();
+    const sidebarRef = useRef<HTMLDivElement>(null);
+
+    useClickOutside(sidebarRef, () => setSidebarOpened(false), (width / 16) < 48);
 
     const createNewChat = () => {
         const nextId = (Math.max(...chats.map(c => Number(c.id)), 0) + 1).toString();
@@ -74,6 +78,7 @@ const Sidebar = ({ chats, updateChats, setActiveChatId, activeChatId }: SidebarP
                     <motion.nav
                         className={styles.sidebar}
                         {...motionProps}
+                        ref={sidebarRef}
                     >
                         <div className={styles.inner}>
                             <div className={styles.buttonsContainer}>

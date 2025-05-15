@@ -41,6 +41,8 @@ main {
   color: transparent;
   font-size: 2rem;
   padding: 0.625rem;
+
+  user-select: none;
 }
 
 .prompt {

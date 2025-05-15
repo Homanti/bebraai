@@ -5,7 +5,7 @@ import { isMobile } from "react-device-detect";
 import SvgButton from "../../../../components/SvgButton/SvgButton.tsx";
 import type {Message} from "../../../../types/chat.tsx";
 import {AnimatePresence, motion} from "motion/react";
-import {useSettingsStore} from "../../../../store/settingsStore.tsx";
+import {useSettingsStore} from "../../../../store/settings.tsx";
 import {models} from "../../../../data/models.tsx";
 
 const PromptForm = ({ onSubmit }: { onSubmit: (message: Message) => void }) => {

@@ -1,0 +1,10 @@
+.settings {
+  position: absolute;
+  background: var(--surface-color);
+  border-radius: var(--border-radius);
+  z-index: 10;
+
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}

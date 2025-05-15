@@ -1,4 +1,4 @@
-import type { ReactNode, MouseEvent, ButtonHTMLAttributes } from "react";
+import type {ReactNode, MouseEvent, ButtonHTMLAttributes, RefObject} from "react";
 import styles from "./SvgButton.module.scss";
 
 type Props = {
@@ -6,9 +6,10 @@ type Props = {
     onClick?: (e: MouseEvent<HTMLButtonElement>) => void;
     className?: string;
     type?: string;
+    ref?: RefObject<HTMLButtonElement> | null;
 } & ButtonHTMLAttributes<HTMLButtonElement>;
 
-const SvgButton = ({ children, onClick, className, type = "button", ...rest }: Props) => {
+const SvgButton = ({ children, onClick, className, type = "button", ref = null, ...rest }: Props) => {
     return (
         <button
             onClick={(e) => {
@@ -17,6 +18,7 @@ const SvgButton = ({ children, onClick, className, type = "button", ...rest }: P
             }}
             className={`${styles.SvgButton} ${className ? ` ${className}` : ""}`}
             type={type}
+            ref={ref}
             {...rest}
         >
             {children}

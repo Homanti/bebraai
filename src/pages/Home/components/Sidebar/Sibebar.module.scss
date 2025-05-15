@@ -32,6 +32,7 @@
     list-style: none;
     padding: 0;
     margin-top: 1rem;
+    user-select: none;
 
     .trashButton {
       & > svg {

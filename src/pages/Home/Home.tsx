@@ -1,6 +1,6 @@
 import styles from './Home.module.scss';
 import PromptForm from './components/PromptForm/PromptForm.tsx';
-import { useState } from "react";
+import {useRef, useState} from "react";
 import { sendMessage } from "../../api/messages.tsx";
 import type { Message, Chat } from "../../types/chat.tsx";
 import { getChats, saveChats } from "../../utils/chatsStorage.tsx";
@@ -11,6 +11,7 @@ import { scrollToBottom } from "../../utils/scrollToBottom.tsx";
 import Header from "./components/Header/Header.tsx";
 import {AnimatePresence, motion} from "motion/react";
 import {getSettings} from "../../utils/settingsStorage.tsx";
+import SettingsModal from "./components/SettingsModal/SettingsModal.tsx";
 
 const Home = () => {
     const [chats, setChats] = useState<Chat[]>(getChats());
@@ -21,6 +22,7 @@ const Home = () => {
         saveChats([defaultChat]);
         return '1';
     });
+    const openSettingsButtonRef = useRef<HTMLButtonElement>(null);
 
     const activeChat = chats.find(c => c.id === activeChatId)!;
 
@@ -82,10 +84,11 @@ const Home = () => {
 
     return (
         <motion.div className={styles.home}>
+            <SettingsModal openSettingsButtonRef={openSettingsButtonRef} />
             <Sidebar chats={chats} updateChats={updateChats} setActiveChatId={setActiveChatId} activeChatId={activeChatId} />
 
             <main>
-                <Header />
+                <Header openSettingsButtonRef={openSettingsButtonRef} />
 
                 <section className={styles.chat}>
                     <AnimatePresence>
