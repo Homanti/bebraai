@@ -21,3 +21,81 @@
 
   z-index: 5;
 }
+
+.dropdown {
+  &Button {
+    background: transparent;
+    border: none;
+
+    color: white;
+
+    font-size: 1.1rem;
+
+    padding: 15px;
+    cursor: pointer;
+
+    border-radius: var(--border-radius);
+
+    &:hover {
+      background: var(--surface-color);
+    }
+  }
+
+  &Content {
+    position: absolute;
+    background: var(--surface-color);
+    border-radius: var(--border-radius);
+    list-style: none;
+    padding: 10px 20px 10px 10px;
+    overflow: hidden;
+    z-index: 2;
+    overflow-y: auto;
+  }
+
+  &Item {
+    display: flex;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: var(--border-radius);
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    &:hover {
+      background: #2f2f2f;
+    }
+
+    &__text {
+      display: flex;
+      flex-direction: column;
+    }
+
+    & > svg {
+      min-width: 24px;
+      min-height: 24px;
+      color: darkgrey;
+
+      margin-left: 10px;
+    }
+  }
+}
+
+.description {
+  padding: 0;
+  margin: 5px 0 0;
+  font-size: 0.8rem;
+  color: darkgrey;
+}
+
+@media (width < 768px) {
+  .dropdownContent {
+    max-width: 300px;
+  }
+}
+
+@media (height < 1200px) {
+  .dropdownContent {
+    max-height: 700px;
+  }
+}
