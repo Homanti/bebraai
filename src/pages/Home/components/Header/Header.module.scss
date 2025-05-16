@@ -52,7 +52,7 @@
     background: var(--surface-color);
     border-radius: var(--border-radius);
 
-    max-width: 85vh;
+    max-height: 50vh;
 
     list-style: none;
     padding: 10px;
@@ -101,8 +101,6 @@
 @media (width < 768px) {
   .dropdownContent {
     max-width: 300px;
-    max-height: 700px;
-
     width: 100%;
 
     left: 50%;
@@ -111,11 +109,5 @@
 
   .toolbar {
     display: contents;
-  }
-}
-
-@media (height < 700px) {
-  .dropdownContent {
-    max-height: 400px;
   }
 }
