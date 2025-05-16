@@ -82,6 +82,8 @@ const PromptForm = ({ onSubmit }: { onSubmit: (message: Message) => void }) => {
         const items = e.clipboardData.items;
         const imageItems: DataTransferItem[] = [];
 
+        if (!models.find((m) => m.name === modelName)?.visionSupport) return;
+
         for (let i = 0; i < items.length; i++) {
             if (items[i].type.indexOf("image") !== -1) {
                 imageItems.push(items[i]);
