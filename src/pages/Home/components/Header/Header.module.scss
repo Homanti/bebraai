@@ -36,7 +36,7 @@
 
     font-size: 1.1rem;
 
-    padding: 15px;
+    padding: 0.9375rem;
     cursor: pointer;
 
     border-radius: var(--border-radius);
@@ -55,7 +55,7 @@
     max-height: 50vh;
 
     list-style: none;
-    padding: 10px;
+    padding: 0.625rem;
     overflow: hidden;
     z-index: 2;
     overflow-y: auto;
@@ -63,7 +63,7 @@
 
   &Item {
     display: flex;
-    padding: 10px;
+    padding: 0.625rem;
     cursor: pointer;
     border-radius: var(--border-radius);
 
@@ -82,25 +82,25 @@
     }
 
     & > svg {
-      min-width: 24px;
-      min-height: 24px;
+      min-width: 1.5rem;
+      min-height: 1.5rem;
       color: darkgrey;
 
-      margin-left: 10px;
+      margin-left: 0.625rem;
     }
   }
 }
 
 .description {
   padding: 0;
-  margin: 5px 0 0;
+  margin: 0.3125rem 0 0;
   font-size: 0.8rem;
   color: darkgrey;
 }
 
-@media (width < 768px) {
+@media (width < 48rem) {
   .dropdownContent {
-    max-width: 300px;
+    max-width: 18.75rem;
     width: 100%;
 
     left: 50%;
