@@ -146,6 +146,11 @@
   margin-left: 1.25rem;
   align-items: center;
 
+  & > svg {
+    width: 1.4rem;
+    height: 1.4rem;
+  }
+
   &:hover {
     opacity: 0.7;
     cursor: pointer;
