@@ -20,7 +20,7 @@
 
 ```bash
 git clone https://github.com/Homanti/bebraai.git
-cd BebraAI
+cd bebraai
 npm install
 npm run dev
 ```
@@ -37,7 +37,7 @@ npm run dev
 - **[motion](https://motion.dev/)** — анимации
 - **[lucide-react](https://lucide.dev/)** — SVG-иконки
 - **[react-markdown](https://github.com/remarkjs/react-markdown)**, **remark-math**, **rehype-katex** — Markdown + математическая разметка
-- **[g4f](https://github.com/xtekky/gpt4free)** — библиотека для обхода платного API OpenAI
+- **[g4f](https://github.com/xtekky/gpt4free)** — серверная библиотека для обхода платного API OpenAI
 
 ---
 
