@@ -92,25 +92,25 @@ const Home = () => {
             <main>
                 <Header openSettingsButtonRef={openSettingsButtonRef} />
 
-                <section className={styles.chat}>
-                    <AnimatePresence>
-                        {activeChat.messages.length === 0 && (
-                            <motion.h1
-                                className={styles.title}
-                                initial={{ opacity: 0, y: -50 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                exit={{ opacity: 0, y: -50 }}
-                            >
-                                {t('welcome_message')}
-                            </motion.h1>
-                        )}
-                    </AnimatePresence>
+                <AnimatePresence>
+                    {activeChat.messages.length === 0 && (
+                        <motion.h1
+                            className={styles.title}
+                            initial={{ opacity: 0, y: -50 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: -50 }}
+                        >
+                            {t('welcome_message')}
+                        </motion.h1>
+                    )}
+                </AnimatePresence>
 
+                <section className={styles.chat}>
                     <Messages activeChat={activeChat} />
 
-                    <div className={`${styles.prompt} ${styles.gradientBorder}`}>
+                    <motion.div className={`${styles.prompt} ${styles.gradientBorder}`}>
                         <PromptForm onSubmit={submitMessage} />
-                    </div>
+                    </motion.div>
                 </section>
             </main>
         </motion.div>

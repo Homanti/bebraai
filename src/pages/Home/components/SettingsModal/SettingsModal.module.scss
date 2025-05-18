@@ -1,16 +1,26 @@
-.settings {
+.backdrop {
+  display: flex;
   position: absolute;
-  background: var(--nav-color);
-  border-radius: var(--border-radius);
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+
   z-index: 10;
 
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
+  backdrop-filter: blur(0.625rem);
+  -webkit-backdrop-filter: blur(0.625rem);
+  background-color: rgba(0, 0, 0, 0.1);
 
-  box-shadow: 0.625rem 0.625rem 1.25rem rgba(0, 0, 0, 0.1);
+  justify-content: center;
+  align-items: center;
+}
 
-  padding: 0.9375rem;
+.settings {
+  background: var(--nav-color);
+  border-radius: var(--border-radius);
+
+  padding: 1.875rem;
 }
 
 .settingsContent {
@@ -108,8 +118,8 @@
   }
 }
 
-@media (width <= 685px) {
+@media (width <= 42.8125rem) {
   .settings {
-    min-width: 90vw;
+    min-width: 80vw;
   }
 }

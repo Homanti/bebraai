@@ -21,5 +21,7 @@
     "deepseek-r1-distill-qwen-32b": { "description": "Другая версия DeepSeek на базе Qwen." },
     "phi-4": { "description": "Небольшая и точная модель от Microsoft." },
     "qwq-32b": { "description": "Модель с высокой ёмкостью для текста." }
-  }
+  },
+  "max_files_exceeded": "Вы можете загрузить только до 10 файлов за раз",
+  "drag_files_here": "Перетащите файлы сюда для загрузки"
 }

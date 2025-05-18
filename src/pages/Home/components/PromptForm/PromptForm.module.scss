@@ -108,11 +108,39 @@
 .form {
   display: flex;
   flex-direction: column;
+  position: relative;
 
   width: 100%;
 
   background: var(--surface-color);
   border-radius: var(--border-radius);
+
+  .dropzone {
+    display: flex;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+
+    z-index: 10;
+
+    background-color: rgba(0, 128, 255, 0.08);
+    outline: 0.125rem dashed #007aff;
+    backdrop-filter: blur(0.625rem);
+    -webkit-backdrop-filter: blur(0.625rem);
+
+    border-radius: var(--border-radius);
+
+    justify-content: center;
+    align-items: center;
+
+    & > h1 {
+      color: white;
+      font-size: 1.5rem;
+      text-align: center;
+      margin: 0;
+      padding: 0.625rem;
+    }
+  }
 }
 
 .inputContainer {
@@ -130,6 +158,8 @@
   height: 1.25rem;
   resize: none;
   font-size: 1rem;
+
+  padding: 0;
 }
 
 .toolbar {
@@ -138,7 +168,7 @@
 
   justify-content: space-between;
 
-  padding: 1rem;
+  padding: 0 1rem 1rem;
 
   .toolbarButtons {
     display: flex;

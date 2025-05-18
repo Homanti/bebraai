@@ -14,6 +14,7 @@ main {
   width: 100%;
 
   align-items: center;
+  justify-content: center;
 }
 
 .chat {
@@ -40,13 +41,14 @@ main {
   color: transparent;
   font-size: 2rem;
   padding: 0.625rem;
+  text-align: start;
 
   user-select: none;
 }
 
 .prompt {
   display: flex;
-  margin-bottom: 1.25rem;
+  margin-bottom: 1.5625rem;
   justify-content: center;
   width: 100%;
 }

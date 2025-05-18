@@ -21,5 +21,7 @@
     "deepseek-r1-distill-qwen-32b": { "description": "Another DeepSeek version based on Qwen." },
     "phi-4": { "description": "Small and accurate model from Microsoft." },
     "qwq-32b": { "description": "High-capacity text model." }
-  }
+  },
+  "max_files_exceeded": "You can only upload up to 10 files at a time",
+  "drag_files_here": "Drag files here to upload"
 }

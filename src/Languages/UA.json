@@ -1,0 +1,61 @@
+{
+  "welcome_message": "Привіт! Напиши своє запитання.",
+  "prompt_placeholder": "Будь ласка, введіть тут своє запитання.",
+  "new_chat": "Новий чат",
+  "select_language": "Оберіть мову",
+  "models": {
+    "gpt-4o": {
+      "description": "Дуже швидкий і розумний. Найкращий на даний момент."
+    },
+    "gpt-4o-mini": {
+      "description": "Швидша, але менша версія GPT-4o."
+    },
+    "o1-mini": {
+      "description": "Розумніший за 4o, але повільніший. Простий легкий модуль."
+    },
+    "o3-mini": {
+      "description": "Розумніший за o1, але повільніший. Збалансована модель для тексту."
+    },
+    "o4-mini": {
+      "description": "Розумніший за o3, але повільніший. Компактна модель від OpenAI."
+    },
+    "gemini-2.5-flash": {
+      "description": "Дуже швидка модель від Google."
+    },
+    "gemini-2.0-flash-thinking": {
+      "description": "Найкраща для логіки та планування."
+    },
+    "qwen-2.5-coder-32b": {
+      "description": "Потужна модель кодування від Alibaba."
+    },
+    "llama-3.3-70b": {
+      "description": "Велика модель від Meta."
+    },
+    "llama-4-scout": {
+      "description": "Рання тестова модель LLaMA 4."
+    },
+    "llama-4-scout-17b": {
+      "description": "Менша версія LLaMA 4 Scout."
+    },
+    "mistral-small-3.1-24b": {
+      "description": "Швидка та універсальна."
+    },
+    "deepseek-r1": {
+      "description": "Підходить для коду та загального тексту."
+    },
+    "deepseek-r1-distill-llama-70b": {
+      "description": "Спрощена версія DeepSeek на базі LLaMA."
+    },
+    "deepseek-r1-distill-qwen-32b": {
+      "description": "Ще одна версія DeepSeek на базі Qwen."
+    },
+    "phi-4": {
+      "description": "Маленька і точна модель від Microsoft."
+    },
+    "qwq-32b": {
+      "description": "Високопродуктивна модель для тексту."
+    }
+  },
+  "max_files_exceeded": "Ви можете завантажити не більше 10 файлів одночасно",
+  "drag_files_here": "Перетягніть файли сюди для завантаження"
+}

@@ -24,6 +24,7 @@ const PromptForm = ({ onSubmit }: { onSubmit: (message: Message) => void }) => {
     const message = useMessageStore(state => state.message);
     const setMessage = useMessageStore(state => state.setMessage);
     const resetMessage = useMessageStore(state => state.resetMessage);
+    const [isDragOver, setIsDragOver] = useState(false);
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -38,86 +39,82 @@ const PromptForm = ({ onSubmit }: { onSubmit: (message: Message) => void }) => {
         resetMessage();
     }
 
-    const handleFileAdd = async (e: React.ChangeEvent<HTMLInputElement>) => {
-        const files = e.target.files;
-        if (!files || files.length === 0) return;
-        if (files.length > 10) return alert('You can only upload up to 10 files at a time');
+    const readFileAsDataUrl = (file: File): Promise<string> => {
+        return new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                const result = e.target?.result;
+                if (typeof result === 'string') resolve(result);
+                else reject('Failed to read file');
+            };
+            reader.onerror = () => reject('Error reading file');
+            reader.readAsDataURL(file);
+        });
+    };
 
-        const readFile = (file: File) =>
-            new Promise<string>((resolve, reject) => {
-                const reader = new FileReader();
-                reader.onload = (event) => {
-                    const content = event.target?.result;
-                    if (typeof content === 'string') {
-                        resolve(content);
-                    } else {
-                        reject('Failed to read file');
-                    }
-                };
-                reader.onerror = () => reject('Error reading file');
-                reader.readAsDataURL(file);
-            });
+    const processFiles = async (
+        files: File[] | DataTransferItem[],
+        allowImageOnly = false
+    ) => {
+        if (!models.find((m) => m.name === modelName)?.visionSupport) return;
+
+        const validFiles: File[] = [];
+
+        for (const item of files) {
+            if (item instanceof File) {
+                validFiles.push(item);
+            } else {
+                const file = item.getAsFile?.();
+                if (file && (!allowImageOnly || item.type.startsWith('image/'))) {
+                    validFiles.push(file);
+                }
+            }
+        }
+
+        if (validFiles.length === 0) return;
+        if ((validFiles.length > 10) || (message.files.length > 10)) return alert(t('max_files_exceeded'));
 
         try {
-            const contents = await Promise.all(Array.from(files).map(readFile));
+            const contents = await Promise.all(validFiles.map(readFileAsDataUrl));
             const withIds = contents.map((data, i) => ({
                 id: `${Date.now()}-${i}`,
-                data
+                data,
             }));
-
             setMessage({ files: [...(message.files ?? []), ...withIds] });
         } catch (err) {
             console.error(err);
         }
     };
 
+    const handleFileAdd = async (e: React.ChangeEvent<HTMLInputElement>) => {
+        if (e.target.files) {
+            await processFiles(Array.from(e.target.files));
+        }
+    };
+
+    const handlePaste = async (e: React.ClipboardEvent<HTMLTextAreaElement>) => {
+        const items = Array.from(e.clipboardData.items);
+        await processFiles(items, true); // только изображения
+        e.preventDefault();
+    };
+
+    const handleDrop = async (e: React.DragEvent<HTMLFormElement>) => {
+        e.preventDefault();
+
+        const files = Array.from(e.dataTransfer.files);
+        const imageFiles = files.filter(file => file.type.startsWith("image/"));
+
+        if (imageFiles.length === 0) {
+            return;
+        }
+
+        await processFiles(imageFiles);
+    };
+
     const handleDeleteContent = (idToDelete: string) => {
         setMessage({ files: message.files?.filter(item => item.id !== idToDelete) ?? []});
     };
 
-    const handlePaste = (e: React.ClipboardEvent<HTMLTextAreaElement>) => {
-        const items = e.clipboardData.items;
-        const imageItems: DataTransferItem[] = [];
-
-        if (!models.find((m) => m.name === modelName)?.visionSupport) return;
-
-        for (let i = 0; i < items.length; i++) {
-            if (items[i].type.indexOf("image") !== -1) {
-                imageItems.push(items[i]);
-            }
-        }
-
-        if (imageItems.length > 0) {
-            e.preventDefault();
-
-            const readImages = imageItems.map((item, i) => {
-                const file = item.getAsFile();
-                return new Promise<{ id: string; data: string }>((resolve, reject) => {
-                    if (!file) return reject('No file found');
-                    const reader = new FileReader();
-                    reader.onload = (event) => {
-                        const content = event.target?.result;
-                        if (typeof content === 'string') {
-                            resolve({ id: `${Date.now()}-${i}`, data: content });
-                        } else {
-                            reject('Failed to read file');
-                        }
-                    };
-                    reader.onerror = () => reject('Error reading file');
-                    reader.readAsDataURL(file);
-                });
-            });
-
-            Promise.all(readImages)
-                .then(results => {
-                    setMessage({
-                        ...message,
-                        files: [...(message.files ?? []), ...results]
-                    });
-                })
-                .catch(err => console.error(err));
-        }
-    };
 
     // const toggleMode = (key: keyof Modes) => {
     //     const isActive = message[key];
@@ -137,9 +134,38 @@ const PromptForm = ({ onSubmit }: { onSubmit: (message: Message) => void }) => {
                  textareaRef.current?.focus();
                  e.preventDefault();
              }}
+
         >
 
-            <form className={styles.form} onSubmit={handleSubmit}>
+            <form className={styles.form} onSubmit={handleSubmit}
+                  onDragOver={(e) => {
+                      e.preventDefault();
+                      setIsDragOver(true);
+                  }}
+                  onDragLeave={(e) => {
+                      e.preventDefault();
+                      setIsDragOver(false);
+                  }}
+                  onDrop={async (e) => {
+                      e.preventDefault();
+                      setIsDragOver(false);
+                      await handleDrop(e);
+                  }}
+                  onDragEnter={(e) => e.preventDefault()}
+            >
+                <AnimatePresence>
+                    {isDragOver && (
+                        <motion.div
+                            className={styles.dropzone}
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                        >
+                            <h1>{t('drag_files_here')}</h1>
+                        </motion.div>
+                    )}
+                </AnimatePresence>
+
                 <AnimatePresence>
                     {(message.files ?? []).length > 0 && (
                         <motion.div
