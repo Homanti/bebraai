@@ -198,6 +198,7 @@
             cursor: not-allowed;
 
             & > svg {
+                opacity: 0.5;
                 color: var(--secondary-color);
             }
         }
