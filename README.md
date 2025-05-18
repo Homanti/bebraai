@@ -19,7 +19,7 @@
 ## ⚙️ Установка и запуск
 
 ```bash
-git clone https://github.com/your-username/BebraAI.git
+git clone https://github.com/Homanti/bebraai.git
 cd BebraAI
 npm install
 npm run dev
