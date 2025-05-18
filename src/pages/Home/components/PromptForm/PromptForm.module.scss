@@ -12,6 +12,8 @@
     scale: 1;
     transition-duration: 0.5s;
 
+    border-radius: var(--border-radius);
+
     &:before {
         transition-duration: 0.5s;
         content: "";
