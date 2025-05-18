@@ -1,61 +1,62 @@
 {
-  "welcome_message": "Salut ! Écris ta question.",
-  "prompt_placeholder": "Veuillez entrer votre question ici.",
-  "new_chat": "Nouvelle discussion",
-  "select_language": "Sélectionnez votre langue",
-  "models": {
-    "gpt-4o": {
-      "description": "Très rapide et intelligent. Le meilleur actuellement."
+    "welcome_message": "Salut ! Écris ta question.",
+    "prompt_placeholder": "Veuillez entrer votre question ici.",
+    "new_chat": "Nouvelle discussion",
+    "select_language": "Sélectionnez votre langue",
+    "models": {
+        "gpt-4o": {
+            "description": "Très rapide et intelligent. Le meilleur actuellement."
+        },
+        "gpt-4o-mini": {
+            "description": "Une version plus rapide mais plus petite de GPT-4o."
+        },
+        "o1-mini": {
+            "description": "Plus intelligent que 4o, mais plus lent. Modèle léger et simple."
+        },
+        "o3-mini": {
+            "description": "Plus intelligent que o1, mais plus lent. Modèle équilibré pour le texte."
+        },
+        "o4-mini": {
+            "description": "Plus intelligent que o3, mais plus lent. Modèle compact d’OpenAI."
+        },
+        "gemini-2.5-flash": {
+            "description": "Modèle très rapide de Google."
+        },
+        "gemini-2.0-flash-thinking": {
+            "description": "Idéal pour la logique et la planification."
+        },
+        "qwen-2.5-coder-32b": {
+            "description": "Modèle puissant de codage d’Alibaba."
+        },
+        "llama-3.3-70b": {
+            "description": "Grand modèle de Meta."
+        },
+        "llama-4-scout": {
+            "description": "Modèle de test précoce de LLaMA 4."
+        },
+        "llama-4-scout-17b": {
+            "description": "Version plus petite du LLaMA 4 Scout."
+        },
+        "mistral-small-3.1-24b": {
+            "description": "Rapide et polyvalent."
+        },
+        "deepseek-r1": {
+            "description": "Bon pour le code et le texte général."
+        },
+        "deepseek-r1-distill-llama-70b": {
+            "description": "Version simplifiée de DeepSeek basée sur LLaMA."
+        },
+        "deepseek-r1-distill-qwen-32b": {
+            "description": "Autre version DeepSeek basée sur Qwen."
+        },
+        "phi-4": {
+            "description": "Petit modèle précis de Microsoft."
+        },
+        "qwq-32b": {
+            "description": "Modèle de texte à grande capacité."
+        }
     },
-    "gpt-4o-mini": {
-      "description": "Une version plus rapide mais plus petite de GPT-4o."
-    },
-    "o1-mini": {
-      "description": "Plus intelligent que 4o, mais plus lent. Modèle léger et simple."
-    },
-    "o3-mini": {
-      "description": "Plus intelligent que o1, mais plus lent. Modèle équilibré pour le texte."
-    },
-    "o4-mini": {
-      "description": "Plus intelligent que o3, mais plus lent. Modèle compact d’OpenAI."
-    },
-    "gemini-2.5-flash": {
-      "description": "Modèle très rapide de Google."
-    },
-    "gemini-2.0-flash-thinking": {
-      "description": "Idéal pour la logique et la planification."
-    },
-    "qwen-2.5-coder-32b": {
-      "description": "Modèle puissant de codage d’Alibaba."
-    },
-    "llama-3.3-70b": {
-      "description": "Grand modèle de Meta."
-    },
-    "llama-4-scout": {
-      "description": "Modèle de test précoce de LLaMA 4."
-    },
-    "llama-4-scout-17b": {
-      "description": "Version plus petite du LLaMA 4 Scout."
-    },
-    "mistral-small-3.1-24b": {
-      "description": "Rapide et polyvalent."
-    },
-    "deepseek-r1": {
-      "description": "Bon pour le code et le texte général."
-    },
-    "deepseek-r1-distill-llama-70b": {
-      "description": "Version simplifiée de DeepSeek basée sur LLaMA."
-    },
-    "deepseek-r1-distill-qwen-32b": {
-      "description": "Autre version DeepSeek basée sur Qwen."
-    },
-    "phi-4": {
-      "description": "Petit modèle précis de Microsoft."
-    },
-    "qwq-32b": {
-      "description": "Modèle de texte à grande capacité."
-    }
-  },
-  "max_files_exceeded": "Vous ne pouvez télécharger que 10 fichiers à la fois",
-  "drag_files_here": "Glissez les fichiers ici pour les télécharger"
+    "max_files_exceeded": "Vous ne pouvez télécharger que 10 fichiers à la fois",
+    "drag_files_here": "Glissez les fichiers ici pour les télécharger",
+    "copied": "Copié !"
 }

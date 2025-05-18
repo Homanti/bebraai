@@ -1,10 +1,8 @@
 import {AnimatePresence, motion} from "motion/react";
 import styles from "./Messages.module.scss";
-import ReactMarkdown from "react-markdown";
-import remarkMath from "remark-math";
-import rehypeKatex from "rehype-katex";
-import { useEffect } from "react";
+import {Fragment, useEffect} from "react";
 import { messagesEndRef, scrollToBottom } from "../../../../utils/scrollToBottom.tsx";
+import { MarkdownRenderer } from "./MarkdownRenderer.tsx";
 
 type MessagesProps = {
     activeChat: {
@@ -24,63 +22,42 @@ const Messages = ({ activeChat }: MessagesProps) => {
     return (
         <div className={styles.messages}>
             <AnimatePresence>
-                {activeChat.messages.map((message, index) => (
-                    <>
-                        {message.content ? (
-                            <>
-                                {message.files?.map((item, index) => (
-                                    <motion.div
-                                        className={styles.imageMessage}
-                                        key={index}
-                                        initial={message.role === 'user' ? { opacity: 0, x: -100 } : { opacity: 0, x: 100 }}
-                                        animate={{ opacity: 1, x: 0 }}
-                                        exit={message.role === 'user' ? { opacity: 0, x: -100 } : { opacity: 0, x: 100 }}
-                                    >
-                                        {item.data.startsWith("data:image") ? (
-                                            <>
-                                                <img src={item.data} alt="image message" />
-                                            </>
-                                        ) : (
-                                            <pre>{item.data}</pre>
-                                        )}
-                                    </motion.div>
-                                ))}
+                {activeChat.messages.map((message, index) => {
+                    const isUser = message.role === 'user';
+                    const motionProps = {
+                        initial: { opacity: 0, x: isUser ? -100 : 100 },
+                        animate: { opacity: 1, x: 0 },
+                        exit: { opacity: 0, x: isUser ? -100 : 100 },
+                    };
 
+                    return (
+                        <Fragment key={index}>
+                            {message.files?.map((item, fileIndex) => (
                                 <motion.div
-                                    key={index}
-                                    className={`${styles.message} ${message.role === 'assistant' ? styles.incoming : ''}`}
-                                    initial={message.role === 'user' ? { opacity: 0, x: -100 } : { opacity: 0, x: 100 }}
-                                    animate={{ opacity: 1, x: 0 }}
-                                    exit={message.role === 'user' ? { opacity: 0, x: -100 } : { opacity: 0, x: 100 }}>
-
-                                    <ReactMarkdown
-                                        remarkPlugins={[remarkMath]}
-                                        rehypePlugins={[rehypeKatex]}>
-                                        {message.content}
-                                    </ReactMarkdown>
+                                    className={styles.imageMessage}
+                                    key={`file-${index}-${fileIndex}`}
+                                    {...motionProps}
+                                >
+                                    {item.data.startsWith("data:image") ? (
+                                        <img src={item.data} alt="image message" />
+                                    ) : (
+                                        <pre>{item.data}</pre>
+                                    )}
                                 </motion.div>
-                            </>
-                        ) : (
-                            <>
-                                {message.files?.map((item, index) => (
-                                    <motion.div className={styles.imageMessage}
-                                                key={index}
-                                                initial={message.role === 'user' ? { opacity: 0, x: -100 } : { opacity: 0, x: 100 }}
-                                                animate={{ opacity: 1, x: 0 }}
-                                                exit={message.role === 'user' ? { opacity: 0, x: -100 } : { opacity: 0, x: 100 }}>
-                                        {item.data.startsWith("data:image") ? (
-                                            <>
-                                                <img src={item.data} alt="image message" />
-                                            </>
-                                        ) : (
-                                            <pre>{item.data}</pre>
-                                        )}
-                                    </motion.div>
-                                ))}
-                            </>
-                        )}
-                    </>
-                ))}
+                            ))}
+
+                            {message.content && (
+                                <motion.div
+                                    key={`text-${index}`}
+                                    className={`${styles.message} ${message.role === 'assistant' ? styles.incoming : ''}`}
+                                    {...motionProps}
+                                >
+                                    <MarkdownRenderer content={message.content} />
+                                </motion.div>
+                            )}
+                        </Fragment>
+                    );
+                })}
             </AnimatePresence>
             <div style={{opacity: 0}} ref={messagesEndRef}>.</div>
         </div>

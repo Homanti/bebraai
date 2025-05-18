@@ -1,250 +1,250 @@
 .container {
-  display: flex;
-  flex-direction: column;
-  position: relative;
+    display: flex;
+    flex-direction: column;
+    position: relative;
 
-  cursor: text;
+    cursor: text;
 
-  width: 100%;
+    width: 100%;
 
-  box-shadow: 0.625rem 0.625rem 1.25rem rgba(0, 0, 0, 0.1);
+    box-shadow: 0.625rem 0.625rem 1.25rem rgba(0, 0, 0, 0.1);
 
-  scale: 1;
-  transition-duration: 0.5s;
-
-  &:before {
+    scale: 1;
     transition-duration: 0.5s;
-    content: "";
-    position: absolute;
-    top: -0.25rem;
-    left: -0.25rem;
-    right: -0.25rem;
-    bottom: -0.25rem;
-    z-index: -1;
-    border-radius: var(--border-radius);
-    background: var(--secondary-gradient);
-    filter: blur(0.625rem);
-    background-size: 300% 300%;
-    opacity: 0;
-  }
 
-  &.focused {
-    scale: 1.05;
-
-    &::before {
-      opacity: 1;
-      animation: gradientAnimation 5s ease infinite;
+    &:before {
+        transition-duration: 0.5s;
+        content: "";
+        position: absolute;
+        top: -0.25rem;
+        left: -0.25rem;
+        right: -0.25rem;
+        bottom: -0.25rem;
+        z-index: -1;
+        border-radius: var(--border-radius);
+        background: var(--secondary-gradient);
+        filter: blur(0.625rem);
+        background-size: 300% 300%;
+        opacity: 0;
     }
-  }
+
+    &.focused {
+        scale: 1.05;
+
+        &::before {
+            opacity: 1;
+            animation: gradientAnimation 5s ease infinite;
+        }
+    }
 }
 
 .contentContainer {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-
-  width: 100%;
-  overflow-x: auto;
-
-  border-bottom: 0.0625rem solid darkgrey;
-}
-
-.contentItem {
-  min-width: 5rem;
-  width: 5rem;
-  height: 5rem;
-  overflow: hidden;
-  position: relative;
-  border-radius: var(--border-radius);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  &:not(:last-child) {
-    margin-right: 0.625rem;
-  }
-
-  &:first-child {
-    margin-left: 0.625rem;
-  }
-
-  &:last-child {
-    margin-right: 0.625rem;
-  }
-}
-
-.imagePreview {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-  display: block;
-}
-
-.contentItem .deleteButton {
-  position: absolute;
-  top: 0;
-  right: 0;
-  background: white;
-  padding: 0.125rem;
-
-  border-radius: var(--border-radius);
-
-  &:hover {
-    opacity: 0.7;
-  }
-
-  &:active {
-    opacity: 0.5;
-  }
-
-  & > svg {
-    width: 1.125rem;
-    height: 1.125rem;
-    color: black;
-  }
-}
-
-.form {
-  display: flex;
-  flex-direction: column;
-  position: relative;
-
-  width: 100%;
-
-  background: var(--surface-color);
-  border-radius: var(--border-radius);
-
-  .dropzone {
-    display: flex;
-    position: absolute;
-    width: 100%;
-    height: 100%;
-
-    z-index: 10;
-
-    background-color: rgba(0, 128, 255, 0.08);
-    outline: 0.125rem dashed #007aff;
-    backdrop-filter: blur(0.625rem);
-    -webkit-backdrop-filter: blur(0.625rem);
-
-    border-radius: var(--border-radius);
-
-    justify-content: center;
-    align-items: center;
-
-    & > h1 {
-      color: white;
-      font-size: 1.5rem;
-      text-align: center;
-      margin: 0;
-      padding: 0.625rem;
-    }
-  }
-}
-
-.inputContainer {
-  display: flex;
-  flex-direction: row;
-
-  padding: 1.25rem 1rem 1rem;
-}
-
-.textarea {
-  border: none;
-  outline: none;
-  background: transparent;
-  width: 100%;
-  height: 1.25rem;
-  resize: none;
-  font-size: 1rem;
-
-  padding: 0;
-}
-
-.toolbar {
-  display: flex;
-  flex-direction: row;
-
-  justify-content: space-between;
-
-  padding: 0 1rem 1rem;
-
-  .toolbarButtons {
     display: flex;
     flex-direction: row;
     align-items: center;
 
-    gap: 0.625rem;
-  }
+    width: 100%;
+    overflow-x: auto;
 
-  .toolButton {
-    padding: 0;
+    border-bottom: 0.0625rem solid darkgrey;
+}
 
-    & > svg {
-      color: darkgrey;
-    }
-
-    &.active {
-      & > svg {
-          color: white;
-      }
-    }
-  }
-
-  .sendButton {
-    padding: 0;
-
-    &:disabled {
-      cursor: not-allowed;
-
-      & > svg {
-        color: darkgrey;
-      }
-    }
-  }
-
-  .addButton {
+.contentItem {
+    min-width: 5rem;
+    width: 5rem;
+    height: 5rem;
+    overflow: hidden;
+    position: relative;
+    border-radius: var(--border-radius);
     display: flex;
     align-items: center;
+    justify-content: center;
 
-    border-radius: 50%;
-
-    & > svg {
-      width: 1.4rem;
-      height: 1.4rem;
+    &:not(:last-child) {
+        margin-right: 0.625rem;
     }
 
+    &:first-child {
+        margin-left: 0.625rem;
+    }
+
+    &:last-child {
+        margin-right: 0.625rem;
+    }
+}
+
+.imagePreview {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+}
+
+.contentItem .deleteButton {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: white;
+    padding: 0.125rem;
+
+    border-radius: var(--border-radius);
+
     &:hover {
-      opacity: 0.7;
-      cursor: pointer;
+        opacity: 0.7;
     }
 
     &:active {
-      opacity: 0.5;
+        opacity: 0.5;
     }
 
-    &.disabled {
-      opacity: 0.5;
-      cursor: not-allowed;
-
-      & > svg {
-        color: darkgrey;
-      }
+    & > svg {
+        width: 1.125rem;
+        height: 1.125rem;
+        color: black;
     }
-  }
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+
+    width: 100%;
+
+    background: var(--surface-color);
+    border-radius: var(--border-radius);
+
+    .dropzone {
+        display: flex;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+
+        z-index: 10;
+
+        background-color: rgba(0, 128, 255, 0.08);
+        outline: 0.125rem dashed #007aff;
+        backdrop-filter: blur(0.625rem);
+        -webkit-backdrop-filter: blur(0.625rem);
+
+        border-radius: var(--border-radius);
+
+        justify-content: center;
+        align-items: center;
+
+        & > h1 {
+            color: white;
+            font-size: 1.5rem;
+            text-align: center;
+            margin: 0;
+            padding: 0.625rem;
+        }
+    }
+}
+
+.inputContainer {
+    display: flex;
+    flex-direction: row;
+
+    padding: 1.25rem 1rem 1rem;
+}
+
+.textarea {
+    border: none;
+    outline: none;
+    background: transparent;
+    width: 100%;
+    height: 1.25rem;
+    resize: none;
+    font-size: 1rem;
+
+    padding: 0;
+}
+
+.toolbar {
+    display: flex;
+    flex-direction: row;
+
+    justify-content: space-between;
+
+    padding: 0 1rem 1rem;
+
+    .toolbarButtons {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+
+        gap: 0.625rem;
+    }
+
+    .toolButton {
+        padding: 0;
+
+        & > svg {
+            color: darkgrey;
+        }
+
+        &.active {
+            & > svg {
+                color: white;
+            }
+        }
+    }
+
+    .sendButton {
+        padding: 0;
+
+        &:disabled {
+            cursor: not-allowed;
+
+            & > svg {
+                color: darkgrey;
+            }
+        }
+    }
+
+    .addButton {
+        display: flex;
+        align-items: center;
+
+        border-radius: 50%;
+
+        & > svg {
+            width: 1.4rem;
+            height: 1.4rem;
+        }
+
+        &:hover {
+            opacity: 0.7;
+            cursor: pointer;
+        }
+
+        &:active {
+            opacity: 0.5;
+        }
+
+        &.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+
+            & > svg {
+                color: darkgrey;
+            }
+        }
+    }
 
 }
 
 @keyframes gradientAnimation {
-  0% {
-    background-position: 0 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0 50%;
-    filter: blur(0.5rem);
-  }
+    0% {
+        background-position: 0 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0 50%;
+        filter: blur(0.5rem);
+    }
 }

@@ -1,27 +1,62 @@
 {
-  "welcome_message": "Привет! Напишите свое сообщение.",
-  "prompt_placeholder": "Пожалуйста, введите свой вопрос здесь.",
-  "new_chat": "Новый чат",
-  "select_language": "Выберите ваш язык",
-  "models": {
-    "gpt-4o": { "description": "Очень быстрый и умный. Лучший на данный момент." },
-    "gpt-4o-mini": { "description": "Более быстрая, но уменьшенная версия GPT-4o." },
-    "o1-mini": { "description": "Умнее, чем 4o, но медленнее. Простая легковесная модель." },
-    "o3-mini": { "description": "Умнее, чем o1, но медленнее. Сбалансированная мини-модель для текста." },
-    "o4-mini": { "description": "Умнее, чем o3, но медленнее. Компактная модель от OpenAI." },
-    "gemini-2.5-flash": { "description": "Очень быстрая модель от Google." },
-    "gemini-2.0-flash-thinking": { "description": "Лучше всего подходит для логики и планирования." },
-    "qwen-2.5-coder-32b": { "description": "Мощная модель для программирования от Alibaba." },
-    "llama-3.3-70b": { "description": "Крупная модель от Meta." },
-    "llama-4-scout": { "description": "Ранняя тестовая модель LLaMA 4." },
-    "llama-4-scout-17b": { "description": "Упрощённая версия LLaMA 4 Scout." },
-    "mistral-small-3.1-24b": { "description": "Быстрая и универсальная модель." },
-    "deepseek-r1": { "description": "Хороша для кода и общего текста." },
-    "deepseek-r1-distill-llama-70b": { "description": "Упрощённая версия DeepSeek на базе LLaMA." },
-    "deepseek-r1-distill-qwen-32b": { "description": "Другая версия DeepSeek на базе Qwen." },
-    "phi-4": { "description": "Небольшая и точная модель от Microsoft." },
-    "qwq-32b": { "description": "Модель с высокой ёмкостью для текста." }
-  },
-  "max_files_exceeded": "Вы можете загрузить только до 10 файлов за раз",
-  "drag_files_here": "Перетащите файлы сюда для загрузки"
+    "welcome_message": "Привет! Напишите свое сообщение.",
+    "prompt_placeholder": "Пожалуйста, введите свой вопрос здесь.",
+    "new_chat": "Новый чат",
+    "select_language": "Выберите ваш язык",
+    "models": {
+        "gpt-4o": {
+            "description": "Очень быстрый и умный. Лучший на данный момент."
+        },
+        "gpt-4o-mini": {
+            "description": "Более быстрая, но уменьшенная версия GPT-4o."
+        },
+        "o1-mini": {
+            "description": "Умнее, чем 4o, но медленнее. Простая легковесная модель."
+        },
+        "o3-mini": {
+            "description": "Умнее, чем o1, но медленнее. Сбалансированная мини-модель для текста."
+        },
+        "o4-mini": {
+            "description": "Умнее, чем o3, но медленнее. Компактная модель от OpenAI."
+        },
+        "gemini-2.5-flash": {
+            "description": "Очень быстрая модель от Google."
+        },
+        "gemini-2.0-flash-thinking": {
+            "description": "Лучше всего подходит для логики и планирования."
+        },
+        "qwen-2.5-coder-32b": {
+            "description": "Мощная модель для программирования от Alibaba."
+        },
+        "llama-3.3-70b": {
+            "description": "Крупная модель от Meta."
+        },
+        "llama-4-scout": {
+            "description": "Ранняя тестовая модель LLaMA 4."
+        },
+        "llama-4-scout-17b": {
+            "description": "Упрощённая версия LLaMA 4 Scout."
+        },
+        "mistral-small-3.1-24b": {
+            "description": "Быстрая и универсальная модель."
+        },
+        "deepseek-r1": {
+            "description": "Хороша для кода и общего текста."
+        },
+        "deepseek-r1-distill-llama-70b": {
+            "description": "Упрощённая версия DeepSeek на базе LLaMA."
+        },
+        "deepseek-r1-distill-qwen-32b": {
+            "description": "Другая версия DeepSeek на базе Qwen."
+        },
+        "phi-4": {
+            "description": "Небольшая и точная модель от Microsoft."
+        },
+        "qwq-32b": {
+            "description": "Модель с высокой ёмкостью для текста."
+        }
+    },
+    "max_files_exceeded": "Вы можете загрузить только до 10 файлов за раз",
+    "drag_files_here": "Перетащите файлы сюда для загрузки",
+    "copied": "Скопировано!"
 }

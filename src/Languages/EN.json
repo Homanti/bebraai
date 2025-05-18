@@ -1,27 +1,62 @@
 {
-  "welcome_message": "Hey! Write your question.",
-  "prompt_placeholder": "Please enter your question here.",
-  "new_chat": "New chat",
-  "select_language": "Select your language",
-  "models": {
-    "gpt-4o": { "description": "Very fast and smart. The best at the moment." },
-    "gpt-4o-mini": { "description": "A faster but smaller version of GPT-4o." },
-    "o1-mini": { "description": "Smarter than 4o, but slower. Simple lightweight model." },
-    "o3-mini": { "description": "Smarter than o1, but slower. Balanced mini model for text." },
-    "o4-mini": { "description": "Smarter than o3 but slower. Compact model from OpenAI." },
-    "gemini-2.5-flash": { "description": "Very fast Google model." },
-    "gemini-2.0-flash-thinking": { "description": "Best for logic and planning." },
-    "qwen-2.5-coder-32b": { "description": "Powerful coding model from Alibaba." },
-    "llama-3.3-70b": { "description": "Large model from Meta." },
-    "llama-4-scout": { "description": "Early LLaMA 4 test model." },
-    "llama-4-scout-17b": { "description": "Smaller version of LLaMA 4 Scout." },
-    "mistral-small-3.1-24b": { "description": "Fast and general-purpose." },
-    "deepseek-r1": { "description": "Good for code and general text." },
-    "deepseek-r1-distill-llama-70b": { "description": "Simplified DeepSeek version based on LLaMA." },
-    "deepseek-r1-distill-qwen-32b": { "description": "Another DeepSeek version based on Qwen." },
-    "phi-4": { "description": "Small and accurate model from Microsoft." },
-    "qwq-32b": { "description": "High-capacity text model." }
-  },
-  "max_files_exceeded": "You can only upload up to 10 files at a time",
-  "drag_files_here": "Drag files here to upload"
+    "welcome_message": "Hey! Write your question.",
+    "prompt_placeholder": "Please enter your question here.",
+    "new_chat": "New chat",
+    "select_language": "Select your language",
+    "models": {
+        "gpt-4o": {
+            "description": "Very fast and smart. The best at the moment."
+        },
+        "gpt-4o-mini": {
+            "description": "A faster but smaller version of GPT-4o."
+        },
+        "o1-mini": {
+            "description": "Smarter than 4o, but slower. Simple lightweight model."
+        },
+        "o3-mini": {
+            "description": "Smarter than o1, but slower. Balanced mini model for text."
+        },
+        "o4-mini": {
+            "description": "Smarter than o3 but slower. Compact model from OpenAI."
+        },
+        "gemini-2.5-flash": {
+            "description": "Very fast Google model."
+        },
+        "gemini-2.0-flash-thinking": {
+            "description": "Best for logic and planning."
+        },
+        "qwen-2.5-coder-32b": {
+            "description": "Powerful coding model from Alibaba."
+        },
+        "llama-3.3-70b": {
+            "description": "Large model from Meta."
+        },
+        "llama-4-scout": {
+            "description": "Early LLaMA 4 test model."
+        },
+        "llama-4-scout-17b": {
+            "description": "Smaller version of LLaMA 4 Scout."
+        },
+        "mistral-small-3.1-24b": {
+            "description": "Fast and general-purpose."
+        },
+        "deepseek-r1": {
+            "description": "Good for code and general text."
+        },
+        "deepseek-r1-distill-llama-70b": {
+            "description": "Simplified DeepSeek version based on LLaMA."
+        },
+        "deepseek-r1-distill-qwen-32b": {
+            "description": "Another DeepSeek version based on Qwen."
+        },
+        "phi-4": {
+            "description": "Small and accurate model from Microsoft."
+        },
+        "qwq-32b": {
+            "description": "High-capacity text model."
+        }
+    },
+    "max_files_exceeded": "You can only upload up to 10 files at a time",
+    "drag_files_here": "Drag files here to upload",
+    "copied": "Copied!"
 }
