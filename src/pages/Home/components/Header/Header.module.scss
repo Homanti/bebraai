@@ -94,6 +94,7 @@
 @media (width < 48rem) {
     .dropdownContent {
         max-width: 18.75rem;
+        min-height: 60vh;
         width: 100%;
 
         left: 50%;
