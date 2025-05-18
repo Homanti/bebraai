@@ -58,5 +58,13 @@
     },
     "max_files_exceeded": "Вы можете загрузить только до 10 файлов за раз",
     "drag_files_here": "Перетащите файлы сюда для загрузки",
-    "copied": "Скопировано!"
+    "copied": "Скопировано!",
+    "settings": {
+        "settings_label": "Настройки",
+        "language": "Язык",
+        "theme": "Тема",
+        "dark_theme": "Темная",
+        "light_theme": "Светлая",
+        "system_theme": "Авто"
+    }
 }

@@ -21,36 +21,60 @@
     border-radius: var(--border-radius);
 
     padding: 1.875rem;
+
+    & > h2 {
+        margin-top: 0;
+    }
 }
 
 .settingsContent {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     gap: 0.625rem;
 
     width: 100%;
 
     border-radius: var(--border-radius);
+}
 
-    & > h1 {
-        margin: 0;
+.dropdownButton {
+    & > img {
+        min-width: 1.5rem;
+        min-height: 1.5rem;
+
+        width: 1.5rem;
+        height: 1.5rem;
+
+        margin-right: 0.3125rem;
+    }
+
+    & > svg {
+        min-width: 1.5rem;
+        min-height: 1.5rem;
+
+        width: 1.5rem;
+        height: 1.5rem;
+
+        margin-right: 0.3125rem;
     }
 }
 
-.dropdown {
-    &Button {
-        background: var(--surface-color);
-        border: none;
+.dropdownItem {
+    display: flex;
+    padding: 0.625rem;
+    cursor: pointer;
+    border-radius: var(--border-radius);
 
-        color: white;
+    user-select: none;
+    align-items: center;
 
-        font-size: 1.1rem;
+    justify-content: space-between;
 
-        padding: 0.9375rem;
-        cursor: pointer;
+    &:hover {
+        background: var(--hover-color);
+    }
 
-        border-radius: var(--border-radius);
-
+    &__text {
         display: flex;
         flex-direction: row;
 
@@ -66,60 +90,15 @@
 
             margin-right: 0.3125rem;
         }
-    }
 
-    &Content {
-        position: absolute;
+        & > svg {
+            min-width: 1.5rem;
+            min-height: 1.5rem;
 
-        background: var(--surface-color);
-        border-radius: var(--border-radius);
+            width: 1.5rem;
+            height: 1.5rem;
 
-        max-height: 30dvh;
-
-        list-style: none;
-        padding: 0.625rem;
-        overflow: hidden;
-        z-index: 2;
-        overflow-y: auto;
-    }
-
-    &Item {
-        display: flex;
-        padding: 0.625rem;
-        cursor: pointer;
-        border-radius: var(--border-radius);
-
-        user-select: none;
-        align-items: center;
-
-        justify-content: space-between;
-
-        &:hover {
-            background: #2f2f2f;
+            margin-right: 0.3125rem;
         }
-
-        &__text {
-            display: flex;
-            flex-direction: row;
-
-            align-items: center;
-            justify-content: center;
-
-            & > img {
-                min-width: 1.5rem;
-                min-height: 1.5rem;
-
-                width: 1.5rem;
-                height: 1.5rem;
-
-                margin-right: 0.3125rem;
-            }
-        }
-    }
-}
-
-@media (width <= 42.8125rem) {
-    .settings {
-        min-width: 80vw;
     }
 }

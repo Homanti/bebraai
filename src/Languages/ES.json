@@ -58,5 +58,13 @@
     },
     "max_files_exceeded": "Solo puedes subir hasta 10 archivos a la vez",
     "drag_files_here": "Arrastra los archivos aquí para subirlos",
-    "copied": "¡Copiado!"
+    "copied": "¡Copiado!",
+    "settings": {
+        "settings_label": "Configuraciones",
+        "language": "Idioma",
+        "theme": "Tema",
+        "dark_theme": "Oscuro",
+        "light_theme": "Claro",
+        "system_theme": "Automático"
+    }
 }

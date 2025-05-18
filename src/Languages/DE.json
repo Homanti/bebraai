@@ -58,5 +58,13 @@
     },
     "max_files_exceeded": "Du kannst nur bis zu 10 Dateien gleichzeitig hochladen",
     "drag_files_here": "Dateien hierher ziehen zum Hochladen",
-    "copied": "Kopiert!"
+    "copied": "Kopiert!",
+    "settings": {
+        "settings_label": "Einstellungen",
+        "language": "Sprache",
+        "theme": "Thema",
+        "dark_theme": "Dunkel",
+        "light_theme": "Hell",
+        "auto_theme": "Automatisch"
+    }
 }

@@ -1,0 +1,44 @@
+.dropdown {
+    &Button {
+        background: var(--surface-color);
+        border: none;
+
+        color: var(--text-color);
+
+        font-size: 1.1rem;
+
+        padding: 0.9375rem;
+        cursor: pointer;
+
+        border-radius: var(--border-radius);
+
+        display: flex;
+        flex-direction: row;
+
+        align-items: center;
+        justify-content: center;
+
+        &:hover {
+            background: var(--hover-color);
+        }
+
+        &:active {
+            opacity: 0.5;
+        }
+    }
+
+    &Content {
+        position: absolute;
+
+        background: var(--surface-color);
+        border-radius: var(--border-radius);
+
+        max-height: 30dvh;
+
+        list-style: none;
+        padding: 0.625rem;
+        overflow: hidden;
+        z-index: 2;
+        overflow-y: auto;
+    }
+}

@@ -58,5 +58,13 @@
     },
     "max_files_exceeded": "You can only upload up to 10 files at a time",
     "drag_files_here": "Drag files here to upload",
-    "copied": "Copied!"
+    "copied": "Copied!",
+    "settings": {
+        "settings_label": "Settings",
+        "language": "Language",
+        "theme": "Theme",
+        "dark_theme": "Dark",
+        "light_theme": "Light",
+        "system_theme": "Auto"
+    }
 }

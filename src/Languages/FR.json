@@ -58,5 +58,13 @@
     },
     "max_files_exceeded": "Vous ne pouvez télécharger que 10 fichiers à la fois",
     "drag_files_here": "Glissez les fichiers ici pour les télécharger",
-    "copied": "Copié !"
+    "copied": "Copié !",
+    "settings": {
+        "settings_label": "Paramètres",
+        "language": "Langue",
+        "theme": "Thème",
+        "dark_theme": "Sombre",
+        "light_theme": "Clair",
+        "system_theme": "Automatique"
+    }
 }
