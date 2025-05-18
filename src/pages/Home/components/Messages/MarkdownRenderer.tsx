@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {type ReactNode, useState} from 'react';
 import ReactMarkdown from 'react-markdown';
 import rehypeHighlight from 'rehype-highlight';
 import rehypeKatex from 'rehype-katex';
@@ -22,11 +22,17 @@ type CodeProps = {
 const CodeBlock: React.FC<CodeProps> = ({ inline, className, children, ...props }) => {
     const [isCopied, setIsCopied] = useState(false);
     const { t } = useTranslation();
-    const code = Array.isArray(children)
-        ? children.map((child) => (typeof child === 'string' ? child : '')).join('')
-        : typeof children === 'string'
-            ? children
-            : '';
+
+    function extractText(node: ReactNode): string {
+        if (typeof node === 'string') return node;
+        if (Array.isArray(node)) return node.map(extractText).join('');
+        if (typeof node === 'object' && node && 'props' in node) {
+            return extractText((node as any).props.children);
+        }
+        return '';
+    }
+
+    const code = extractText(children);
 
     const copyToClipboard = () => {
         navigator.clipboard.writeText(code);
