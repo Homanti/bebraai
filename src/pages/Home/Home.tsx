@@ -12,13 +12,15 @@ import Header from "./components/Header/Header.tsx";
 import {AnimatePresence, motion} from "motion/react";
 import {getSettings} from "../../utils/settingsStorage.tsx";
 import SettingsModal from "./components/SettingsModal/SettingsModal.tsx";
+import {useTranslation} from "react-i18next";
 
 const Home = () => {
+    const { t } = useTranslation();
     const [chats, setChats] = useState<Chat[]>(getChats());
     const [activeChatId, setActiveChatId] = useState(() => {
         const existing = getChats();
         if (existing.length > 0) return existing[existing.length - 1].id;
-        const defaultChat: Chat = { id: '1', title: 'New chat', messages: [] };
+        const defaultChat: Chat = { id: '1', title: t('new_chat'), messages: [] };
         saveChats([defaultChat]);
         return '1';
     });
@@ -37,7 +39,7 @@ const Home = () => {
                 ? {
                     ...chat,
                     messages: newMessages,
-                    title: chat.title === 'New chat' && newMessages.length > 0 && newMessages[0].content
+                    title: chat.title === t('new_chat') && newMessages.length > 0 && newMessages[0].content
                         ? newMessages[0].content.slice(0, 50)
                         : chat.title
                 }
@@ -59,7 +61,7 @@ const Home = () => {
 
         const modelName = getSettings().modelName || 'ChatGPT 4o';
 
-        await sendMessage(currentMessages, modelName, (chunk: string) => {
+        await sendMessage(currentMessages, modelName, message.draw, message.web_search, (chunk: string) => {
             assistantText += chunk;
 
             const updatedMessages = [...currentMessages];
@@ -99,7 +101,7 @@ const Home = () => {
                                 animate={{ opacity: 1, y: 0 }}
                                 exit={{ opacity: 0, y: -50 }}
                             >
-                                Hey! Write your question.
+                                {t('welcome_message')}
                             </motion.h1>
                         )}
                     </AnimatePresence>

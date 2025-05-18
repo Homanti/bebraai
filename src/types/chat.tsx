@@ -2,6 +2,8 @@ export type Message = {
     content?: string;
     files?: { id: string; data: string }[];
     role: 'user' | 'assistant';
+    draw?: boolean;
+    web_search?: boolean;
 }
 
 export type Chat = {

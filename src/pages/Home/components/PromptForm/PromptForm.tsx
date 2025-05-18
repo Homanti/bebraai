@@ -1,5 +1,5 @@
 import styles from './PromptForm.module.scss';
-import { useState } from "react";
+import {useRef, useState} from "react";
 import { Send, Plus, X } from "lucide-react";
 import { isMobile } from "react-device-detect";
 import SvgButton from "../../../../components/SvgButton/SvgButton.tsx";
@@ -7,16 +7,23 @@ import type {Message} from "../../../../types/chat.tsx";
 import {AnimatePresence, motion} from "motion/react";
 import {useSettingsStore} from "../../../../store/settings.tsx";
 import {models} from "../../../../data/models.tsx";
+import {useMessageStore} from "../../../../store/messages.tsx";
+import {useTranslation} from "react-i18next";
+
+// type Modes = {
+//     draw: boolean;
+//     web_search: boolean;
+// };
 
 const PromptForm = ({ onSubmit }: { onSubmit: (message: Message) => void }) => {
+    const { t } = useTranslation();
     const [inputValue, setInputValue] = useState<string>('');
     const [inputFocused, setInputFocused] = useState(false);
     const { modelName } = useSettingsStore();
-    const [message, setMessage] = useState<Message>({
-        content: '',
-        files: [],
-        role: 'user'
-    });
+    const textareaRef = useRef<HTMLTextAreaElement>(null);
+    const message = useMessageStore(state => state.message);
+    const setMessage = useMessageStore(state => state.setMessage);
+    const resetMessage = useMessageStore(state => state.resetMessage);
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -28,11 +35,7 @@ const PromptForm = ({ onSubmit }: { onSubmit: (message: Message) => void }) => {
 
         onSubmit(message);
         setInputValue('');
-        setMessage({
-            content: '',
-            files: [],
-            role: 'user'
-        });
+        resetMessage();
     }
 
     const handleFileAdd = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -62,20 +65,14 @@ const PromptForm = ({ onSubmit }: { onSubmit: (message: Message) => void }) => {
                 data
             }));
 
-            setMessage(prev => ({
-                ...prev,
-                files: [...(prev.files ?? []), ...withIds]
-            }));
+            setMessage({ files: [...(message.files ?? []), ...withIds] });
         } catch (err) {
             console.error(err);
         }
     };
 
     const handleDeleteContent = (idToDelete: string) => {
-        setMessage(prev => ({
-            ...prev,
-            files: prev.files?.filter(item => item.id !== idToDelete) ?? []
-        }));
+        setMessage({ files: message.files?.filter(item => item.id !== idToDelete) ?? []});
     };
 
     const handlePaste = (e: React.ClipboardEvent<HTMLTextAreaElement>) => {
@@ -113,17 +110,34 @@ const PromptForm = ({ onSubmit }: { onSubmit: (message: Message) => void }) => {
 
             Promise.all(readImages)
                 .then(results => {
-                    setMessage(prev => ({
-                        ...prev,
-                        files: [...(prev.files ?? []), ...results]
-                    }));
+                    setMessage({
+                        ...message,
+                        files: [...(message.files ?? []), ...results]
+                    });
                 })
                 .catch(err => console.error(err));
         }
     };
 
+    // const toggleMode = (key: keyof Modes) => {
+    //     const isActive = message[key];
+    //     setMessage({
+    //         draw: key === 'draw' ? !isActive : false,
+    //         web_search: key === 'web_search' ? !isActive : false,
+    //     });
+    // };
+
     return (
-        <div className={`${styles.container} ${inputFocused ? styles.focused : ''}`}>
+        <div className={`${styles.container} ${inputFocused ? styles.focused : ''}`}
+             onMouseDown={(e) => {
+                 const target = e.target as HTMLElement;
+
+                 if (target.closest('button, input, textarea, label, [tabindex], [role="button"]')) return;
+
+                 textareaRef.current?.focus();
+                 e.preventDefault();
+             }}
+        >
 
             <form className={styles.form} onSubmit={handleSubmit}>
                 <AnimatePresence>
@@ -165,15 +179,11 @@ const PromptForm = ({ onSubmit }: { onSubmit: (message: Message) => void }) => {
                 </AnimatePresence>
 
                 <div className={styles.inputContainer}>
-                    <label className={`${styles.addButton} ${!(models.find((m) => m.name === modelName)?.visionSupport) ? styles.disabled : ''}`}>
-                        <Plus />
-                        <input disabled={!models.find((m) => m.name === modelName)?.visionSupport} type="file" maxLength={10} accept="image/png, image/jpeg" multiple style={{ display: 'none' }} onChange={handleFileAdd} />
-                    </label>
-
                     <textarea
                         className={styles.textarea}
-                        placeholder="Write your prompt"
+                        placeholder={t('prompt_placeholder')}
                         value={inputValue}
+                        ref={textareaRef}
                         onFocus={() => setInputFocused(true)}
                         onBlur={() => setInputFocused(false)}
                         onChange={(e) => setInputValue(e.currentTarget.value)}
@@ -188,15 +198,11 @@ const PromptForm = ({ onSubmit }: { onSubmit: (message: Message) => void }) => {
                                 const trimmed = inputValue.trim();
 
                                 if (trimmed || (message.files?.length && message.files?.length > 0)) {
-                                    message.content = trimmed;
+                                    const newMessage = { ...message, content: trimmed };
+                                    onSubmit(newMessage);
 
-                                    onSubmit(message);
                                     setInputValue('');
-                                    setMessage({
-                                        content: '',
-                                        files: [],
-                                        role: 'user'
-                                    });
+                                    resetMessage();
                                 }
                             }
 
@@ -215,6 +221,30 @@ const PromptForm = ({ onSubmit }: { onSubmit: (message: Message) => void }) => {
                             }
                         }}
                     />
+                </div>
+
+                <div className={styles.toolbar}>
+                    <div className={styles.toolbarButtons}>
+                        <label className={`${styles.addButton} ${!(models.find((m) => m.name === modelName)?.visionSupport) ? styles.disabled : ''}`}>
+                            <Plus />
+                            <input disabled={!models.find((m) => m.name === modelName)?.visionSupport} type="file" maxLength={10} accept="image/png, image/jpeg" multiple style={{ display: 'none' }} onChange={handleFileAdd} />
+                        </label>
+
+                        {/*<SvgButton*/}
+                        {/*    className={`${styles.toolButton} ${message.draw ? styles.active : ''}`}*/}
+                        {/*    onClick={() => toggleMode('draw')}*/}
+                        {/*>*/}
+                        {/*    <Brush />*/}
+                        {/*</SvgButton>*/}
+
+                        {/*<SvgButton*/}
+                        {/*    className={`${styles.toolButton} ${message.web_search ? styles.active : ''}`}*/}
+                        {/*    onClick={() => toggleMode('web_search')}*/}
+                        {/*>*/}
+                        {/*    <Globe />*/}
+                        {/*</SvgButton>*/}
+                    </div>
+
                     <SvgButton type="submit" className={styles.sendButton} disabled={!inputValue.trim() && !(message.files?.length && message.files.length > 0)}>
                         <Send />
                     </SvgButton>

@@ -4,6 +4,8 @@ import { models } from "../data/models.tsx";
 export const sendMessage = async (
     messages: Message[],
     modelName: string = "ChatGPT 4o",
+    draw: boolean = false,
+    web_search: boolean = false,
     onChunk: (chunk: string) => void,
 ): Promise<void> => {
     const formData = new FormData();
@@ -18,6 +20,13 @@ export const sendMessage = async (
     const model = models.find((m) => m.name === modelName)?.model || "gpt-4o";
 
     formData.append('model', model);
+
+    const mods = {
+        draw: draw,
+        web_search: web_search,
+    };
+
+    formData.append('mods', JSON.stringify(mods));
 
     messages.forEach((msg, msgIndex) => {
         msg.files?.forEach((item, fileIndex) => {
@@ -41,7 +50,7 @@ export const sendMessage = async (
         });
     });
 
-    const response = await fetch('https://bebraai-fastapi-production.up.railway.app/api/messages', {
+    const response = await fetch('https://bebraai-fastapi-production.up.railway.app/api/stream/generate', {
         method: 'POST',
         body: formData
     });

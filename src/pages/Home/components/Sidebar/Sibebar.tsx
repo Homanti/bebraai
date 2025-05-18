@@ -6,6 +6,7 @@ import type {Chat} from "../../../../types/chat.tsx";
 import {useEffect, useRef, useState} from "react";
 import { useSidebar } from "../../../../store/sidebar.tsx";
 import {useClickOutside} from "../../../../hooks/useClickOutside.tsx";
+import {useTranslation} from "react-i18next";
 
 type SidebarProps = {
     chats: Chat[];
@@ -15,6 +16,7 @@ type SidebarProps = {
 }
 
 const Sidebar = ({ chats, updateChats, setActiveChatId, activeChatId }: SidebarProps) => {
+    const { t } = useTranslation();
     const [width, setWidth] = useState(window.innerWidth);
     const { sidebarOpened, setSidebarOpened } = useSidebar();
     const sidebarRef = useRef<HTMLDivElement>(null);
@@ -25,7 +27,7 @@ const Sidebar = ({ chats, updateChats, setActiveChatId, activeChatId }: SidebarP
         const nextId = (Math.max(...chats.map(c => Number(c.id)), 0) + 1).toString();
         const newChat: Chat = {
             id: nextId,
-            title: 'New chat',
+            title: t('new_chat'),
             messages: [],
         };
         const newChats = [...chats, newChat];
@@ -35,7 +37,7 @@ const Sidebar = ({ chats, updateChats, setActiveChatId, activeChatId }: SidebarP
 
     const deleteChat = (id: string) => {
         if (chats.length === 1) {
-            const defaultChat: Chat = { id: '1', title: 'New chat', messages: [] };
+            const defaultChat: Chat = { id: '1', title: t('new_chat'), messages: [] };
             updateChats([defaultChat]);
             setActiveChatId('1');
             return;

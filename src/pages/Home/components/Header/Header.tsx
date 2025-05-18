@@ -7,6 +7,7 @@ import {useSettings, useSettingsStore} from "../../../../store/settings.tsx";
 import {AnimatePresence, motion} from "motion/react";
 import {type RefObject, useRef, useState} from "react";
 import {useClickOutside} from "../../../../hooks/useClickOutside.tsx";
+import {useTranslation} from "react-i18next";
 
 type HeaderProps = {
     openSettingsButtonRef: RefObject<HTMLButtonElement | null>;
@@ -18,6 +19,7 @@ const Header = ({ openSettingsButtonRef }: HeaderProps) => {
     const [isOpen, setIsOpen] = useState(false);
     const dropdownRef = useRef<HTMLDivElement>(null);
     const { settingsOpened, setSettingsOpened } = useSettings();
+    const { t } = useTranslation();
 
     useClickOutside(dropdownRef, () => setIsOpen(false), isOpen);
 
@@ -61,7 +63,7 @@ const Header = ({ openSettingsButtonRef }: HeaderProps) => {
                                     <li onClick={() => handleSelect(item.name)} key={index} className={styles.dropdownItem}>
                                         <div className={styles.dropdownItem__text}>
                                             {item.name}
-                                            {<p className={styles.description}>{item.description}</p>}
+                                            {<p className={styles.description}>{t(item.description)}</p>}
                                         </div>
                                         {item.visionSupport ? (
                                             <Image />
@@ -76,7 +78,7 @@ const Header = ({ openSettingsButtonRef }: HeaderProps) => {
                 </div>
             </div>
 
-            <motion.div layout style={{visibility: "hidden"}}>
+            <motion.div layout>
                 <SvgButton ref={openSettingsButtonRef as RefObject<HTMLButtonElement>} onClick={() => setSettingsOpened(!settingsOpened)}>
                     <Settings2 />
                 </SvgButton>

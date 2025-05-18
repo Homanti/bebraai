@@ -3,6 +3,8 @@
   flex-direction: column;
   position: relative;
 
+  cursor: text;
+
   width: 100%;
 
   box-shadow: 0.625rem 0.625rem 1.25rem rgba(0, 0, 0, 0.1);
@@ -113,61 +115,95 @@
   border-radius: var(--border-radius);
 }
 
+.inputContainer {
+  display: flex;
+  flex-direction: row;
+
+  padding: 1.25rem 1rem 1rem;
+}
+
 .textarea {
   border: none;
   outline: none;
   background: transparent;
   width: 100%;
   height: 1.25rem;
-  padding: 1.875rem;
   resize: none;
   font-size: 1rem;
 }
 
-.sendButton {
-  margin-right: 1.25rem;
-
-  &:disabled {
-    cursor: not-allowed;
-
-    & > svg {
-      color: darkgrey;
-    }
-  }
-}
-
-.inputContainer {
+.toolbar {
   display: flex;
   flex-direction: row;
-}
 
-.addButton {
-  display: flex;
-  margin-left: 1.25rem;
-  align-items: center;
+  justify-content: space-between;
 
-  & > svg {
-    width: 1.4rem;
-    height: 1.4rem;
+  padding: 1rem;
+
+  .toolbarButtons {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    gap: 0.625rem;
   }
 
-  &:hover {
-    opacity: 0.7;
-    cursor: pointer;
-  }
-
-  &:active {
-    opacity: 0.5;
-  }
-
-  &.disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
+  .toolButton {
+    padding: 0;
 
     & > svg {
       color: darkgrey;
     }
+
+    &.active {
+      & > svg {
+          color: white;
+      }
+    }
   }
+
+  .sendButton {
+    padding: 0;
+
+    &:disabled {
+      cursor: not-allowed;
+
+      & > svg {
+        color: darkgrey;
+      }
+    }
+  }
+
+  .addButton {
+    display: flex;
+    align-items: center;
+
+    border-radius: 50%;
+
+    & > svg {
+      width: 1.4rem;
+      height: 1.4rem;
+    }
+
+    &:hover {
+      opacity: 0.7;
+      cursor: pointer;
+    }
+
+    &:active {
+      opacity: 0.5;
+    }
+
+    &.disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+
+      & > svg {
+        color: darkgrey;
+      }
+    }
+  }
+
 }
 
 @keyframes gradientAnimation {
