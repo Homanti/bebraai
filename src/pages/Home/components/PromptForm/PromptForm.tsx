@@ -94,8 +94,8 @@ const PromptForm = ({ onSubmit }: { onSubmit: (message: Message) => void }) => {
 
     const handlePaste = async (e: React.ClipboardEvent<HTMLTextAreaElement>) => {
         const items = Array.from(e.clipboardData.items);
-        await processFiles(items, true); // только изображения
-        e.preventDefault();
+        await processFiles(items, true);
+        // e.preventDefault();
     };
 
     const handleDrop = async (e: React.DragEvent<HTMLFormElement>) => {
