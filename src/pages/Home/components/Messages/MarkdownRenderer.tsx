@@ -48,39 +48,45 @@ const CodeBlock: React.FC<CodeProps> = ({ inline, className, children, ...props 
 
     const language = className?.match(/language-([\w-]+)/)?.[1] || 'plaintext';
 
-    return (
-        <div className={styles.codeMessage} style={{ position: 'relative' }}>
-            <div className={styles.topBar}>
-                <span className={styles.languageName}>{language}</span>
-                <motion.div className={styles.copyContainer} layout>
-                    <motion.span layout>
-                        <SvgButton
-                            onClick={copyToClipboard}
-                            className={styles.copyButton}
-                        >
-                            <Copy />
-                        </SvgButton>
-                    </motion.span>
-
-                    <AnimatePresence>
-                        {isCopied && (
-                            <motion.span
-                                className={styles.copiedMessage}
-                                initial={{ opacity: 0, width: 0 }}
-                                animate={{ opacity: 1, width: "auto" }}
-                                exit={{ opacity: 0, width: 0 }}
+    if(language == "plaintext") {
+        return (
+            <div className={styles.codeMessage} style={{ position: 'relative' }}>
+                <div className={styles.topBar}>
+                    <span className={styles.languageName}>{language}</span>
+                    <motion.div className={styles.copyContainer} layout>
+                        <motion.span layout>
+                            <SvgButton
+                                onClick={copyToClipboard}
+                                className={styles.copyButton}
                             >
-                                {t('copied')}
-                            </motion.span>
-                        )}
-                    </AnimatePresence>
-                </motion.div>
+                                <Copy />
+                            </SvgButton>
+                        </motion.span>
+
+                        <AnimatePresence>
+                            {isCopied && (
+                                <motion.span
+                                    className={styles.copiedMessage}
+                                    initial={{ opacity: 0, width: 0 }}
+                                    animate={{ opacity: 1, width: "auto" }}
+                                    exit={{ opacity: 0, width: 0 }}
+                                >
+                                    {t('copied')}
+                                </motion.span>
+                            )}
+                        </AnimatePresence>
+                    </motion.div>
+                </div>
+                <pre className={`${className} ${styles.codeMessageContent}`} {...props}>
+                    <code className={className}>{children}</code>
+                </pre>
             </div>
-            <pre className={`${className} ${styles.codeMessageContent}`} {...props}>
-                <code className={className}>{children}</code>
-            </pre>
-        </div>
-    );
+            );
+    } else {
+        <pre className={`${className} ${styles.codeMessageContent}`} {...props}>
+            <code className={className}>{children}</code>
+        </pre>
+    }
 };
 
 export const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({ content }) => (
