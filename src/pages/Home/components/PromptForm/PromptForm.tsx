@@ -1,5 +1,5 @@
 import styles from './PromptForm.module.scss';
-import {useRef, useState} from "react";
+import {useEffect, useRef, useState} from "react";
 import { Send, Plus, X } from "lucide-react";
 import { isMobile } from "react-device-detect";
 import SvgButton from "../../../../components/SvgButton/SvgButton.tsx";
@@ -94,9 +94,15 @@ const PromptForm = ({ onSubmit }: { onSubmit: (message: Message) => void }) => {
 
     const handlePaste = async (e: React.ClipboardEvent<HTMLTextAreaElement>) => {
         const items = Array.from(e.clipboardData.items);
-        await processFiles(items, true);
-        // e.preventDefault();
+
+        const hasImage = items.some(item => item.type.startsWith("image/"));
+
+        if (hasImage) {
+            e.preventDefault();
+            await processFiles(items, true);
+        }
     };
+
 
     const handleDrop = async (e: React.DragEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -115,6 +121,15 @@ const PromptForm = ({ onSubmit }: { onSubmit: (message: Message) => void }) => {
         setMessage({ files: message.files?.filter(item => item.id !== idToDelete) ?? []});
     };
 
+    useEffect(() => {
+        const textarea = textareaRef.current;
+        if (textarea) {
+            textarea.style.height = 'auto';
+
+            const scrollHeight:number = Math.min(textarea.scrollHeight, 200);
+            textarea.style.height = scrollHeight + 'px';
+        }
+    }, [inputValue]);
 
     // const toggleMode = (key: keyof Modes) => {
     //     const isActive = message[key];
