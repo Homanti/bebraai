@@ -12,7 +12,8 @@ export default defineConfig({
         enabled: true,
       },
       workbox: {
-        navigateFallback: '/',
+        navigateFallback: '/index.html',
+        cleanupOutdatedCaches: true
       },
     }),
   ],
