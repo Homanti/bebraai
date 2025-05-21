@@ -148,9 +148,7 @@ const PromptForm = ({ onSubmit }: { onSubmit: (message: Message) => void }) => {
 
                  textareaRef.current?.focus();
                  e.preventDefault();
-             }}
-
-        >
+             }}>
 
             <form className={styles.form} onSubmit={handleSubmit}
                   onDragOver={(e) => {

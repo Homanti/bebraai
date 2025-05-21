@@ -48,9 +48,9 @@ const CodeBlock: React.FC<CodeProps> = ({ inline, className, children, ...props 
 
     const language = className?.match(/language-([\w-]+)/)?.[1] || 'plaintext';
 
-    if(language == "plaintext") {
-        return (
-            <div className={styles.codeMessage} style={{ position: 'relative' }}>
+    return (
+        <div className={styles.codeMessage} style={{ position: 'relative' }}>
+            {language !== 'plaintext' && (
                 <div className={styles.topBar}>
                     <span className={styles.languageName}>{language}</span>
                     <motion.div className={styles.copyContainer} layout>
@@ -77,16 +77,12 @@ const CodeBlock: React.FC<CodeProps> = ({ inline, className, children, ...props 
                         </AnimatePresence>
                     </motion.div>
                 </div>
-                <pre className={`${className} ${styles.codeMessageContent}`} {...props}>
-                    <code className={className}>{children}</code>
-                </pre>
-            </div>
-            );
-    } else {
-        <pre className={`${className} ${styles.codeMessageContent}`} {...props}>
-            <code className={className}>{children}</code>
-        </pre>
-    }
+            )}
+            <pre className={`${className} ${styles.codeMessageContent}`} {...props}>
+                <code className={className}>{children}</code>
+            </pre>
+        </div>
+        );
 };
 
 export const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({ content }) => (

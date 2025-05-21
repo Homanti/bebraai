@@ -108,7 +108,7 @@ const Home = () => {
                 <section className={styles.chat}>
                     <Messages activeChat={activeChat} />
 
-                    <motion.div className={`${styles.prompt} ${styles.gradientBorder}`}>
+                    <motion.div className={`${styles.prompt}`}>
                         <PromptForm onSubmit={submitMessage} />
                     </motion.div>
                 </section>
