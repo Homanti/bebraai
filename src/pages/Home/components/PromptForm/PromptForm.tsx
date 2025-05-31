@@ -26,7 +26,7 @@ const PromptForm = ({ onSubmit }: { onSubmit: (message: Message) => void }) => {
     const resetMessage = useMessageStore(state => state.resetMessage);
     const [isDragOver, setIsDragOver] = useState(false);
 
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement> | React.KeyboardEvent<HTMLTextAreaElement>) => {
         e.preventDefault();
         const trimmed = inputValue.trim();
 
@@ -102,7 +102,6 @@ const PromptForm = ({ onSubmit }: { onSubmit: (message: Message) => void }) => {
             await processFiles(items, true);
         }
     };
-
 
     const handleDrop = async (e: React.DragEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -234,15 +233,7 @@ const PromptForm = ({ onSubmit }: { onSubmit: (message: Message) => void }) => {
 
                             if (e.key === 'Enter' && !e.shiftKey) {
                                 e.preventDefault();
-                                const trimmed = inputValue.trim();
-
-                                if (trimmed || (message.files?.length && message.files?.length > 0)) {
-                                    const newMessage = { ...message, content: trimmed };
-                                    onSubmit(newMessage);
-
-                                    setInputValue('');
-                                    resetMessage();
-                                }
+                                handleSubmit(e);
                             }
 
                             if (e.key === 'Enter' && e.shiftKey) {

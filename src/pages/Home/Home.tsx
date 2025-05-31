@@ -57,11 +57,17 @@ const Home = () => {
 
         let assistantText = '';
         let currentMessages = [...updatedUserMessages];
+
+        const currentMessagesWithoutFilesExceptLast: Message[] = currentMessages.map((msg, index, arr) => ({
+            ...msg,
+            files: index === arr.length - 1 ? msg.files : [],
+        }));
+
         let assistantAdded = false;
 
         const modelName = getSettings().modelName || 'ChatGPT 4o';
 
-        await sendMessage(currentMessages, modelName, message.draw, message.web_search, (chunk: string) => {
+        await sendMessage(currentMessagesWithoutFilesExceptLast, modelName, message.draw, message.web_search, (chunk: string) => {
             assistantText += chunk;
 
             const updatedMessages = [...currentMessages];
