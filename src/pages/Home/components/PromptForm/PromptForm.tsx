@@ -255,7 +255,7 @@ const PromptForm = ({ onSubmit }: { onSubmit: (message: Message) => void }) => {
 
                 <div className={styles.toolbar}>
                     <div className={styles.toolbarButtons}>
-                        <label className={`${styles.addButton} ${!(models.find((m) => m.name === modelName)?.visionSupport) ? styles.disabled : ''}`}>
+                        <label className={`${styles.addButton} ${!(models.find((m) => m.name === modelName)?.visionSupport) ? styles.disabled : ''}`} aria-label={t('aria.button_add_files')}>
                             <Plus />
                             <input disabled={!models.find((m) => m.name === modelName)?.visionSupport} type="file" maxLength={10} accept="image/png, image/jpeg" multiple style={{ display: 'none' }} onChange={handleFileAdd} />
                         </label>
@@ -275,7 +275,7 @@ const PromptForm = ({ onSubmit }: { onSubmit: (message: Message) => void }) => {
                         {/*</SvgButton>*/}
                     </div>
 
-                    <SvgButton type="submit" className={styles.sendButton} disabled={!inputValue.trim() && !(message.files?.length && message.files.length > 0)}>
+                    <SvgButton type="submit" className={styles.sendButton} disabled={!inputValue.trim() && !(message.files?.length && message.files.length > 0)} aria-label={t('aria.button_send_message')}>
                         <Send />
                     </SvgButton>
                 </div>

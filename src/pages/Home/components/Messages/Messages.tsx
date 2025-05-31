@@ -1,6 +1,6 @@
 import {AnimatePresence, motion} from "motion/react";
 import styles from "./Messages.module.scss";
-import {Fragment, useEffect} from "react";
+import { useEffect } from "react";
 import { messagesEndRef, scrollToBottom } from "../../../../utils/scrollToBottom.tsx";
 import { MarkdownRenderer } from "./MarkdownRenderer.tsx";
 
@@ -31,7 +31,7 @@ const Messages = ({ activeChat }: MessagesProps) => {
                     };
 
                     return (
-                        <Fragment key={index}>
+                        <div className={styles.messageContainer} key={index} aria-live={message.role === 'assistant' ? 'polite' : 'off'}>
                             {message.files?.map((item, fileIndex) => (
                                 <motion.div
                                     className={styles.imageMessage}
@@ -55,7 +55,7 @@ const Messages = ({ activeChat }: MessagesProps) => {
                                     <MarkdownRenderer content={message.content} />
                                 </motion.div>
                             )}
-                        </Fragment>
+                        </div>
                     );
                 })}
             </AnimatePresence>

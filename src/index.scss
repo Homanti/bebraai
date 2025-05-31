@@ -1,34 +1,18 @@
-@import "highlight.js/styles/github-dark.css";
-
-@font-face {
-    font-family: 'Roboto';
-    src: url("assets/fonts/Roboto-Regular.ttf") format('truetype');
-    font-weight: 400;
-    font-style: normal;
-    font-display: swap;
-}
-
-:root {
-    --background-color: #1b1c1d;
-    --surface-color: #232425;
-    --border-radius: 0.625rem;
-    --main-gradient: linear-gradient(to right, #4b83f0, #a071c3, #ca6887, #d46678);
-    --secondary-gradient: linear-gradient(90deg, #007AFF, #FF2D55, #FF9500);;
-    --nav-color: #171717;
-}
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
 :root {
     --color-scheme: light;
     --text-color: #000000;
     --background-color: #ffffff;
-    --surface-color: #ced3da;
+    --surface-color: #e9eef6;
     --border-radius: 0.625rem;
     --main-gradient: linear-gradient(to right, #4b83f0, #a071c3, #ca6887, #d46678);
     --secondary-gradient: linear-gradient(90deg, #007AFF, #FF2D55, #FF9500);
     --nav-color: #f0f4f9;
-    --primary-color: black;
+    --primary-color: #36383a;
     --secondary-color: #505353;
-    --hover-color: #e0e3e8;
+    --second-surface-color: #e0e3e8;
+    --third-surface-color: #e0e3e8;
 }
 
 [data-theme="dark"] {
@@ -38,20 +22,22 @@
     --surface-color: #232425;
     --border-radius: 0.625rem;
     --main-gradient: linear-gradient(to right, #4b83f0, #a071c3, #ca6887, #d46678);
-    --secondary-gradient: linear-gradient(90deg, #007AFF, #FF2D55, #FF9500);;
+    --secondary-gradient: linear-gradient(90deg, #007AFF, #FF2D55, #FF9500);
     --nav-color: #171717;
     --primary-color: white;
     --secondary-color: darkgray;
-    --hover-color: #2f2f2f;
+    --second-surface-color: #2f2f2f;
+    --third-surface-color: #424242;
 }
 
 html, body, #root {
     background-color: var(--background-color);
-    font-family: "Roboto", sans-serif;
+    font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
     color-scheme: var(--color-scheme);
     height: 100dvh;
     margin: 0;
     padding: 0;
+    color: var(--primary-color);
 }
 
 input,

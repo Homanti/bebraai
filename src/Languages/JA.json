@@ -1,0 +1,79 @@
+{
+  "welcome_message": "こんにちは！質問を書いてください。",
+  "prompt_placeholder": "ここに質問を入力してください。",
+  "new_chat": "新しいチャット",
+  "select_language": "言語を選択してください",
+  "models": {
+    "gpt-4o": {
+      "description": "非常に速くて賢い。現時点で最高。"
+    },
+    "gpt-4o-mini": {
+      "description": "より高速でコンパクトなGPT-4oのバージョン。"
+    },
+    "o1-mini": {
+      "description": "4oより賢いが、遅い。シンプルで軽量なモデル。"
+    },
+    "o3-mini": {
+      "description": "o1より賢いが、遅い。テキスト用のバランス型ミニモデル。"
+    },
+    "o4-mini": {
+      "description": "o3より賢いが、遅い。OpenAIのコンパクトモデル。"
+    },
+    "gemini-2.5-flash": {
+      "description": "非常に高速なGoogleモデル。"
+    },
+    "gemini-2.0-flash-thinking": {
+      "description": "論理と計画に最適。"
+    },
+    "qwen-2.5-coder-32b": {
+      "description": "Alibaba製の強力なコーディングモデル。"
+    },
+    "llama-3.3-70b": {
+      "description": "Metaの大型モデル。"
+    },
+    "llama-4-scout": {
+      "description": "LLaMA 4の初期テストモデル。"
+    },
+    "llama-4-scout-17b": {
+      "description": "LLaMA 4 Scoutの小型版。"
+    },
+    "mistral-small-3.1-24b": {
+      "description": "高速かつ汎用性が高い。"
+    },
+    "deepseek-r1": {
+      "description": "コーディングとテキスト作成に最適。"
+    },
+    "deepseek-r1-distill-llama-70b": {
+      "description": "LLaMAベースの簡略版DeepSeek。"
+    },
+    "deepseek-r1-distill-qwen-32b": {
+      "description": "Qwenベースの別バージョンDeepSeek。"
+    },
+    "phi-4": {
+      "description": "Microsoftの小型で高精度なモデル。"
+    },
+    "qwq-32b": {
+      "description": "大容量テキストモデル。"
+    }
+  },
+  "max_files_exceeded": "一度にアップロードできるファイルは最大10個までです",
+  "drag_files_here": "ファイルをここにドラッグしてアップロード",
+  "copied": "コピーしました！",
+  "settings": {
+    "settings_label": "設定",
+    "language": "言語",
+    "theme": "テーマ",
+    "dark_theme": "ダーク",
+    "light_theme": "ライト",
+    "system_theme": "自動"
+  },
+  "aria": {
+    "button_open_sidebar": "サイドバーを開く",
+    "button_create_new_chat": "新しいチャットを作成",
+    "button_delete_chat": "チャットを削除",
+    "button_send_message": "メッセージを送信",
+    "button_copy_message": "メッセージをコピー",
+    "button_add_files": "ファイルを追加",
+    "button_open_settings": "設定を開く"
+  }
+}

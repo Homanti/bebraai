@@ -64,6 +64,9 @@ const SettingsModal = ({openSettingsButtonRef}: SettingsModalProps) => {
         <AnimatePresence>
             {settingsOpened && (
                 <motion.div className={styles.backdrop}
+                            id={"settings-content"}
+                            role={"dialog"}
+                            aria-hidden={!settingsOpened}
                             initial={{opacity: 0}}
                             animate={{opacity: 1}}
                             exit={{opacity: 0}}

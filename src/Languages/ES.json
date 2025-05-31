@@ -66,5 +66,14 @@
         "dark_theme": "Oscuro",
         "light_theme": "Claro",
         "system_theme": "Automático"
+    },
+    "aria": {
+        "button_open_sidebar": "Abrir barra lateral",
+        "button_create_new_chat": "Crear nuevo chat",
+        "button_delete_chat": "Eliminar chat",
+        "button_send_message": "Enviar mensaje",
+        "button_copy_message": "Copiar mensaje",
+        "button_add_files": "Agregar archivos",
+        "button_open_settings": "Abrir configuración"
     }
 }

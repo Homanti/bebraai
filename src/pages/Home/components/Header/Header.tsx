@@ -36,7 +36,7 @@ const Header = ({ openSettingsButtonRef }: HeaderProps) => {
                             // exit={{opacity: 0, x: -10}}
                             // layout
                         >
-                            <SvgButton onClick={() => setSidebarOpened(!sidebarOpened)}>
+                            <SvgButton onClick={() => setSidebarOpened(!sidebarOpened)} aria-expanded={sidebarOpened} aria-label={t("aria.button_open_sidebar")} aria-controls={"sidebar-content"}>
                                 <Menu />
                             </SvgButton>
                         </motion.div>
@@ -61,8 +61,7 @@ const Header = ({ openSettingsButtonRef }: HeaderProps) => {
             </div>
 
             <motion.div layout>
-                <SvgButton ref={openSettingsButtonRef as RefObject<HTMLButtonElement>}
-                           onClick={() => setSettingsOpened(!settingsOpened)}>
+                <SvgButton ref={openSettingsButtonRef as RefObject<HTMLButtonElement>} onClick={() => setSettingsOpened(!settingsOpened)} aria-controls={"settings-content"} aria-expanded={settingsOpened} aria-label={t("aria.button_open_settings")}>
                     <Settings2/>
                 </SvgButton>
             </motion.div>

@@ -1,0 +1,79 @@
+{
+  "welcome_message": "안녕하세요! 질문을 작성해주세요.",
+  "prompt_placeholder": "여기에 질문을 입력하세요.",
+  "new_chat": "새 채팅",
+  "select_language": "언어 선택",
+  "models": {
+    "gpt-4o": {
+      "description": "매우 빠르고 스마트합니다. 현재 최고의 모델입니다."
+    },
+    "gpt-4o-mini": {
+      "description": "더 빠르지만 더 작은 GPT-4o 버전입니다."
+    },
+    "o1-mini": {
+      "description": "4o보다 더 똑똑하지만 느립니다. 간단하고 가벼운 모델입니다."
+    },
+    "o3-mini": {
+      "description": "o1보다 더 똑똑하지만 느립니다. 텍스트에 적합한 균형 잡힌 미니 모델입니다."
+    },
+    "o4-mini": {
+      "description": "o3보다 더 똑똑하지만 느립니다. OpenAI의 컴팩트 모델입니다."
+    },
+    "gemini-2.5-flash": {
+      "description": "구글의 매우 빠른 모델입니다."
+    },
+    "gemini-2.0-flash-thinking": {
+      "description": "논리와 계획에 최적화되었습니다."
+    },
+    "qwen-2.5-coder-32b": {
+      "description": "알리바바의 강력한 코딩 모델입니다."
+    },
+    "llama-3.3-70b": {
+      "description": "Meta의 대형 모델입니다."
+    },
+    "llama-4-scout": {
+      "description": "LLaMA 4의 초기 테스트 모델입니다."
+    },
+    "llama-4-scout-17b": {
+      "description": "LLaMA 4 Scout의 소형 버전입니다."
+    },
+    "mistral-small-3.1-24b": {
+      "description": "빠르고 범용적인 모델입니다."
+    },
+    "deepseek-r1": {
+      "description": "코딩 및 일반 텍스트 작업에 적합합니다."
+    },
+    "deepseek-r1-distill-llama-70b": {
+      "description": "LLaMA 기반의 간소화된 DeepSeek 버전입니다."
+    },
+    "deepseek-r1-distill-qwen-32b": {
+      "description": "Qwen 기반의 또 다른 DeepSeek 버전입니다."
+    },
+    "phi-4": {
+      "description": "마이크로소프트의 작고 정확한 모델입니다."
+    },
+    "qwq-32b": {
+      "description": "대용량 텍스트 모델입니다."
+    }
+  },
+  "max_files_exceeded": "한 번에 최대 10개의 파일만 업로드할 수 있습니다",
+  "drag_files_here": "파일을 여기에 드래그하여 업로드하세요",
+  "copied": "복사되었습니다!",
+  "settings": {
+    "settings_label": "설정",
+    "language": "언어",
+    "theme": "테마",
+    "dark_theme": "다크",
+    "light_theme": "라이트",
+    "system_theme": "자동"
+  },
+  "aria": {
+    "button_open_sidebar": "사이드바 열기",
+    "button_create_new_chat": "새 채팅 만들기",
+    "button_delete_chat": "채팅 삭제",
+    "button_send_message": "메시지 보내기",
+    "button_copy_message": "메시지 복사",
+    "button_add_files": "파일 추가",
+    "button_open_settings": "설정 열기"
+  }
+}

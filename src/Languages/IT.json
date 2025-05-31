@@ -1,0 +1,79 @@
+{
+  "welcome_message": "Ciao! Scrivi la tua domanda.",
+  "prompt_placeholder": "Inserisci qui la tua domanda.",
+  "new_chat": "Nuova chat",
+  "select_language": "Seleziona la tua lingua",
+  "models": {
+    "gpt-4o": {
+      "description": "Molto veloce e intelligente. Il migliore al momento."
+    },
+    "gpt-4o-mini": {
+      "description": "Una versione più veloce ma più piccola di GPT-4o."
+    },
+    "o1-mini": {
+      "description": "Più intelligente di 4o, ma più lento. Modello leggero e semplice."
+    },
+    "o3-mini": {
+      "description": "Più intelligente di o1, ma più lento. Modello mini bilanciato per testi."
+    },
+    "o4-mini": {
+      "description": "Più intelligente di o3 ma più lento. Modello compatto di OpenAI."
+    },
+    "gemini-2.5-flash": {
+      "description": "Modello Google molto veloce."
+    },
+    "gemini-2.0-flash-thinking": {
+      "description": "Ottimo per logica e pianificazione."
+    },
+    "qwen-2.5-coder-32b": {
+      "description": "Potente modello di codifica di Alibaba."
+    },
+    "llama-3.3-70b": {
+      "description": "Grande modello di Meta."
+    },
+    "llama-4-scout": {
+      "description": "Modello di test preliminare di LLaMA 4."
+    },
+    "llama-4-scout-17b": {
+      "description": "Versione più piccola di LLaMA 4 Scout."
+    },
+    "mistral-small-3.1-24b": {
+      "description": "Veloce e adatto a scopi generali."
+    },
+    "deepseek-r1": {
+      "description": "Buono per codice e testi generali."
+    },
+    "deepseek-r1-distill-llama-70b": {
+      "description": "Versione semplificata di DeepSeek basata su LLaMA."
+    },
+    "deepseek-r1-distill-qwen-32b": {
+      "description": "Un'altra versione di DeepSeek basata su Qwen."
+    },
+    "phi-4": {
+      "description": "Piccolo e preciso, di Microsoft."
+    },
+    "qwq-32b": {
+      "description": "Modello di testo ad alta capacità."
+    }
+  },
+  "max_files_exceeded": "Puoi caricare fino a 10 file alla volta",
+  "drag_files_here": "Trascina qui i file da caricare",
+  "copied": "Copiato!",
+  "settings": {
+    "settings_label": "Impostazioni",
+    "language": "Lingua",
+    "theme": "Tema",
+    "dark_theme": "Scuro",
+    "light_theme": "Chiaro",
+    "system_theme": "Automatico"
+  },
+  "aria": {
+    "button_open_sidebar": "Apri barra laterale",
+    "button_create_new_chat": "Crea nuova chat",
+    "button_delete_chat": "Elimina chat",
+    "button_send_message": "Invia messaggio",
+    "button_copy_message": "Copia messaggio",
+    "button_add_files": "Aggiungi file",
+    "button_open_settings": "Apri impostazioni"
+  }
+}

@@ -82,12 +82,12 @@ const Sidebar = ({ chats, updateChats, setActiveChatId, activeChatId }: SidebarP
                         {...motionProps}
                         ref={sidebarRef}
                     >
-                        <div className={styles.inner}>
+                        <div className={styles.inner} aria-hidden={!sidebarOpened ? "true" : "false"} id={"sidebar-content"}>
                             <div className={styles.buttonsContainer}>
-                                <SvgButton onClick={() => setSidebarOpened(!sidebarOpened)}>
+                                <SvgButton onClick={() => setSidebarOpened(!sidebarOpened)} aria-expanded={sidebarOpened} aria-label={t("aria.button_open_sidebar")} aria-controls={"sidebar-content"}>
                                     <Menu />
                                 </SvgButton>
-                                <SvgButton onClick={createNewChat}>
+                                <SvgButton onClick={createNewChat} aria-label={t("aria.button_create_new_chat")}>
                                     <SquarePen />
                                 </SvgButton>
                             </div>
@@ -109,7 +109,7 @@ const Sidebar = ({ chats, updateChats, setActiveChatId, activeChatId }: SidebarP
                                             }}
                                         >
                                             <span>{chat.title || 'New chat'}</span>
-                                            <SvgButton className={styles.trashButton} onClick={() => deleteChat(chat.id)}>
+                                            <SvgButton className={styles.trashButton} onClick={() => deleteChat(chat.id)} aria-label={t("aria.button_delete_chat")}>
                                                 <Trash />
                                             </SvgButton>
                                         </motion.li>

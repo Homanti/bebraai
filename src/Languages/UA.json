@@ -66,5 +66,14 @@
         "dark_theme": "Темна",
         "light_theme": "Світла",
         "system_theme": "Авто"
+    },
+    "aria": {
+        "button_open_sidebar": "Відкрити бічну панель",
+        "button_create_new_chat": "Створити новий чат",
+        "button_delete_chat": "Видалити чат",
+        "button_send_message": "Надіслати повідомлення",
+        "button_copy_message": "Скопіювати повідомлення",
+        "button_add_files": "Додати файли",
+        "button_open_settings": "Відкрити налаштування"
     }
 }

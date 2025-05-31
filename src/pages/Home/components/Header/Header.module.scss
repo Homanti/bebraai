@@ -1,7 +1,7 @@
 .header {
     display: flex;
     flex-direction: row;
-    border-bottom: 0.0625rem solid var(--hover-color);
+    border-bottom: 0.0625rem solid var(--second-surface-color);
 
     width: 100%;
 
@@ -41,13 +41,13 @@
         background: var(--surface-color);
         border-radius: var(--border-radius);
 
-        max-height: 50vh;
-
         list-style: none;
         padding: 0.625rem;
         overflow: hidden;
         z-index: 2;
         overflow-y: auto;
+
+        max-height: 60vh !important;
     }
 
     &Item {
@@ -62,7 +62,7 @@
         justify-content: space-between;
 
         &:hover {
-            background: var(--hover-color);
+            background: var(--second-surface-color);
         }
 
         &__text {
@@ -94,7 +94,6 @@
 @media (width < 48rem) {
     .dropdownContent {
         max-width: 18.75rem;
-        min-height: 60vh;
         width: 100%;
 
         left: 50%;

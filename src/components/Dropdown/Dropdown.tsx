@@ -18,13 +18,16 @@ const Dropdown = ({ isOpen, setIsOpen, buttonContent, children, customButtonClas
 
     return (
         <div className={`${styles.dropdown}`} ref={dropdownRef}>
-            <button onClick={() => setIsOpen(!isOpen)} className={`${styles.dropdownButton} ${customButtonClass || ""}`}>
+            <button onClick={() => setIsOpen(!isOpen)} className={`${styles.dropdownButton} ${customButtonClass || ""}`} aria-controls={"dropdown-content"} aria-expanded={isOpen}>
                 {buttonContent}
             </button>
             <AnimatePresence>
                 {isOpen && (
                     <motion.ul
                         className={`${styles.dropdownContent} ${customContentClass || ""}`}
+                        role="menu"
+                        id={"dropdown-content"}
+                        aria-hidden={!isOpen}
                         initial={{ opacity: 0, height: 0 }}
                         animate={{ opacity: 1, height: 'auto' }}
                         exit={{ opacity: 0, height: 0 }}

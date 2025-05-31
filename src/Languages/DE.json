@@ -66,5 +66,14 @@
         "dark_theme": "Dunkel",
         "light_theme": "Hell",
         "auto_theme": "Automatisch"
+    },
+    "aria": {
+        "button_open_sidebar": "Seitenleiste öffnen",
+        "button_create_new_chat": "Neuen Chat erstellen",
+        "button_delete_chat": "Chat löschen",
+        "button_send_message": "Nachricht senden",
+        "button_copy_message": "Nachricht kopieren",
+        "button_add_files": "Dateien hinzufügen",
+        "button_open_settings": "Einstellungen öffnen"
     }
 }

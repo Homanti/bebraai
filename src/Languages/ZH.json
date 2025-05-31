@@ -1,0 +1,79 @@
+{
+  "welcome_message": "你好！请写下你的问题。",
+  "prompt_placeholder": "请在这里输入你的问题。",
+  "new_chat": "新聊天",
+  "select_language": "选择你的语言",
+  "models": {
+    "gpt-4o": {
+      "description": "非常快且智能。目前是最好的。"
+    },
+    "gpt-4o-mini": {
+      "description": "更快但更小的GPT-4o版本。"
+    },
+    "o1-mini": {
+      "description": "比4o更聪明，但速度更慢。简单轻量的模型。"
+    },
+    "o3-mini": {
+      "description": "比o1更聪明，但速度更慢。适合文本的平衡型小模型。"
+    },
+    "o4-mini": {
+      "description": "比o3更聪明但速度更慢。OpenAI的紧凑型模型。"
+    },
+    "gemini-2.5-flash": {
+      "description": "谷歌出品的超高速模型。"
+    },
+    "gemini-2.0-flash-thinking": {
+      "description": "逻辑与规划能力出色。"
+    },
+    "qwen-2.5-coder-32b": {
+      "description": "阿里巴巴推出的强大编程模型。"
+    },
+    "llama-3.3-70b": {
+      "description": "Meta公司推出的大型模型。"
+    },
+    "llama-4-scout": {
+      "description": "LLaMA 4的早期测试模型。"
+    },
+    "llama-4-scout-17b": {
+      "description": "LLaMA 4 Scout的小型版本。"
+    },
+    "mistral-small-3.1-24b": {
+      "description": "快速且通用的模型。"
+    },
+    "deepseek-r1": {
+      "description": "适合编码和通用文本任务。"
+    },
+    "deepseek-r1-distill-llama-70b": {
+      "description": "基于LLaMA的简化版DeepSeek。"
+    },
+    "deepseek-r1-distill-qwen-32b": {
+      "description": "基于Qwen的另一版DeepSeek。"
+    },
+    "phi-4": {
+      "description": "微软出品的小巧精准模型。"
+    },
+    "qwq-32b": {
+      "description": "高容量文本模型。"
+    }
+  },
+  "max_files_exceeded": "一次最多只能上传10个文件",
+  "drag_files_here": "拖拽文件到这里上传",
+  "copied": "已复制！",
+  "settings": {
+    "settings_label": "设置",
+    "language": "语言",
+    "theme": "主题",
+    "dark_theme": "深色",
+    "light_theme": "浅色",
+    "system_theme": "自动"
+  },
+  "aria": {
+    "button_open_sidebar": "打开侧边栏",
+    "button_create_new_chat": "创建新聊天",
+    "button_delete_chat": "删除聊天",
+    "button_send_message": "发送消息",
+    "button_copy_message": "复制消息",
+    "button_add_files": "添加文件",
+    "button_open_settings": "打开设置"
+  }
+}

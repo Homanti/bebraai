@@ -66,5 +66,14 @@
         "dark_theme": "Темная",
         "light_theme": "Светлая",
         "system_theme": "Авто"
+    },
+    "aria": {
+        "button_open_sidebar": "Открыть боковую панель",
+        "button_create_new_chat": "Создать новый чат",
+        "button_delete_chat": "Удалить чат",
+        "button_send_message": "Отправить сообщение",
+        "button_copy_message": "Скопировать сообщение",
+        "button_add_files": "Добавить файлы",
+        "button_open_settings": "Открыть настройки"
     }
 }

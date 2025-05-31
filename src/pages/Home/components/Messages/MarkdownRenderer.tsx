@@ -1,4 +1,4 @@
-import React, {type ReactNode, useState} from 'react';
+import React, {type ReactElement, type ReactNode, useState} from 'react';
 import ReactMarkdown from 'react-markdown';
 import rehypeHighlight from 'rehype-highlight';
 import rehypeKatex from 'rehype-katex';
@@ -8,6 +8,7 @@ import SvgButton from "../../../../components/SvgButton/SvgButton.tsx";
 import {Copy} from "lucide-react";
 import {AnimatePresence, motion} from "motion/react";
 import {useTranslation} from "react-i18next";
+import 'highlight.js/styles/github-dark.css';
 
 type MarkdownRendererProps = {
     content: string;
@@ -26,8 +27,11 @@ const CodeBlock: React.FC<CodeProps> = ({ inline, className, children, ...props 
     function extractText(node: ReactNode): string {
         if (typeof node === 'string') return node;
         if (Array.isArray(node)) return node.map(extractText).join('');
-        if (typeof node === 'object' && node && 'props' in node) {
-            return extractText((node as any).props.children);
+        if (React.isValidElement(node)) {
+            const element = node as ReactElement<{ children?: ReactNode }>;
+            if (element.props.children) {
+                return extractText(element.props.children);
+            }
         }
         return '';
     }
@@ -48,36 +52,43 @@ const CodeBlock: React.FC<CodeProps> = ({ inline, className, children, ...props 
 
     const language = className?.match(/language-([\w-]+)/)?.[1] || 'plaintext';
 
+    if (language === 'plaintext') {
+        return (
+            <pre className={styles.inlineCode} {...props}>
+                <code>{children}</code>
+            </pre>
+        );
+    }
+
     return (
         <div className={styles.codeMessage} style={{ position: 'relative' }}>
-            {language !== 'plaintext' && (
-                <div className={styles.topBar}>
-                    <span className={styles.languageName}>{language}</span>
-                    <motion.div className={styles.copyContainer} layout>
-                        <motion.span layout>
-                            <SvgButton
-                                onClick={copyToClipboard}
-                                className={styles.copyButton}
-                            >
-                                <Copy />
-                            </SvgButton>
-                        </motion.span>
+            <div className={styles.topBar}>
+                <span className={styles.languageName}>{language}</span>
+                <motion.div className={styles.copyContainer} layout>
+                    <motion.span layout>
+                        <SvgButton
+                            onClick={copyToClipboard}
+                            className={styles.copyButton}
+                            aria-label={t('aria.button_copy_message')}
+                        >
+                            <Copy />
+                        </SvgButton>
+                    </motion.span>
 
-                        <AnimatePresence>
-                            {isCopied && (
-                                <motion.span
-                                    className={styles.copiedMessage}
-                                    initial={{ opacity: 0, width: 0 }}
-                                    animate={{ opacity: 1, width: "auto" }}
-                                    exit={{ opacity: 0, width: 0 }}
-                                >
-                                    {t('copied')}
-                                </motion.span>
-                            )}
-                        </AnimatePresence>
-                    </motion.div>
-                </div>
-            )}
+                    <AnimatePresence>
+                        {isCopied && (
+                            <motion.span
+                                className={styles.copiedMessage}
+                                initial={{ opacity: 0, width: 0 }}
+                                animate={{ opacity: 1, width: "auto" }}
+                                exit={{ opacity: 0, width: 0 }}
+                            >
+                                {t('copied')}
+                            </motion.span>
+                        )}
+                    </AnimatePresence>
+                </motion.div>
+            </div>
             <pre className={`${className} ${styles.codeMessageContent}`} {...props}>
                 <code className={className}>{children}</code>
             </pre>
