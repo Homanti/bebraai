@@ -44,6 +44,10 @@
 
     align-items: flex-start;
     justify-content: flex-start;
+
+    &:not(:nth-last-child(2)) {
+        margin-bottom: 0.625rem;
+    }
 }
 
 .message {
@@ -58,10 +62,6 @@
     overflow-wrap: break-word;
 
     margin-left: auto;
-
-    &:not(:nth-last-child(2)) {
-        margin-bottom: 0.625rem;
-    }
 
     &.incoming {
         margin-left: 0;
