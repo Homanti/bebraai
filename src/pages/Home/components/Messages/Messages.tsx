@@ -59,7 +59,7 @@ const Messages = ({ activeChat }: MessagesProps) => {
                     );
                 })}
             </AnimatePresence>
-            <div style={{opacity: 0}} ref={messagesEndRef}>.</div>
+            <div aria-hidden={true} style={{opacity: 0}} ref={messagesEndRef}>.</div>
         </div>
     )
 }
