@@ -49,9 +49,10 @@ const Home = () => {
         updateChats(updatedChats);
     };
 
-    const submitMessage = async (message: Message) => {
+    const submitMessage = async (message: Message, setFormDisabled: (disabled: boolean) => void) => {
         const userMessage: Message = { content: message.content, files: message.files, role: 'user' };
         const updatedUserMessages = [...activeChat.messages, userMessage];
+        setFormDisabled(true);
 
         updateActiveChatMessages(updatedUserMessages);
         scrollToBottom();
@@ -68,27 +69,31 @@ const Home = () => {
 
         const modelName = getSettings().modelName || 'ChatGPT 4o';
 
-        await sendMessage(currentMessagesWithoutFilesExceptLast, modelName, message.draw, message.web_search, (chunk: string) => {
-            assistantText += chunk;
+        try {
+            await sendMessage(currentMessagesWithoutFilesExceptLast, modelName, message.draw, message.web_search, (chunk: string) => {
+                assistantText += chunk;
 
-            const updatedMessages = [...currentMessages];
+                const updatedMessages = [...currentMessages];
 
-            if (!assistantAdded) {
-                updatedMessages.push({
-                    content: assistantText,
-                    role: 'assistant',
-                });
-                assistantAdded = true;
-            } else {
-                updatedMessages[updatedMessages.length - 1] = {
-                    content: assistantText,
-                    role: 'assistant',
-                };
-            }
+                if (!assistantAdded) {
+                    updatedMessages.push({
+                        content: assistantText,
+                        role: 'assistant',
+                    });
+                    assistantAdded = true;
+                } else {
+                    updatedMessages[updatedMessages.length - 1] = {
+                        content: assistantText,
+                        role: 'assistant',
+                    };
+                }
 
-            updateActiveChatMessages(updatedMessages);
-            currentMessages = updatedMessages;
-        });
+                updateActiveChatMessages(updatedMessages);
+                currentMessages = updatedMessages;
+            });
+        } finally {
+            setFormDisabled(false);
+        }
     };
 
     return (

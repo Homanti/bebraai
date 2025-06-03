@@ -14,7 +14,7 @@ import {useTranslation} from "react-i18next";
 //     web_search: boolean;
 // };
 
-const PromptForm = ({ onSubmit }: { onSubmit: (message: Message) => void }) => {
+const PromptForm = ({ onSubmit }: { onSubmit: (message: Message, setFormIsDisabled: (disabled: boolean) => void) => void }) => {
     const { t } = useTranslation();
     const [inputValue, setInputValue] = useState<string>('');
     const [inputFocused, setInputFocused] = useState(false);
@@ -25,6 +25,7 @@ const PromptForm = ({ onSubmit }: { onSubmit: (message: Message) => void }) => {
     const setMessage = useMessageStore(state => state.setMessage);
     const resetMessage = useMessageStore(state => state.resetMessage);
     const [isDragOver, setIsDragOver] = useState(false);
+    const [formIsDisabled, setFormIsDisabled] = useState(false);
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement> | React.KeyboardEvent<HTMLTextAreaElement>) => {
         e.preventDefault();
@@ -34,7 +35,7 @@ const PromptForm = ({ onSubmit }: { onSubmit: (message: Message) => void }) => {
 
         message.content = trimmed;
 
-        onSubmit(message);
+        onSubmit(message, setFormIsDisabled);
         setInputValue('');
         resetMessage();
     }
@@ -239,6 +240,7 @@ const PromptForm = ({ onSubmit }: { onSubmit: (message: Message) => void }) => {
 
                             if (e.key === 'Enter' && !e.shiftKey) {
                                 e.preventDefault();
+                                if (formIsDisabled) return;
                                 handleSubmit(e);
                             }
 
@@ -281,7 +283,7 @@ const PromptForm = ({ onSubmit }: { onSubmit: (message: Message) => void }) => {
                         {/*</SvgButton>*/}
                     </div>
 
-                    <SvgButton type="submit" className={styles.sendButton} disabled={!inputValue.trim() && !(message.files?.length && message.files.length > 0)} aria-label={t('aria.button_send_message')}>
+                    <SvgButton type="submit" className={styles.sendButton} disabled={formIsDisabled || (!inputValue.trim() && !(message.files?.length && message.files.length > 0))} aria-label={t('aria.button_send_message')}>
                         <Send />
                     </SvgButton>
                 </div>
