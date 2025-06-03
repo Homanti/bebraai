@@ -8,6 +8,7 @@ import {useSettingsStore} from "../../../../store/settings.tsx";
 import {models} from "../../../../data/models.tsx";
 import {useMessageStore} from "../../../../store/messages.tsx";
 import {useTranslation} from "react-i18next";
+import {useImageViewerStore} from "../../../../store/imageviewer.tsx";
 
 // type Modes = {
 //     draw: boolean;
@@ -26,6 +27,7 @@ const PromptForm = ({ onSubmit }: { onSubmit: (message: Message, setFormIsDisabl
     const resetMessage = useMessageStore(state => state.resetMessage);
     const [isDragOver, setIsDragOver] = useState(false);
     const [formIsDisabled, setFormIsDisabled] = useState(false);
+    const { setImageViewer } = useImageViewerStore();
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement> | React.KeyboardEvent<HTMLTextAreaElement>) => {
         e.preventDefault();
@@ -150,7 +152,7 @@ const PromptForm = ({ onSubmit }: { onSubmit: (message: Message, setFormIsDisabl
              onMouseDown={(e) => {
                  const target = e.target as HTMLElement;
 
-                 if (target.closest('button, input, textarea, label, [tabindex], [role="button"]')) return;
+                 if (target.closest('button, input, textarea, label, img, [tabindex], [role="button"]')) return;
 
                  textareaRef.current?.focus();
                  e.preventDefault();
@@ -211,7 +213,7 @@ const PromptForm = ({ onSubmit }: { onSubmit: (message: Message, setFormIsDisabl
                                                 >
                                                     <X />
                                                 </SvgButton>
-                                                <img src={item.data} alt="preview" className={styles.imagePreview} />
+                                                <img src={item.data} alt="preview" className={styles.imagePreview} onClick={() => {setImageViewer(true, item.data)}} />
                                             </>
                                         ) : (
                                             <pre>{item.data}</pre>
