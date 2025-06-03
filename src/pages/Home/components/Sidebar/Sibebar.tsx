@@ -20,10 +20,12 @@ const Sidebar = ({ chats, updateChats, setActiveChatId, activeChatId }: SidebarP
     const [width, setWidth] = useState(window.innerWidth);
     const { sidebarOpened, setSidebarOpened } = useSidebar();
     const sidebarRef = useRef<HTMLDivElement>(null);
+    const [isSidebarOpening, setIsSidebarOpening] = useState(false);
 
     useClickOutside(sidebarRef, () => setSidebarOpened(false), (width / 16) < 48);
 
     const createNewChat = () => {
+        setIsSidebarOpening(false);
         const nextId = (Math.max(...chats.map(c => Number(c.id)), 0) + 1).toString();
         const newChat: Chat = {
             id: nextId,
@@ -73,6 +75,10 @@ const Sidebar = ({ chats, updateChats, setActiveChatId, activeChatId }: SidebarP
         setSidebarOpened(window.innerWidth > 768);
     }, [setSidebarOpened]);
 
+    useEffect(() => {
+        setIsSidebarOpening(true);
+    }, [sidebarOpened]);
+
     return (
         <>
             <AnimatePresence>
@@ -98,7 +104,7 @@ const Sidebar = ({ chats, updateChats, setActiveChatId, activeChatId }: SidebarP
                                             key={chat.id}
                                             className={chat.id === activeChatId ? styles.active : ''}
                                             onClick={() => setActiveChatId(chat.id)}
-                                            initial={{ opacity: 0, x: -300 }}
+                                            initial={isSidebarOpening ? false : { opacity: 0, x: -300 }}
                                             animate={{ opacity: 1, x: 0 }}
                                             exit={{ opacity: 0, x: -300 }}
                                             layout
