@@ -75,5 +75,8 @@
         "button_copy_message": "Скопировать сообщение",
         "button_add_files": "Добавить файлы",
         "button_open_settings": "Открыть настройки"
+    },
+    "error": {
+        "display_image_error": "Не удалось отобразить изображение"
     }
 }

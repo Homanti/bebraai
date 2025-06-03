@@ -75,5 +75,8 @@
     "button_copy_message": "メッセージをコピー",
     "button_add_files": "ファイルを追加",
     "button_open_settings": "設定を開く"
+  },
+  "error": {
+    "display_image_error": "画像を表示できませんでした"
   }
 }

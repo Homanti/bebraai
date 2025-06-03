@@ -1,8 +1,9 @@
 import {AnimatePresence, motion} from "motion/react";
 import styles from "./Messages.module.scss";
-import { useEffect } from "react";
+import {useEffect} from "react";
 import { messagesEndRef, scrollToBottom } from "../../../../utils/scrollToBottom.tsx";
 import { MarkdownRenderer } from "./MarkdownRenderer.tsx";
+import {useImageViewerStore} from "../../../../store/imageviewer.tsx";
 
 type MessagesProps = {
     activeChat: {
@@ -15,6 +16,8 @@ type MessagesProps = {
 }
 
 const Messages = ({ activeChat }: MessagesProps) => {
+    const { setImageViewer } = useImageViewerStore();
+
     useEffect(() => {
         scrollToBottom();
     }, [activeChat?.messages]);
@@ -37,6 +40,7 @@ const Messages = ({ activeChat }: MessagesProps) => {
                                     className={styles.imageMessage}
                                     key={`file-${index}-${fileIndex}`}
                                     {...motionProps}
+                                    onClick={() => {setImageViewer(true, item.data)}}
                                 >
                                     {item.data.startsWith("data:image") ? (
                                         <img src={item.data} alt="image message" />

@@ -75,5 +75,8 @@
     "button_copy_message": "메시지 복사",
     "button_add_files": "파일 추가",
     "button_open_settings": "설정 열기"
+  },
+  "error": {
+    "display_image_error": "이미지를 표시하지 못했습니다"
   }
 }

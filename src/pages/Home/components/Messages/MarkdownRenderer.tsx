@@ -9,6 +9,7 @@ import {Copy} from "lucide-react";
 import {AnimatePresence, motion} from "motion/react";
 import {useTranslation} from "react-i18next";
 import 'highlight.js/styles/github-dark.css';
+import remarkGfm from "remark-gfm";
 
 type MarkdownRendererProps = {
     content: string;
@@ -98,10 +99,17 @@ const CodeBlock: React.FC<CodeProps> = ({ inline, className, children, ...props 
 
 export const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({ content }) => (
     <ReactMarkdown
-        remarkPlugins={[remarkMath]}
+        remarkPlugins={[remarkMath, remarkGfm]}
         rehypePlugins={[rehypeKatex, rehypeHighlight]}
         components={{
             code: CodeBlock,
+            table: ({ children }) => (
+                <div className={styles.tableContainer}>
+                    <table className={styles.table}>
+                        {children}
+                    </table>
+                </div>
+            ),
         }}
     >
         {content}

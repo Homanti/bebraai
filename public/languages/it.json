@@ -75,5 +75,8 @@
     "button_copy_message": "Copia messaggio",
     "button_add_files": "Aggiungi file",
     "button_open_settings": "Apri impostazioni"
+  },
+  "error": {
+    "display_image_error": "Impossibile visualizzare l'immagine"
   }
 }

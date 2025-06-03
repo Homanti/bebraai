@@ -1,7 +1,6 @@
 import styles from './PromptForm.module.scss';
 import {useEffect, useRef, useState} from "react";
 import { Send, Plus, X } from "lucide-react";
-import { isMobile } from "react-device-detect";
 import SvgButton from "../../../../components/SvgButton/SvgButton.tsx";
 import type {Message} from "../../../../types/chat.tsx";
 import {AnimatePresence, motion} from "motion/react";
@@ -19,6 +18,7 @@ const PromptForm = ({ onSubmit }: { onSubmit: (message: Message) => void }) => {
     const { t } = useTranslation();
     const [inputValue, setInputValue] = useState<string>('');
     const [inputFocused, setInputFocused] = useState(false);
+    const [width, setWidth] = useState(window.innerWidth);
     const { modelName } = useSettingsStore();
     const textareaRef = useRef<HTMLTextAreaElement>(null);
     const message = useMessageStore(state => state.message);
@@ -30,7 +30,7 @@ const PromptForm = ({ onSubmit }: { onSubmit: (message: Message) => void }) => {
         e.preventDefault();
         const trimmed = inputValue.trim();
 
-        if (!trimmed && !message.files) return;
+        if (trimmed.length === 0 && message.files.length === 0) return;
 
         message.content = trimmed;
 
@@ -130,6 +130,12 @@ const PromptForm = ({ onSubmit }: { onSubmit: (message: Message) => void }) => {
         }
     }, [inputValue]);
 
+    useEffect(() => {
+        const handleResize = () => setWidth(window.innerWidth);
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
+
     // const toggleMode = (key: keyof Modes) => {
     //     const isActive = message[key];
     //     setMessage({
@@ -227,7 +233,7 @@ const PromptForm = ({ onSubmit }: { onSubmit: (message: Message) => void }) => {
                         onChange={(e) => setInputValue(e.currentTarget.value)}
                         onPaste={handlePaste}
                         onKeyDown={(e) => {
-                            if (isMobile) {
+                            if (width <= 768) {
                                 return;
                             }
 

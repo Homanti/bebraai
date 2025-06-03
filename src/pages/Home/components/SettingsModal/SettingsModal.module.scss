@@ -6,7 +6,7 @@
     left: 0;
     right: 0;
 
-    z-index: 10;
+    z-index: 12;
 
     backdrop-filter: blur(0.625rem);
     -webkit-backdrop-filter: blur(0.625rem);
@@ -46,6 +46,7 @@
         height: 1.5rem;
 
         margin-right: 0.3125rem;
+        user-select: none;
     }
 
     & > svg {

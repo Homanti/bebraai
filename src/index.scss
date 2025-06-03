@@ -2,7 +2,7 @@
 
 :root {
     --color-scheme: light;
-    --text-color: #000000;
+    --text-color: black;
     --background-color: #ffffff;
     --surface-color: #e9eef6;
     --border-radius: 0.625rem;
@@ -17,7 +17,7 @@
 
 [data-theme="dark"] {
     --color-scheme: dark;
-    --text-color: #ffffff;
+    --text-color: white;
     --background-color: #1b1c1d;
     --surface-color: #232425;
     --border-radius: 0.625rem;
@@ -37,7 +37,7 @@ html, body, #root {
     height: 100dvh;
     margin: 0;
     padding: 0;
-    color: var(--primary-color);
+    color: var(--text-color);
 }
 
 input,

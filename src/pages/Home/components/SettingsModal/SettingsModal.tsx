@@ -34,6 +34,7 @@ const SettingsModal = ({openSettingsButtonRef}: SettingsModalProps) => {
     useClickOutside(settingsRef, () => {
         setSettingsOpened(false);
         setLangDropdownIsOpen(false);
+        setThemeDropdownIsOpen(false);
     }, true, openSettingsButtonRef)
 
     function applyTheme(theme: string) {

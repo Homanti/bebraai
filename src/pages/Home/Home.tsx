@@ -13,6 +13,7 @@ import {AnimatePresence, motion} from "motion/react";
 import {getSettings} from "../../utils/settingsStorage.tsx";
 import SettingsModal from "./components/SettingsModal/SettingsModal.tsx";
 import {useTranslation} from "react-i18next";
+import ImageViewer from "./components/ImageViewer/ImageViewer.tsx";
 
 const Home = () => {
     const { t } = useTranslation();
@@ -119,6 +120,8 @@ const Home = () => {
                     </motion.div>
                 </section>
             </main>
+
+            <ImageViewer />
         </motion.div>
     );
 };

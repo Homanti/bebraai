@@ -75,5 +75,8 @@
         "button_copy_message": "Nachricht kopieren",
         "button_add_files": "Dateien hinzufügen",
         "button_open_settings": "Einstellungen öffnen"
+    },
+    "error": {
+        "display_image_error": "Bild konnte nicht angezeigt werden"
     }
 }

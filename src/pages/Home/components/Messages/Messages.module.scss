@@ -38,7 +38,7 @@
 
 .messageContainer {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
 
     width: 100%;
 
@@ -71,6 +71,14 @@
 
     & > p {
         white-space: pre-wrap;
+        word-break: break-word;
+        overflow-wrap: break-word;
+        line-break: strict;
+        text-wrap: pretty;
+
+        widows: 2;
+        orphans: 2;
+
         margin-top: 0.5rem;
         margin-bottom: 0.5rem;
 
@@ -186,18 +194,44 @@
     margin: 0;
 }
 
-.imageMessage {
-    margin-left: auto;
-    border-radius: 1.25rem;
-    max-width: 80%;
-    margin-bottom: 0.5rem;
+.tableContainer {
+    width: 100%;
+    overflow-x: auto;
 
-    &:first-child {
-        margin-top: calc(var(--header-height) + 0.625rem);
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.table {
+    border-collapse: collapse;
+    width: 100%;
+
+    th, td {
+        border: 0.0625rem solid var(--third-surface-color);
+        padding: 0.5rem;
     }
 
+    th {
+        background-color: var(--second-surface-color);
+        text-align: left;
+    }
+}
+
+.imageMessage {
     display: flex;
     justify-content: flex-end;
+
+    cursor: pointer;
+
+    margin-left: auto;
+
+    border-radius: 1.25rem;
+    margin-bottom: 0.5rem;
+
+    max-width: 80%;
+    min-height: 6.25rem;
+
+    border: 0.0625rem solid var(--third-surface-color);
 
     & > img {
         display: block;
@@ -205,7 +239,7 @@
         max-height: 12.5rem;
         width: auto;
         height: auto;
-        object-fit: contain;
+        object-fit: cover;
         border-radius: 1.25rem;
     }
 }
