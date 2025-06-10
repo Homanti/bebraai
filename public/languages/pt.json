@@ -56,7 +56,6 @@
       "description": "Modelo de texto de alta capacidade."
     }
   },
-  "max_files_exceeded": "Você pode enviar até 10 arquivos por vez",
   "drag_files_here": "Arraste os arquivos aqui para enviar",
   "copied": "Copiado!",
   "settings": {
@@ -77,6 +76,8 @@
     "button_open_settings": "Abrir configurações"
   },
   "error": {
-    "display_image_error": "Falha ao exibir a imagem"
+    "max_files_exceeded": "Você pode enviar até 10 arquivos por vez",
+    "display_image_error": "Falha ao exibir a imagem",
+    "file_upload_failed": "Falha no envio do arquivo. Por favor, tente novamente."
   }
 }

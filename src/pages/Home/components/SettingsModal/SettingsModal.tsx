@@ -8,6 +8,7 @@ import {languages} from "../../../../data/languages.tsx";
 import flagUS from '../../../../assets/flags/flag_us.png';
 import Dropdown from "../../../../components/Dropdown/Dropdown.tsx";
 import {Moon, Sun, SunMoon} from "lucide-react";
+import FocusTrap from "focus-trap-react";
 
 type SettingsModalProps = {
     openSettingsButtonRef: RefObject<HTMLButtonElement | null>;
@@ -61,6 +62,24 @@ const SettingsModal = ({openSettingsButtonRef}: SettingsModalProps) => {
         }
     }, [theme]);
 
+    useEffect(() => {
+        function handleKeyDown(event: KeyboardEvent) {
+            if (event.key === 'Escape') {
+                setSettingsOpened(false);
+            }
+        }
+
+        if (settingsOpened) {
+            window.addEventListener('keydown', handleKeyDown);
+        } else {
+            window.removeEventListener('keydown', handleKeyDown);
+        }
+
+        return () => {
+            window.removeEventListener('keydown', handleKeyDown);
+        };
+    }, [settingsOpened, setSettingsOpened]);
+
     return (
         <AnimatePresence>
             {settingsOpened && (
@@ -72,18 +91,19 @@ const SettingsModal = ({openSettingsButtonRef}: SettingsModalProps) => {
                             animate={{opacity: 1}}
                             exit={{opacity: 0}}
                 >
-                    <motion.div
-                        className={styles.settings}
-                        ref={settingsRef}
-                        initial={{ opacity: 0, y: -50 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -50 }}
-                    >
-                        <h2>{t('settings.settings_label')}</h2>
+                    <FocusTrap>
+                        <motion.div
+                            className={styles.settings}
+                            ref={settingsRef}
+                            initial={{ opacity: 0, y: -50 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: -50 }}
+                        >
+                            <h2>{t('settings.settings_label')}</h2>
 
-                        <div className={styles.settingsContent}>
+                            <div className={styles.settingsContent}>
 
-                            <Dropdown isOpen={langDropdownIsOpen} setIsOpen={setLangDropdownIsOpen} customButtonClass={styles.dropdownButton} buttonContent={(() => {
+                                <Dropdown isOpen={langDropdownIsOpen} setIsOpen={setLangDropdownIsOpen} customButtonClass={styles.dropdownButton} buttonContent={(() => {
                                     const item = languages.find((item) => item.code === i18n.language);
                                     if (!item) {
                                         changeLanguage("en");
@@ -103,48 +123,49 @@ const SettingsModal = ({openSettingsButtonRef}: SettingsModalProps) => {
                                     );
                                 })()}>
 
-                                {languages.map((item, index) => (
-                                    <li onClick={() => {changeLanguage(item.code); setLangDropdownIsOpen(false)}} key={index} className={styles.dropdownItem}>
-                                        <div className={styles.dropdownItem__text}>
-                                            <img alt={item.name} src={item.icon}/>
-                                            {item.name}
-                                        </div>
-                                    </li>
-                                ))}
-                            </Dropdown>
+                                    {languages.map((item, index) => (
+                                        <li onClick={() => {changeLanguage(item.code); setLangDropdownIsOpen(false)}} key={index} className={styles.dropdownItem}>
+                                            <div className={styles.dropdownItem__text}>
+                                                <img alt={item.name} src={item.icon}/>
+                                                {item.name}
+                                            </div>
+                                        </li>
+                                    ))}
+                                </Dropdown>
 
-                            <Dropdown isOpen={themeDropdownIsOpen} setIsOpen={setThemeDropdownIsOpen} customButtonClass={styles.dropdownButton} buttonContent={
-                                (() => {
-                                    const item = themes.find((item) => item.code === theme);
-                                    if (!item) {
-                                        setTheme('system');
+                                <Dropdown isOpen={themeDropdownIsOpen} setIsOpen={setThemeDropdownIsOpen} customButtonClass={styles.dropdownButton} buttonContent={
+                                    (() => {
+                                        const item = themes.find((item) => item.code === theme);
+                                        if (!item) {
+                                            setTheme('system');
+                                            return (
+                                                <>
+                                                    <SunMoon />
+                                                    System
+                                                </>
+                                            )
+                                        }
                                         return (
                                             <>
-                                                <SunMoon />
-                                                System
+                                                {item.icon}
+                                                {t("settings." + item.code + "_theme")}
                                             </>
-                                        )
-                                    }
-                                    return (
-                                        <>
-                                            {item.icon}
-                                            {t("settings." + item.code + "_theme")}
-                                        </>
-                                    );
-                                })()
-                            }>
+                                        );
+                                    })()
+                                }>
 
-                                {themes.map((item, index) => (
-                                    <li onClick={() => {setTheme(item.code); applyTheme(item.code); setThemeDropdownIsOpen(false)}} key={index} className={styles.dropdownItem}>
-                                        <div className={styles.dropdownItem__text}>
-                                            {item.icon}
-                                            {t("settings." + item.code + "_theme")}
-                                        </div>
-                                    </li>
-                                ))}
-                            </Dropdown>
+                                    {themes.map((item, index) => (
+                                        <li onClick={() => {setTheme(item.code); applyTheme(item.code); setThemeDropdownIsOpen(false)}} key={index} className={styles.dropdownItem}>
+                                            <div className={styles.dropdownItem__text}>
+                                                {item.icon}
+                                                {t("settings." + item.code + "_theme")}
+                                            </div>
+                                        </li>
+                                    ))}
+                                </Dropdown>
                             </div>
-                    </motion.div>
+                        </motion.div>
+                    </FocusTrap>
                 </motion.div>
             )}
         </AnimatePresence>

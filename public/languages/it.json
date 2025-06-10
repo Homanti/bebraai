@@ -56,7 +56,6 @@
       "description": "Modello di testo ad alta capacità."
     }
   },
-  "max_files_exceeded": "Puoi caricare fino a 10 file alla volta",
   "drag_files_here": "Trascina qui i file da caricare",
   "copied": "Copiato!",
   "settings": {
@@ -77,6 +76,8 @@
     "button_open_settings": "Apri impostazioni"
   },
   "error": {
-    "display_image_error": "Impossibile visualizzare l'immagine"
+    "max_files_exceeded": "Puoi caricare fino a 10 file alla volta",
+    "display_image_error": "Impossibile visualizzare l'immagine",
+    "file_upload_failed": "Caricamento del file non riuscito. Per favore riprova."
   }
 }

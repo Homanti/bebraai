@@ -56,7 +56,6 @@
             "description": "Modelo de texto de alta capacidad."
         }
     },
-    "max_files_exceeded": "Solo puedes subir hasta 10 archivos a la vez",
     "drag_files_here": "Arrastra los archivos aquí para subirlos",
     "copied": "¡Copiado!",
     "settings": {
@@ -77,6 +76,8 @@
         "button_open_settings": "Abrir configuración"
     },
     "error": {
-        "display_image_error": "No se pudo mostrar la imagen"
+        "max_files_exceeded": "Solo puedes subir hasta 10 archivos a la vez",
+        "display_image_error": "No se pudo mostrar la imagen",
+        "file_upload_failed": "La carga del archivo falló. Por favor, inténtelo de nuevo."
     }
 }

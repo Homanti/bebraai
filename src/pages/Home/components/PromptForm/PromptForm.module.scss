@@ -92,6 +92,8 @@
     background: white;
     padding: 0.125rem;
 
+    z-index: 1;
+
     border-radius: var(--border-radius);
 
     &:hover {

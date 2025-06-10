@@ -1,12 +1,5 @@
 import { create } from 'zustand';
-
-type Message = {
-    content: string;
-    files: { id: string; data: string }[];
-    role: 'user' | 'assistant';
-    draw?: boolean;
-    web_search?: boolean;
-};
+import type {Message} from "../types/chat.tsx";
 
 type MessageState = {
     message: Message;

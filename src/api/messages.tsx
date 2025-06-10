@@ -1,6 +1,8 @@
 import type { Message } from "../types/chat.tsx";
 import { models } from "../data/models.tsx";
 
+const url = "https://bebraai-fastapi-production.up.railway.app"
+
 export const sendMessage = async (
     messages: Message[],
     modelName: string = "ChatGPT 4o",
@@ -28,29 +30,12 @@ export const sendMessage = async (
 
     formData.append('mods', JSON.stringify(mods));
 
-    messages.forEach((msg, msgIndex) => {
-        msg.files?.forEach((item, fileIndex) => {
-            if (item.data.startsWith("data:")) {
-                const [meta, base64] = item.data.split(',');
-                const mimeMatch = meta.match(/data:(.*?);base64/);
-                if (!mimeMatch) return;
+    const files = messages.flatMap((m) => m.files || []).map((f) => f.file_url);
+    for (const url of files) {
+        formData.append('files_url', url);
+    }
 
-                const mime = mimeMatch[1];
-                const binary = atob(base64);
-                const len = binary.length;
-                const buffer = new Uint8Array(len);
-                for (let i = 0; i < len; i++) {
-                    buffer[i] = binary.charCodeAt(i);
-                }
-                const blob = new Blob([buffer], { type: mime });
-                const ext = mime.split('/')[1];
-                const filename = `file-${msgIndex}-${fileIndex}.${ext}`;
-                formData.append('files', blob, filename);
-            }
-        });
-    });
-
-    const response = await fetch('https://bebraai-fastapi-production.up.railway.app/api/stream/generate', {
+    const response = await fetch(url + '/api/stream/generate', {
         method: 'POST',
         body: formData
     });
@@ -84,3 +69,25 @@ export const sendMessage = async (
         }
     }
 };
+
+export const uploadFile = async (file: File): Promise<string> => {
+    const formData = new FormData();
+    formData.append('file', file);
+
+    const response = await fetch(url + '/files/upload/', {
+        method: 'POST',
+        body: formData
+    });
+
+    if (!response.ok) {
+        throw new Error('Failed to upload file');
+    }
+
+    const data = await response.json();
+
+    if (!data || !data.url) {
+        throw new Error(response.status + response.statusText || 'Invalid response from server');
+    }
+
+    return data.url;
+}

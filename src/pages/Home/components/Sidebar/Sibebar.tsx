@@ -29,7 +29,7 @@ const Sidebar = ({ chats, updateChats, setActiveChatId, activeChatId }: SidebarP
         const nextId = (Math.max(...chats.map(c => Number(c.id)), 0) + 1).toString();
         const newChat: Chat = {
             id: nextId,
-            title: t('new_chat'),
+            title: 'new_chat',
             messages: [],
         };
         const newChats = [...chats, newChat];
@@ -39,7 +39,7 @@ const Sidebar = ({ chats, updateChats, setActiveChatId, activeChatId }: SidebarP
 
     const deleteChat = (id: string) => {
         if (chats.length === 1) {
-            const defaultChat: Chat = { id: '1', title: t('new_chat'), messages: [] };
+            const defaultChat: Chat = { id: '1', title: 'new_chat', messages: [] };
             updateChats([defaultChat]);
             setActiveChatId('1');
             return;
@@ -114,7 +114,7 @@ const Sidebar = ({ chats, updateChats, setActiveChatId, activeChatId }: SidebarP
                                                 opacity: { duration: 0.2 }
                                             }}
                                         >
-                                            <span>{chat.title || 'New chat'}</span>
+                                            <span>{t(chat.title)}</span>
                                             <SvgButton className={styles.trashButton} onClick={() => deleteChat(chat.id)} aria-label={t("aria.button_delete_chat")}>
                                                 <Trash />
                                             </SvgButton>

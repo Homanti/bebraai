@@ -56,7 +56,6 @@
       "description": "大容量テキストモデル。"
     }
   },
-  "max_files_exceeded": "一度にアップロードできるファイルは最大10個までです",
   "drag_files_here": "ファイルをここにドラッグしてアップロード",
   "copied": "コピーしました！",
   "settings": {
@@ -77,6 +76,8 @@
     "button_open_settings": "設定を開く"
   },
   "error": {
-    "display_image_error": "画像を表示できませんでした"
+    "max_files_exceeded": "一度にアップロードできるファイルは最大10個までです",
+    "display_image_error": "画像を表示できませんでした",
+    "file_upload_failed": "ファイルのアップロードに失敗しました。もう一度お試しください。"
   }
 }

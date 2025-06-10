@@ -21,7 +21,7 @@ const Home = () => {
     const [activeChatId, setActiveChatId] = useState(() => {
         const existing = getChats();
         if (existing.length > 0) return existing[existing.length - 1].id;
-        const defaultChat: Chat = { id: '1', title: t('new_chat'), messages: [] };
+        const defaultChat: Chat = { id: '1', title: 'new_chat', messages: [] };
         saveChats([defaultChat]);
         return '1';
     });
@@ -40,7 +40,7 @@ const Home = () => {
                 ? {
                     ...chat,
                     messages: newMessages,
-                    title: chat.title === t('new_chat') && newMessages.length > 0 && newMessages[0].content
+                    title: chat.title === 'new_chat' && newMessages.length > 0 && newMessages[0].content
                         ? newMessages[0].content.slice(0, 50)
                         : chat.title
                 }

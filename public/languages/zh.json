@@ -56,7 +56,6 @@
       "description": "高容量文本模型。"
     }
   },
-  "max_files_exceeded": "一次最多只能上传10个文件",
   "drag_files_here": "拖拽文件到这里上传",
   "copied": "已复制！",
   "settings": {
@@ -77,6 +76,8 @@
     "button_open_settings": "打开设置"
   },
   "error": {
-    "display_image_error": "无法显示图像"
+    "max_files_exceeded": "一次最多只能上传10个文件",
+    "display_image_error": "无法显示图像",
+    "file_upload_failed": "文件上传失败。请再试一次。"
   }
 }

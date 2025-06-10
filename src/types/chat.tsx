@@ -1,6 +1,11 @@
+export type MessageFile = {
+    id: string;
+    file_url: string;
+}
+
 export type Message = {
     content?: string;
-    files?: { id: string; data: string }[];
+    files?: MessageFile[];
     role: 'user' | 'assistant';
     draw?: boolean;
     web_search?: boolean;

@@ -56,7 +56,6 @@
             "description": "Hochkapazitätsmodell für Text."
         }
     },
-    "max_files_exceeded": "Du kannst nur bis zu 10 Dateien gleichzeitig hochladen",
     "drag_files_here": "Dateien hierher ziehen zum Hochladen",
     "copied": "Kopiert!",
     "settings": {
@@ -77,6 +76,8 @@
         "button_open_settings": "Einstellungen öffnen"
     },
     "error": {
-        "display_image_error": "Bild konnte nicht angezeigt werden"
+        "max_files_exceeded": "Du kannst nur bis zu 10 Dateien gleichzeitig hochladen",
+        "display_image_error": "Bild konnte nicht angezeigt werden",
+        "file_upload_failed": "Datei-Upload fehlgeschlagen. Bitte versuchen Sie es erneut."
     }
 }

@@ -4,12 +4,13 @@ import {useEffect} from "react";
 import { messagesEndRef, scrollToBottom } from "../../../../utils/scrollToBottom.tsx";
 import { MarkdownRenderer } from "./MarkdownRenderer.tsx";
 import {useImageViewerStore} from "../../../../store/imageviewer.tsx";
+import ImageWithLoader from "../../../../components/ImageWithLoader/ImageWithLoader.tsx";
 
 type MessagesProps = {
     activeChat: {
         messages: {
             content?: string;
-            files?: { id: string; data: string }[];
+            files?: { id: string; file_url: string }[];
             role: 'user' | 'assistant';
         }[];
     };
@@ -40,12 +41,12 @@ const Messages = ({ activeChat }: MessagesProps) => {
                                     className={styles.imageMessage}
                                     key={`file-${index}-${fileIndex}`}
                                     {...motionProps}
-                                    onClick={() => {setImageViewer(true, item.data)}}
+                                    onClick={() => {setImageViewer(true, item.file_url)}}
                                 >
-                                    {item.data.startsWith("data:image") ? (
-                                        <img src={item.data} alt="image message" />
+                                    {item.file_url ? (
+                                        <ImageWithLoader src={item.file_url} alt="image message" className={styles.imageMessage__img} />
                                     ) : (
-                                        <pre>{item.data}</pre>
+                                        <pre>{item.file_url}</pre>
                                     )}
                                 </motion.div>
                             ))}

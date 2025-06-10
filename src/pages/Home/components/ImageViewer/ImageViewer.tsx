@@ -4,6 +4,7 @@ import {useClickOutside} from "../../../../hooks/useClickOutside.tsx";
 import {useImageViewerStore} from "../../../../store/imageviewer.tsx";
 import {useRef} from "react";
 import {useTranslation} from "react-i18next";
+import ImageWithLoader from "../../../../components/ImageWithLoader/ImageWithLoader.tsx";
 
 const ImageViewer = () => {
     const { imageViewerOpened, imageViewContent, setImageViewer } = useImageViewerStore();
@@ -30,8 +31,8 @@ const ImageViewer = () => {
                         exit={{ opacity: 0, scale: 0.8 }}
                         ref={imageViewerRef}
                     >
-                        {imageViewContent && imageViewContent.startsWith('data:image') ? (
-                            <img src={imageViewContent} alt="Large view"/>
+                        {imageViewContent ? (
+                            <ImageWithLoader src={imageViewContent} alt="Large view" className={styles.imageViewer__img}/>
                         ):(
                             <div className={styles.error}>
                                 <h2>{t('error.display_image_error')}</h2>
