@@ -38,7 +38,7 @@ const Messages = ({ activeChat }: MessagesProps) => {
                         <div className={styles.messageContainer} key={index} aria-live={message.role === 'assistant' ? 'polite' : 'off'}>
                             {message.files?.map((item, fileIndex) => (
                                 <motion.div
-                                    className={styles.imageMessage}
+                                    className={`${styles.imageMessage} ${message.role === 'assistant' ? styles.incoming : ''}`}
                                     key={`file-${index}-${fileIndex}`}
                                     {...motionProps}
                                     onClick={() => {setImageViewer(true, item.file_url)}}

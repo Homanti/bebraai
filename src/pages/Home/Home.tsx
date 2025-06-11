@@ -1,7 +1,7 @@
 import styles from './Home.module.scss';
 import PromptForm from './components/PromptForm/PromptForm.tsx';
 import {useRef, useState} from "react";
-import { sendMessage } from "../../api/messages.tsx";
+import {generateImage, generateText} from "../../api/messages.tsx";
 import type { Message, Chat } from "../../types/chat.tsx";
 import { getChats, saveChats } from "../../utils/chatsStorage.tsx";
 import 'katex/dist/katex.min.css';
@@ -70,27 +70,44 @@ const Home = () => {
         const modelName = getSettings().modelName || 'ChatGPT 4o';
 
         try {
-            await sendMessage(currentMessagesWithoutFilesExceptLast, modelName, message.draw, message.web_search, (chunk: string) => {
-                assistantText += chunk;
+            if (!message.draw) {
+                await generateText(currentMessagesWithoutFilesExceptLast, modelName, message.web_search, (chunk: string) => {
+                    assistantText += chunk;
 
-                const updatedMessages = [...currentMessages];
+                    const updatedMessages = [...currentMessages];
 
-                if (!assistantAdded) {
+                    if (!assistantAdded) {
+                        updatedMessages.push({
+                            content: assistantText,
+                            role: 'assistant',
+                        });
+                        assistantAdded = true;
+                    } else {
+                        updatedMessages[updatedMessages.length - 1] = {
+                            content: assistantText,
+                            role: 'assistant',
+                        };
+                    }
+
+                    updateActiveChatMessages(updatedMessages);
+                    currentMessages = updatedMessages;
+                });
+            } else {
+                const prompt = currentMessages[currentMessages.length - 1].content;
+
+                if (prompt) {
+                    const imageUrl: string = await generateImage(prompt);
+
+                    const updatedMessages = [...currentMessages];
                     updatedMessages.push({
-                        content: assistantText,
+                        content: '',
+                        files: [{ id: crypto.randomUUID(), file_url: imageUrl }],
                         role: 'assistant',
                     });
-                    assistantAdded = true;
-                } else {
-                    updatedMessages[updatedMessages.length - 1] = {
-                        content: assistantText,
-                        role: 'assistant',
-                    };
+                    updateActiveChatMessages(updatedMessages);
+                    currentMessages = updatedMessages;
                 }
-
-                updateActiveChatMessages(updatedMessages);
-                currentMessages = updatedMessages;
-            });
+            }
         } finally {
             setFormDisabled(false);
         }

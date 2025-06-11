@@ -1,6 +1,6 @@
 import styles from './PromptForm.module.scss';
 import { useEffect, useRef, useState } from "react";
-import { Send, Plus, X } from "lucide-react";
+import {Send, Plus, X, Brush} from "lucide-react";
 import SvgButton from "../../../../components/SvgButton/SvgButton.tsx";
 import type {Message, MessageFile} from "../../../../types/chat.tsx";
 import { AnimatePresence, motion } from "motion/react";
@@ -11,6 +11,11 @@ import { useTranslation } from "react-i18next";
 import { useImageViewerStore } from "../../../../store/imageviewer.tsx";
 import {uploadFile} from "../../../../api/messages.tsx";
 import ImageWithLoader from "../../../../components/ImageWithLoader/ImageWithLoader.tsx";
+
+type Modes = {
+    draw: boolean;
+    web_search: boolean;
+};
 
 const PromptForm = ({ onSubmit }: { onSubmit: (message: Message, setFormIsDisabled: (disabled: boolean) => void) => void }) => {
     const { t } = useTranslation();
@@ -139,6 +144,14 @@ const PromptForm = ({ onSubmit }: { onSubmit: (message: Message, setFormIsDisabl
         return () => window.removeEventListener('resize', handleResize);
     }, []);
 
+    const toggleMode = (key: keyof Modes) => {
+        const isActive = message[key];
+        setMessage({
+            draw: key === 'draw' ? !isActive : false,
+            web_search: key === 'web_search' ? !isActive : false,
+        });
+    };
+
     return (
         <div className={`${styles.container} ${inputFocused ? styles.focused : ''}`}
              onMouseDown={(e) => {
@@ -256,10 +269,10 @@ const PromptForm = ({ onSubmit }: { onSubmit: (message: Message, setFormIsDisabl
 
                 <div className={styles.toolbar}>
                     <div className={styles.toolbarButtons}>
-                        <label className={`${styles.addButton} ${!(models.find((m) => m.name === modelName)?.visionSupport) ? styles.disabled : ''}`} aria-label={t('aria.button_add_files')}>
+                        <label className={`${styles.addButton} ${!((models.find((m) => m.name === modelName)?.visionSupport) && !(message.draw)) ? styles.disabled : ''}`} aria-label={t('aria.button_add_files')}>
                             <Plus />
                             <input
-                                disabled={!models.find((m) => m.name === modelName)?.visionSupport}
+                                disabled={!models.find((m) => m.name === modelName)?.visionSupport || message.draw}
                                 type="file"
                                 accept="image/png, image/jpeg"
                                 multiple
@@ -267,6 +280,20 @@ const PromptForm = ({ onSubmit }: { onSubmit: (message: Message, setFormIsDisabl
                                 onChange={handleFileAdd}
                             />
                         </label>
+
+                        <SvgButton
+                            className={`${styles.toolButton} ${message.draw ? styles.active : ''}`}
+                            onClick={() => toggleMode('draw')}
+                        >
+                            <Brush />
+                        </SvgButton>
+
+                        {/*<SvgButton*/}
+                        {/*    className={`${styles.toolButton} ${message.web_search ? styles.active : ''}`}*/}
+                        {/*    onClick={() => toggleMode('web_search')}*/}
+                        {/*>*/}
+                        {/*    <Globe />*/}
+                        {/*</SvgButton>*/}
                     </div>
 
                     <SvgButton
