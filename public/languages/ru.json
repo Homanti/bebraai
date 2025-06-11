@@ -73,7 +73,8 @@
         "button_send_message": "Отправить сообщение",
         "button_copy_message": "Скопировать сообщение",
         "button_add_files": "Добавить файлы",
-        "button_open_settings": "Открыть настройки"
+        "button_open_settings": "Открыть настройки",
+        "button_drawing_mode": "Режим рисования"
     },
     "error": {
         "max_files_exceeded": "Вы можете загрузить только до 10 файлов за раз",

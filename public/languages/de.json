@@ -73,7 +73,8 @@
         "button_send_message": "Nachricht senden",
         "button_copy_message": "Nachricht kopieren",
         "button_add_files": "Dateien hinzufügen",
-        "button_open_settings": "Einstellungen öffnen"
+        "button_open_settings": "Einstellungen öffnen",
+        "button_drawing_mode": "Zeichenmodus"
     },
     "error": {
         "max_files_exceeded": "Du kannst nur bis zu 10 Dateien gleichzeitig hochladen",

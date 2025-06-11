@@ -284,6 +284,7 @@ const PromptForm = ({ onSubmit }: { onSubmit: (message: Message, setFormIsDisabl
                         <SvgButton
                             className={`${styles.toolButton} ${message.draw ? styles.active : ''}`}
                             onClick={() => toggleMode('draw')}
+                            aria-label={t('aria.button_drawing_mode')}
                         >
                             <Brush />
                         </SvgButton>

@@ -73,7 +73,8 @@
     "button_send_message": "发送消息",
     "button_copy_message": "复制消息",
     "button_add_files": "添加文件",
-    "button_open_settings": "打开设置"
+    "button_open_settings": "打开设置",
+    "button_drawing_mode": "绘图模式"
   },
   "error": {
     "max_files_exceeded": "一次最多只能上传10个文件",

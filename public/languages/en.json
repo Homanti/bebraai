@@ -73,7 +73,8 @@
         "button_send_message": "Send message",
         "button_copy_message": "Copy message",
         "button_add_files": "Add files",
-        "button_open_settings": "Open settings"
+        "button_open_settings": "Open settings",
+        "button_drawing_mode": "Drawing mode"
     },
     "error": {
         "max_files_exceeded": "You can only upload up to 10 files at a time",

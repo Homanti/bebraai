@@ -73,7 +73,8 @@
     "button_send_message": "メッセージを送信",
     "button_copy_message": "メッセージをコピー",
     "button_add_files": "ファイルを追加",
-    "button_open_settings": "設定を開く"
+    "button_open_settings": "設定を開く",
+    "button_drawing_mode": "描画モード"
   },
   "error": {
     "max_files_exceeded": "一度にアップロードできるファイルは最大10個までです",

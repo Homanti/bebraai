@@ -73,7 +73,8 @@
         "button_send_message": "Envoyer le message",
         "button_copy_message": "Copier le message",
         "button_add_files": "Ajouter des fichiers",
-        "button_open_settings": "Ouvrir les paramètres"
+        "button_open_settings": "Ouvrir les paramètres",
+        "button_drawing_mode": "Mode dessin"
     },
     "error": {
         "max_files_exceeded": "Vous ne pouvez télécharger que 10 fichiers à la fois",
