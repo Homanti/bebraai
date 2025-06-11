@@ -79,9 +79,47 @@ export const generateImage = async (prompt: string) => {
     return data.content;
 };
 
+const compressImage = (file: File, quality = 0.7): Promise<File> => {
+    return new Promise((resolve, reject) => {
+        const img = new Image();
+        const reader = new FileReader();
+
+        reader.onload = (e) => {
+            img.src = e.target?.result as string;
+        };
+
+        img.onload = () => {
+            const canvas = document.createElement('canvas');
+            const MAX_WIDTH = 1024;
+            const scaleSize = MAX_WIDTH / img.width;
+            canvas.width = MAX_WIDTH;
+            canvas.height = img.height * scaleSize;
+
+            const ctx = canvas.getContext('2d');
+            if (!ctx) return reject(new Error('Canvas context error'));
+
+            ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+            canvas.toBlob((blob) => {
+                if (!blob) return reject(new Error('Compression failed'));
+                const compressedFile = new File([blob], file.name, { type: file.type });
+                resolve(compressedFile);
+            }, file.type, quality);
+        };
+
+        reader.onerror = (e) => reject(e);
+        reader.readAsDataURL(file);
+    });
+};
+
+
 export const uploadFile = async (file: File): Promise<string> => {
+    const compressedFile = file.type.startsWith('image/')
+        ? await compressImage(file, 0.7)
+        : file;
+
     const formData = new FormData();
-    formData.append('file', file);
+    formData.append('file', compressedFile);
 
     const response = await fetch(url + '/files/upload/', {
         method: 'POST',
@@ -99,4 +137,4 @@ export const uploadFile = async (file: File): Promise<string> => {
     }
 
     return data.image_url;
-}
+};
