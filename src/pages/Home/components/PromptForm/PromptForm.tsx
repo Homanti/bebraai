@@ -89,7 +89,27 @@ const PromptForm = ({ onSubmit }: { onSubmit: (message: Message, setFormIsDisabl
             });
         };
 
+        const allowedTextExtensions = [
+            '.txt', '.md', '.json', '.yaml', '.yml', '.xml', '.csv', '.tsv',
+            '.js', '.ts', '.jsx', '.tsx', '.py', '.cpp', '.c', '.h', '.hpp',
+            '.java', '.kt', '.scala', '.rb', '.php', '.sh', '.go', '.rs',
+            '.css', '.scss', '.less', '.html', '.htm', '.env', '.toml',
+            '.sql', '.log', '.conf', '.cfg', '.ini', '.tex'
+        ];
+
         for (const item of files) {
+            let file: File | null = null;
+
+            if (item instanceof File) {
+                file = item;
+            } else if ('getAsFile' in item && typeof item.getAsFile === 'function') {
+                file = item.getAsFile();
+            }
+
+            if (!file) continue;
+
+            const fileExtension = file.name.slice(file.name.lastIndexOf('.')).toLowerCase();
+
             if (item instanceof File) {
                 if (item.type.startsWith('image/')) {
                     try {
@@ -100,7 +120,7 @@ const PromptForm = ({ onSubmit }: { onSubmit: (message: Message, setFormIsDisabl
                         console.error(err);
                         alert(t('error.file_upload_failed'));
                     }
-                } else if (item.type.startsWith('text/') || item.type === 'application/json') {
+                } else if (item.type.startsWith('text/') || item.type === 'application/json' || allowedTextExtensions.includes(fileExtension)) {
                     try {
                         const result = await readTextFile(item);
                         validFiles.push(result);
@@ -344,32 +364,22 @@ const PromptForm = ({ onSubmit }: { onSubmit: (message: Message, setFormIsDisabl
                                 disabled={!models.find((m) => m.name === modelName)?.visionSupport || message.draw}
                                 type="file"
                                 accept="
-                                    image/png,
-                                    image/jpeg,
-                                    text/plain,
-                                    application/json,
-                                    .application/xml,
-                                    text/html,
-                                    text/css,
-                                    text/csv,
-                                    .text/markdown,
-                                    .text/javascript,
-                                    .application/javascript,
-                                    .py,
-                                    .js,
-                                    .ts,
-                                    .jsx,
-                                    .tsx,
-                                    .json,
-                                    .css,
-                                    .scss,
-                                    .html,
-                                    .txt,
-                                    .log,
-                                    .xml,
-                                    .yaml,
-                                    .yml,
-                                    "
+                                    image/png,image/jpeg,.jpeg,.bmp,.webp,.svg,
+                                    .txt,.md,.rtf,.log,
+                                    .json,.yaml,.yml,.ini,.toml,.csv,.tsv,
+                                    .xml,.html,.htm,.xhtml,
+                                    .js,.jsx,.ts,.tsx,
+                                    .c,.cpp,.h,.hpp,.cs,
+                                    .java,.kt,.kts,.scala,
+                                    .py,.ipynb,
+                                    .rb,.php,.pl,.sh,.bash,.zsh,
+                                    .go,.rs,.dart,.swift,.m,.mm,
+                                    .sql,.db,.sqlite,
+                                    .css,.scss,.sass,.less,
+                                    .bat,.cmd,.ps1,.vb,.vbs,.lua,
+                                    .tex,.bib,
+                                    .cfg,.conf,.env,.rc
+                                  "
                                 multiple
                                 style={{ display: 'none' }}
                                 onChange={handleFileAdd}

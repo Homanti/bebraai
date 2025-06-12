@@ -52,6 +52,7 @@
 
 .message {
     background: var(--surface-color);
+    font-size: 1.0625rem;
 
     border-radius: 1.25rem 0 1.25rem 1.25rem;
 
@@ -145,6 +146,7 @@
 .codeMessage {
     border-radius: var(--border-radius);
     overflow: hidden;
+    font-size: 1rem;
 
     .topBar {
         display: flex;
@@ -215,6 +217,8 @@
     border-radius: 0.25rem;
     padding: 0.15rem 0.3rem;
     margin: 0;
+    max-width: 100%;
+    overflow-x: auto;
 }
 
 .tableContainer {

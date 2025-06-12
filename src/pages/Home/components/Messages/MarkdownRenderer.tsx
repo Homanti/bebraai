@@ -1,4 +1,4 @@
-import React, {type ReactElement, type ReactNode, useState} from 'react';
+import React, {type ReactElement, type ReactNode, useEffect, useState} from 'react';
 import ReactMarkdown from 'react-markdown';
 import rehypeHighlight from 'rehype-highlight';
 import rehypeKatex from 'rehype-katex';
@@ -8,7 +8,6 @@ import SvgButton from "../../../../components/SvgButton/SvgButton.tsx";
 import {ChevronDown, Copy, Download} from "lucide-react";
 import {AnimatePresence, motion} from "motion/react";
 import {useTranslation} from "react-i18next";
-import 'highlight.js/styles/github-dark.css';
 import remarkGfm from "remark-gfm";
 import { remarkStripFilename } from './remark-strip-filename';
 import type { Element } from 'hast';
@@ -193,21 +192,60 @@ const CodeBlock: React.FC<CodeProps> = ({ inline, className, children, ...props 
         );
 };
 
-export const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({ content }) => (
-    <ReactMarkdown
-        remarkPlugins={[remarkMath, remarkGfm, remarkStripFilename]}
-        rehypePlugins={[rehypeKatex, rehypeHighlight]}
-        components={{
-            code: CodeBlock,
-            table: ({ children }) => (
-                <div className={styles.tableContainer}>
-                    <table className={styles.table}>
-                        {children}
-                    </table>
-                </div>
-            ),
-        }}
-    >
-        {content}
-    </ReactMarkdown>
-);
+
+export const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({ content }) => {
+    useEffect(() => {
+        const applyHighlightTheme = (theme: string) => {
+            const existingLink = document.querySelector('link[data-hljs-theme]');
+            if (existingLink) existingLink.remove();
+
+            const link = document.createElement('link');
+            link.rel = 'stylesheet';
+            link.href = theme === 'dark'
+                ? 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css'
+                : 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css';
+            link.setAttribute('data-hljs-theme', theme);
+            document.head.appendChild(link);
+        };
+
+        const getTheme = () => document.documentElement.getAttribute('data-theme') || 'light';
+
+        applyHighlightTheme(getTheme());
+
+        const observer = new MutationObserver((mutations) => {
+            for (const mutation of mutations) {
+                if (
+                    mutation.type === 'attributes' &&
+                    mutation.attributeName === 'data-theme'
+                ) {
+                    const newTheme = getTheme();
+                    applyHighlightTheme(newTheme);
+                }
+            }
+        });
+
+        observer.observe(document.documentElement, {
+            attributes: true,
+            attributeFilter: ['data-theme'],
+        });
+
+        return () => observer.disconnect();
+    }, []);
+
+    return (
+        <ReactMarkdown
+            remarkPlugins={[remarkMath, remarkGfm, remarkStripFilename]}
+            rehypePlugins={[rehypeKatex, rehypeHighlight]}
+            components={{
+                code: CodeBlock,
+                table: ({ children }) => (
+                    <div className={styles.tableContainer}>
+                        <table className={styles.table}>{children}</table>
+                    </div>
+                ),
+            }}
+        >
+            {content}
+        </ReactMarkdown>
+    );
+};
