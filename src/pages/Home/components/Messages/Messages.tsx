@@ -10,7 +10,7 @@ type MessagesProps = {
     activeChat: {
         messages: {
             content?: string;
-            files?: { id: string; file_url: string }[];
+            files?: { id: string; file_url?: string }[];
             role: 'user' | 'assistant';
         }[];
     };
