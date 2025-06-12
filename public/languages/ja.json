@@ -74,7 +74,8 @@
     "button_copy_message": "メッセージをコピー",
     "button_add_files": "ファイルを追加",
     "button_open_settings": "設定を開く",
-    "button_drawing_mode": "描画モード"
+    "button_drawing_mode": "描画モード",
+    "button_download_code": "コードをダウンロード"
   },
   "error": {
     "max_files_exceeded": "一度にアップロードできるファイルは最大10個までです",

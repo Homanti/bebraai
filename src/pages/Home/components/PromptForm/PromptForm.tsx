@@ -1,6 +1,6 @@
 import styles from './PromptForm.module.scss';
 import { useEffect, useRef, useState } from "react";
-import {Send, Plus, X, Brush} from "lucide-react";
+import {Send, Plus, X, Brush, File as Document} from "lucide-react";
 import SvgButton from "../../../../components/SvgButton/SvgButton.tsx";
 import type {Message, MessageFile} from "../../../../types/chat.tsx";
 import { AnimatePresence, motion } from "motion/react";
@@ -33,12 +33,38 @@ const PromptForm = ({ onSubmit }: { onSubmit: (message: Message, setFormIsDisabl
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement> | React.KeyboardEvent<HTMLTextAreaElement>) => {
         e.preventDefault();
-        const trimmed = inputValue.trim();
+        let value = inputValue;
 
-        if (trimmed.length === 0 && (!message.files || message.files.length === 0)) return;
+        let remainingFiles: MessageFile[] = [];
 
-        message.content = trimmed;
-        onSubmit(message, setFormIsDisabled);
+        if (message.files && message.files.length > 0) {
+            let newValue = value;
+
+            remainingFiles = [];
+
+            for (const file of message.files) {
+                if (file.file_content && file.file_name) {
+                    const extension = file.file_name.split('.').pop()?.toLowerCase() || '';
+                    newValue += `\n\`\`\`${extension} filename="${file.file_name}"\n${file.file_content}\n\`\`\``;
+                } else {
+                    remainingFiles.push(file);
+                }
+            }
+
+            value = newValue;
+        }
+
+        const trimmed = value.trim();
+
+        if (trimmed.length === 0 && remainingFiles.length === 0) return;
+
+        const newMessage: Message = {
+            ...message,
+            content: trimmed,
+            files: remainingFiles,
+        };
+
+        onSubmit(newMessage, setFormIsDisabled);
         setInputValue('');
         resetMessage();
     };
@@ -52,6 +78,17 @@ const PromptForm = ({ onSubmit }: { onSubmit: (message: Message, setFormIsDisabl
 
         const validFiles: MessageFile[] = [];
 
+        const readTextFile = (file: File): Promise<MessageFile> => {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.onload = () => {
+                    resolve({ id: `${Date.now()}-${Math.random()}`, file_content: reader.result as string, file_name: file.name, file_url: undefined });
+                };
+                reader.onerror = reject;
+                reader.readAsText(file);
+            });
+        };
+
         for (const item of files) {
             if (item instanceof File) {
                 if (item.type.startsWith('image/')) {
@@ -59,6 +96,14 @@ const PromptForm = ({ onSubmit }: { onSubmit: (message: Message, setFormIsDisabl
                         setFormIsDisabled(true);
                         const url = await uploadFile(item);
                         validFiles.push({ id: `${Date.now()}-${validFiles.length}`, file_url: url });
+                    } catch (err) {
+                        console.error(err);
+                        alert(t('error.file_upload_failed'));
+                    }
+                } else if (item.type.startsWith('text/') || item.type === 'application/json') {
+                    try {
+                        const result = await readTextFile(item);
+                        validFiles.push(result);
                     } catch (err) {
                         console.error(err);
                         alert(t('error.file_upload_failed'));
@@ -87,7 +132,8 @@ const PromptForm = ({ onSubmit }: { onSubmit: (message: Message, setFormIsDisabl
         }
 
         try {
-            setMessage({ files: [...(message.files ?? []), ...validFiles] });
+            const updatedFiles = [...(message.files ?? []), ...validFiles];
+            setMessage({ files: updatedFiles });
         } catch (err) {
             console.error(err);
             alert(t('file_upload_failed'));
@@ -116,13 +162,8 @@ const PromptForm = ({ onSubmit }: { onSubmit: (message: Message, setFormIsDisabl
         e.preventDefault();
 
         const files = Array.from(e.dataTransfer.files);
-        const imageFiles = files.filter(file => file.type.startsWith("image/"));
 
-        if (imageFiles.length === 0) {
-            return;
-        }
-
-        await processFiles(imageFiles);
+        await processFiles(files);
     };
 
     const handleDeleteContent = (idToDelete: string) => {
@@ -200,29 +241,57 @@ const PromptForm = ({ onSubmit }: { onSubmit: (message: Message, setFormIsDisabl
                         >
                             <AnimatePresence mode="popLayout">
                                 {message.files?.map(item => (
-                                    <motion.div
-                                        key={item.id}
-                                        className={styles.contentItem}
-                                        layout
-                                        initial={{ opacity: 0, y: -10 }}
-                                        animate={{ opacity: 1, y: 0 }}
-                                        exit={{ opacity: 0, y: -10 }}
-                                    >
-                                        <>
-                                            <SvgButton
-                                                className={styles.deleteButton}
-                                                onClick={() => handleDeleteContent(item.id)}
+                                    item.file_url ? (
+                                        <motion.div
+                                            key={item.id}
+                                            className={styles.previewImgItem}
+                                            layout
+                                            initial={{ opacity: 0, y: -10 }}
+                                            animate={{ opacity: 1, y: 0 }}
+                                            exit={{ opacity: 0, y: -10 }}
+                                        >
+                                            <>
+                                                <SvgButton
+                                                    className={styles.deleteButton}
+                                                    onClick={() => handleDeleteContent(item.id)}
+                                                >
+                                                    <X />
+                                                </SvgButton>
+                                                <ImageWithLoader
+                                                    src={item.file_url}
+                                                    alt="preview"
+                                                    className={styles.imagePreview}
+                                                    onClick={() => { setImageViewer(true, item.file_url) }}
+                                                />
+                                            </>
+                                        </motion.div>
+                                    ) : (
+                                        item.file_content && (
+                                            <motion.div
+                                                key={item.id}
+                                                className={styles.previewItem}
+                                                layout
+                                                initial={{ opacity: 0, y: -10 }}
+                                                animate={{ opacity: 1, y: 0 }}
+                                                exit={{ opacity: 0, y: -10 }}
                                             >
-                                                <X />
-                                            </SvgButton>
-                                            <ImageWithLoader
-                                                src={item.file_url}
-                                                alt="preview"
-                                                className={styles.imagePreview}
-                                                onClick={() => { setImageViewer(true, item.file_url) }}
-                                            />
-                                        </>
-                                    </motion.div>
+                                                <>
+                                                    <SvgButton
+                                                        className={styles.deleteButton}
+                                                        onClick={() => handleDeleteContent(item.id)}
+                                                    >
+                                                        <X />
+                                                    </SvgButton>
+                                                    <div className={styles.itemContent}>
+                                                        <span className={styles.itemContent__icon}>
+                                                            <Document />
+                                                        </span>
+                                                        {item.file_name}
+                                                    </div>
+                                                </>
+                                            </motion.div>
+                                        )
+                                    )
                                 ))}
                             </AnimatePresence>
                         </motion.div>
@@ -269,12 +338,38 @@ const PromptForm = ({ onSubmit }: { onSubmit: (message: Message, setFormIsDisabl
 
                 <div className={styles.toolbar}>
                     <div className={styles.toolbarButtons}>
-                        <label className={`${styles.addButton} ${!((models.find((m) => m.name === modelName)?.visionSupport) && !(message.draw)) ? styles.disabled : ''}`} aria-label={t('aria.button_add_files')}>
+                        <label className={`${styles.addButton} ${!((models.find((m) => m.name === modelName)?.visionSupport) && !(message.draw)) ? styles.disabled : ''}`} aria-label={t('aria.button_add_files')} title={t('aria.button_add_files')}>
                             <Plus />
                             <input
                                 disabled={!models.find((m) => m.name === modelName)?.visionSupport || message.draw}
                                 type="file"
-                                accept="image/png, image/jpeg"
+                                accept="
+                                    image/png,
+                                    image/jpeg,
+                                    text/plain,
+                                    application/json,
+                                    .application/xml,
+                                    text/html,
+                                    text/css,
+                                    text/csv,
+                                    .text/markdown,
+                                    .text/javascript,
+                                    .application/javascript,
+                                    .py,
+                                    .js,
+                                    .ts,
+                                    .jsx,
+                                    .tsx,
+                                    .json,
+                                    .css,
+                                    .scss,
+                                    .html,
+                                    .txt,
+                                    .log,
+                                    .xml,
+                                    .yaml,
+                                    .yml,
+                                    "
                                 multiple
                                 style={{ display: 'none' }}
                                 onChange={handleFileAdd}
@@ -285,6 +380,7 @@ const PromptForm = ({ onSubmit }: { onSubmit: (message: Message, setFormIsDisabl
                             className={`${styles.toolButton} ${message.draw ? styles.active : ''}`}
                             onClick={() => toggleMode('draw')}
                             aria-label={t('aria.button_drawing_mode')}
+                            title={t('aria.button_drawing_mode')}
                         >
                             <Brush />
                         </SvgButton>
@@ -302,6 +398,7 @@ const PromptForm = ({ onSubmit }: { onSubmit: (message: Message, setFormIsDisabl
                         className={styles.sendButton}
                         disabled={formIsDisabled || (!inputValue.trim() && !(message.files?.length && message.files.length > 0))}
                         aria-label={t('aria.button_send_message')}
+                        title={t('aria.button_send_message')}
                     >
                         <Send />
                     </SvgButton>

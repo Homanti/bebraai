@@ -2,6 +2,7 @@ import type { Message } from "../types/chat.tsx";
 import { models } from "../data/models.tsx";
 
 const url = "https://bebraai-fastapi-production.up.railway.app"
+// const url = "http://127.0.0.1:8000"
 
 export const generateText = async (
     messages: Message[],
@@ -26,6 +27,7 @@ export const generateText = async (
 
     const files = messages.flatMap((m) => m.files || []).map((f) => f.file_url);
     for (const fileUrl of files) {
+        if (!fileUrl) continue;
         formData.append('files_url', fileUrl);
     }
 

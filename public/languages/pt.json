@@ -74,7 +74,8 @@
     "button_copy_message": "Copiar mensagem",
     "button_add_files": "Adicionar arquivos",
     "button_open_settings": "Abrir configurações",
-    "button_drawing_mode": "Modo de desenho"
+    "button_drawing_mode": "Modo de desenho",
+    "button_download_code": "Baixar código"
   },
   "error": {
     "max_files_exceeded": "Você pode enviar até 10 arquivos por vez",

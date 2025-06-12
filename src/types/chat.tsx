@@ -1,6 +1,8 @@
 export type MessageFile = {
     id: string;
-    file_url: string;
+    file_url?: string;
+    file_name?: string;
+    file_content?: string;
 }
 
 export type Message = {

@@ -74,7 +74,8 @@
     "button_copy_message": "Copia messaggio",
     "button_add_files": "Aggiungi file",
     "button_open_settings": "Apri impostazioni",
-    "button_drawing_mode": "Modalità disegno"
+    "button_drawing_mode": "Modalità disegno",
+    "button_download_code": "Scarica codice"
   },
   "error": {
     "max_files_exceeded": "Puoi caricare fino a 10 file alla volta",

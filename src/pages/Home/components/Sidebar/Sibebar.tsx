@@ -90,10 +90,10 @@ const Sidebar = ({ chats, updateChats, setActiveChatId, activeChatId }: SidebarP
                     >
                         <div className={styles.inner} aria-hidden={!sidebarOpened ? "true" : "false"} id={"sidebar-content"}>
                             <div className={styles.buttonsContainer}>
-                                <SvgButton onClick={() => setSidebarOpened(!sidebarOpened)} aria-expanded={sidebarOpened} aria-label={t("aria.button_open_sidebar")} aria-controls={"sidebar-content"}>
+                                <SvgButton onClick={() => setSidebarOpened(!sidebarOpened)} aria-expanded={sidebarOpened} aria-label={t("aria.button_open_sidebar")} title={t("aria.button_open_sidebar")} aria-controls={"sidebar-content"}>
                                     <Menu />
                                 </SvgButton>
-                                <SvgButton onClick={createNewChat} aria-label={t("aria.button_create_new_chat")}>
+                                <SvgButton onClick={createNewChat} aria-label={t("aria.button_create_new_chat")} title={t("aria.button_create_new_chat")}>
                                     <SquarePen />
                                 </SvgButton>
                             </div>
@@ -115,7 +115,7 @@ const Sidebar = ({ chats, updateChats, setActiveChatId, activeChatId }: SidebarP
                                             }}
                                         >
                                             <span>{t(chat.title)}</span>
-                                            <SvgButton className={styles.trashButton} onClick={() => deleteChat(chat.id)} aria-label={t("aria.button_delete_chat")}>
+                                            <SvgButton className={styles.trashButton} onClick={() => deleteChat(chat.id)} aria-label={t("aria.button_delete_chat")} title={t("aria.button_delete_chat")}>
                                                 <Trash />
                                             </SvgButton>
                                         </motion.li>
