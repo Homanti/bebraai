@@ -170,7 +170,18 @@
         }
 
         .languageName {
-            margin-left: 0.625rem;
+            margin-left: 0.3125rem;
+            max-width: 100%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .filename {
+            max-width: 100%;
+            margin-left: 0.3125rem;
+            margin-right: 0.3125rem;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
         .toggleButtonWrapper {
