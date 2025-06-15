@@ -75,7 +75,8 @@
     "button_add_files": "Adicionar arquivos",
     "button_open_settings": "Abrir configurações",
     "button_drawing_mode": "Modo de desenho",
-    "button_download_code": "Baixar código"
+    "button_download_code": "Baixar código",
+    "button_toggle_code_visibility": "Alternar visibilidade do código"
   },
   "error": {
     "max_files_exceeded": "Você pode enviar até 10 arquivos por vez",

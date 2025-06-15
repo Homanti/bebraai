@@ -75,7 +75,8 @@
         "button_add_files": "Добавить файлы",
         "button_open_settings": "Открыть настройки",
         "button_drawing_mode": "Режим рисования",
-        "button_download_code": "Скачать код"
+        "button_download_code": "Скачать код",
+        "button_toggle_code_visibility": "Показать/скрыть код"
     },
     "error": {
         "max_files_exceeded": "Вы можете загрузить только до 10 файлов за раз",
