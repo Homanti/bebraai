@@ -132,8 +132,6 @@ const Home = () => {
             const absX = Math.abs(eventData.deltaX);
             const absY = Math.abs(eventData.deltaY);
 
-            console.log(`AbsX: ${absX}, AbsY: ${absY}`)
-
             if (absY > absX) return;
 
             setXOffset(newX / 16);
@@ -145,8 +143,6 @@ const Home = () => {
 
             const absX = Math.abs(eventData.deltaX);
             const absY = Math.abs(eventData.deltaY);
-
-            console.log(`AbsX: ${absX}, AbsY: ${absY}`)
 
             if (absY > absX) return;
 

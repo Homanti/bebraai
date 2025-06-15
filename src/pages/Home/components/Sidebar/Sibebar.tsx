@@ -66,7 +66,7 @@ const Sidebar = ({ chats, updateChats, setActiveChatId, activeChatId }: SidebarP
             initial: { x: "-18.125rem" },
             animate: { x: xOffset != false ? `${xOffset}rem` : 0 },
             exit: { x: "-18.125rem" },
-            transition: { type: "spring", stiffness: 500, damping: 40 },
+            transition: xOffset != false ? {duration: 0} : {type: "spring", stiffness: 500, damping: 35},
         }
         : {
             initial: { width: "0rem" },
