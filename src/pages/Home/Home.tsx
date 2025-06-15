@@ -117,7 +117,12 @@ const Home = () => {
     };
 
     const handlers = useSwipeable({
-        onSwipeStart: () => {
+        onSwipeStart: (eventData) => {
+            const absX = Math.abs(eventData.deltaX);
+            const absY = Math.abs(eventData.deltaY);
+
+            if (absY > absX) return;
+
             setSidebarOpened(true);
         },
         onSwiping: (eventData) => {
@@ -126,6 +131,8 @@ const Home = () => {
 
             const absX = Math.abs(eventData.deltaX);
             const absY = Math.abs(eventData.deltaY);
+
+            console.log(`AbsX: ${absX}, AbsY: ${absY}`)
 
             if (absY > absX) return;
 
@@ -139,14 +146,18 @@ const Home = () => {
             const absX = Math.abs(eventData.deltaX);
             const absY = Math.abs(eventData.deltaY);
 
+            console.log(`AbsX: ${absX}, AbsY: ${absY}`)
+
             if (absY > absX) return;
 
             if (newX > -110 || velocity > 0.3) {
                 setXOffset(0);
                 setSidebarOpened(true);
+                return;
             } else {
                 setXOffset(minX / 16);
                 setSidebarOpened(false);
+                return;
             }
         },
         trackMouse: false,

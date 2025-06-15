@@ -40,6 +40,8 @@ const Sidebar = ({ chats, updateChats, setActiveChatId, activeChatId }: SidebarP
 
     const deleteChat = (id: string) => {
         if (chats.length === 1) {
+            setIsSidebarOpening(false);
+
             const defaultChat: Chat = { id: '1', title: 'new_chat', messages: [] };
             updateChats([defaultChat]);
             setActiveChatId('1');
@@ -70,6 +72,17 @@ const Sidebar = ({ chats, updateChats, setActiveChatId, activeChatId }: SidebarP
             initial: { width: "0rem" },
             animate: { width: "18.125rem" },
             exit: { width: "0rem" }
+        };
+
+    const liMotionProps =
+        !isSidebarOpening ? {
+            initial: { opacity: 0, x: -300 },
+            animate: { opacity: 1, x: 0 },
+            exit: { opacity: 0, x: -300 },
+    } : {
+            initial: undefined,
+            animate: undefined,
+            exit: undefined,
         };
 
     useEffect(() => {
@@ -103,13 +116,11 @@ const Sidebar = ({ chats, updateChats, setActiveChatId, activeChatId }: SidebarP
                                     {[...chats].reverse().map(chat => (
                                         <motion.li
                                             key={chat.id}
-                                            className={chat.id === activeChatId ? styles.active : ''}
+                                            className={`${chat.id === activeChatId ? styles.active : ''} ${isSidebarOpening ? styles.disableLiMovement : ''}`} // не бейте за это, я инвалид
                                             onClick={() => setActiveChatId(chat.id)}
-                                            initial={isSidebarOpening ? undefined : { opacity: 0, x: -300 }}
-                                            animate={isSidebarOpening ? undefined : { opacity: 1, x: 0 }}
-                                            exit={isSidebarOpening ? undefined : { opacity: 0, x: -300 }}
-                                            layout={isSidebarOpening ? undefined : "position"}
-                                            transition={ isSidebarOpening ? undefined : {
+                                            {...liMotionProps}
+                                            layout
+                                            transition= {{
                                                 layout: { type: "spring", stiffness: 500, damping: 40 },
                                                 x: { type: "spring", stiffness: 500, damping: 30 },
                                                 opacity: { duration: 0.2 }

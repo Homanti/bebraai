@@ -51,6 +51,10 @@
         cursor: pointer;
         border-radius: var(--border-radius);
 
+        &.disableLiMovement {
+            transform: none !important; // не бейте за это, я инвалид
+        }
+
         & > span {
             width: 100%;
 
