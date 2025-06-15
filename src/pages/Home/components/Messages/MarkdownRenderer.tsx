@@ -11,6 +11,7 @@ import {useTranslation} from "react-i18next";
 import remarkGfm from "remark-gfm";
 import { remarkStripFilename } from './remark-strip-filename';
 import type { Element } from 'hast';
+import {useSidebar} from "../../../../store/sidebar.tsx";
 
 type MarkdownRendererProps = {
     content: string;
@@ -61,6 +62,7 @@ const CodeBlock: React.FC<CodeProps> = ({ inline, className, children, ...props 
     const [isCodeOpen, setIsCodeOpen] = useState(true);
     const { t } = useTranslation();
     const language = className?.match(/language-([\w-]+)/)?.[1] || 'plaintext';
+    const { setIsSwipingAllowed } = useSidebar();
 
     const meta = props.node?.data?.meta;
     let filename = 'code.txt';
@@ -125,7 +127,7 @@ const CodeBlock: React.FC<CodeProps> = ({ inline, className, children, ...props 
     }
 
     return (
-        <div className={styles.codeMessage} style={{ position: 'relative' }}>
+        <div className={styles.codeMessage} style={{ position: 'relative' }} onTouchStart={() => setIsSwipingAllowed(false)} onTouchEnd={() => setIsSwipingAllowed(true)}>
             <div className={styles.topBar}>
                 <span className={styles.topBarLeft}>
                     <motion.div

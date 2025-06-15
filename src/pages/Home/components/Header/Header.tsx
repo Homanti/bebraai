@@ -14,7 +14,7 @@ type HeaderProps = {
 };
 
 const Header = ({ openSettingsButtonRef }: HeaderProps) => {
-    const { sidebarOpened, setSidebarOpened } = useSidebar();
+    const { isSidebarOpened, setIsSidebarOpened } = useSidebar();
     const { modelName, setModelName } = useSettingsStore();
     const [isOpen, setIsOpen] = useState(false);
     const { settingsOpened, setSettingsOpened } = useSettings();
@@ -38,9 +38,9 @@ const Header = ({ openSettingsButtonRef }: HeaderProps) => {
             <div className={styles.toolbar}>
                 {!isMobile ? (
                     <>
-                        {!sidebarOpened && (
+                        {!isSidebarOpened && (
                             <div>
-                                <SvgButton onClick={() => setSidebarOpened(!sidebarOpened)} aria-expanded={sidebarOpened} aria-label={t("aria.button_open_sidebar")} title={t("aria.button_open_sidebar")} aria-controls={"sidebar-content"}>
+                                <SvgButton onClick={() => setIsSidebarOpened(!isSidebarOpened)} aria-expanded={isSidebarOpened} aria-label={t("aria.button_open_sidebar")} title={t("aria.button_open_sidebar")} aria-controls={"sidebar-content"}>
                                     <Menu />
                                 </SvgButton>
                             </div>
@@ -49,7 +49,7 @@ const Header = ({ openSettingsButtonRef }: HeaderProps) => {
                 ) : (
                     <>
                         <div>
-                            <SvgButton onClick={() => setSidebarOpened(!sidebarOpened)} aria-expanded={sidebarOpened} aria-label={t("aria.button_open_sidebar")} title={t("aria.button_open_sidebar")} aria-controls={"sidebar-content"}>
+                            <SvgButton onClick={() => setIsSidebarOpened(!isSidebarOpened)} aria-expanded={isSidebarOpened} aria-label={t("aria.button_open_sidebar")} title={t("aria.button_open_sidebar")} aria-controls={"sidebar-content"}>
                                 <Menu />
                             </SvgButton>
                         </div>

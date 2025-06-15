@@ -18,12 +18,12 @@ type SidebarProps = {
 const Sidebar = ({ chats, updateChats, setActiveChatId, activeChatId }: SidebarProps) => {
     const { t } = useTranslation();
     const [width, setWidth] = useState(window.innerWidth);
-    const { sidebarOpened, setSidebarOpened, xOffset } = useSidebar();
+    const { isSidebarOpened, setIsSidebarOpened, xOffset } = useSidebar();
     const sidebarRef = useRef<HTMLDivElement>(null);
     const [isSidebarOpening, setIsSidebarOpening] = useState(false);
     const isMobile = width <= 768;
 
-    useClickOutside(sidebarRef, () => setSidebarOpened(false), (width / 16) < 48);
+    useClickOutside(sidebarRef, () => setIsSidebarOpened(false), (width / 16) < 48);
 
     const createNewChat = () => {
         setIsSidebarOpening(false);
@@ -86,25 +86,25 @@ const Sidebar = ({ chats, updateChats, setActiveChatId, activeChatId }: SidebarP
         };
 
     useEffect(() => {
-        setSidebarOpened(window.innerWidth > 768);
-    }, [setSidebarOpened]);
+        setIsSidebarOpened(window.innerWidth > 768);
+    }, [setIsSidebarOpened]);
 
     useEffect(() => {
         setIsSidebarOpening(true);
-    }, [sidebarOpened]);
+    }, [isSidebarOpened]);
 
     return (
         <>
             <AnimatePresence>
-                {(sidebarOpened) && (
+                {(isSidebarOpened) && (
                     <motion.nav
                         className={styles.sidebar}
                         {...motionProps}
                         ref={sidebarRef}
                     >
-                        <div className={styles.inner} aria-hidden={!sidebarOpened ? "true" : "false"} id={"sidebar-content"}>
+                        <div className={styles.inner} aria-hidden={!isSidebarOpened ? "true" : "false"} id={"sidebar-content"}>
                             <div className={styles.buttonsContainer}>
-                                <SvgButton onClick={() => setSidebarOpened(!sidebarOpened)} aria-expanded={sidebarOpened} aria-label={t("aria.button_open_sidebar")} title={t("aria.button_open_sidebar")} aria-controls={"sidebar-content"}>
+                                <SvgButton onClick={() => setIsSidebarOpened(!isSidebarOpened)} aria-expanded={isSidebarOpened} aria-label={t("aria.button_open_sidebar")} title={t("aria.button_open_sidebar")} aria-controls={"sidebar-content"}>
                                     <Menu />
                                 </SvgButton>
                                 <SvgButton onClick={createNewChat} aria-label={t("aria.button_create_new_chat")} title={t("aria.button_create_new_chat")}>

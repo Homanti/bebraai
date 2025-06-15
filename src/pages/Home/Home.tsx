@@ -28,7 +28,7 @@ const Home = () => {
         return '1';
     });
     const openSettingsButtonRef = useRef<HTMLButtonElement>(null);
-    const { setSidebarOpened, setXOffset } = useSidebar();
+    const { setIsSidebarOpened, setXOffset, isSwipingAllowed } = useSidebar();
 
     const activeChat = chats.find(c => c.id === activeChatId)!;
 
@@ -118,42 +118,57 @@ const Home = () => {
 
     const handlers = useSwipeable({
         onSwipeStart: (eventData) => {
-            const absX = Math.abs(eventData.deltaX);
-            const absY = Math.abs(eventData.deltaY);
+            if (isSwipingAllowed) {
+                const absX = Math.abs(eventData.deltaX);
+                const absY = Math.abs(eventData.deltaY);
 
-            if (absY > absX) return;
+                if (absY > absX) return;
 
-            setSidebarOpened(true);
+                setIsSidebarOpened(true);
+            } else {
+                setXOffset(false);
+                setIsSidebarOpened(false);
+            }
         },
         onSwiping: (eventData) => {
-            const minX = -(18.125 * 16);
-            const newX = Math.min(0, minX + eventData.deltaX);
+            if (isSwipingAllowed) {
+                const minX = -(18.125 * 16);
+                const newX = Math.min(0, minX + eventData.deltaX);
 
-            const absX = Math.abs(eventData.deltaX);
-            const absY = Math.abs(eventData.deltaY);
+                const absX = Math.abs(eventData.deltaX);
+                const absY = Math.abs(eventData.deltaY);
 
-            if (absY > absX) return;
+                if (absY > absX) return;
 
-            setXOffset(newX / 16);
+                setXOffset(newX / 16);
+            } else {
+                setXOffset(false);
+                setIsSidebarOpened(false);
+            }
         },
         onSwipedRight: (eventData) => {
-            const minX = -(18.125 * 16);
-            const newX = Math.min(0, minX + eventData.deltaX);
-            const velocity = eventData.velocity;
+            if (isSwipingAllowed) {
+                const minX = -(18.125 * 16);
+                const newX = Math.min(0, minX + eventData.deltaX);
+                const velocity = eventData.velocity;
 
-            const absX = Math.abs(eventData.deltaX);
-            const absY = Math.abs(eventData.deltaY);
+                const absX = Math.abs(eventData.deltaX);
+                const absY = Math.abs(eventData.deltaY);
 
-            if (absY > absX) return;
+                if (absY > absX) return;
 
-            if (newX > -110 || velocity > 0.3) {
-                setXOffset(0);
-                setSidebarOpened(true);
-                return;
+                if (newX > -110 || velocity > 0.3) {
+                    setXOffset(0);
+                    setIsSidebarOpened(true);
+                    return;
+                } else {
+                    setXOffset(minX / 16);
+                    setIsSidebarOpened(false);
+                    return;
+                }
             } else {
-                setXOffset(minX / 16);
-                setSidebarOpened(false);
-                return;
+                setXOffset(false);
+                setIsSidebarOpened(false);
             }
         },
         trackMouse: false,
