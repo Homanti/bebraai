@@ -162,6 +162,7 @@ const Home = () => {
     return (
         <motion.div className={styles.home}>
             <SettingsModal openSettingsButtonRef={openSettingsButtonRef} />
+            <ImageViewer />
             <Sidebar chats={chats} updateChats={updateChats} setActiveChatId={setActiveChatId} activeChatId={activeChatId} />
 
             <main {...handlers}>
@@ -189,7 +190,6 @@ const Home = () => {
                 </section>
             </main>
 
-            <ImageViewer />
         </motion.div>
     );
 };
