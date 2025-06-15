@@ -14,6 +14,8 @@ import {getSettings} from "../../utils/settingsStorage.tsx";
 import SettingsModal from "./components/SettingsModal/SettingsModal.tsx";
 import {useTranslation} from "react-i18next";
 import ImageViewer from "./components/ImageViewer/ImageViewer.tsx";
+import {useSwipeable} from "react-swipeable";
+import {useSidebar} from "../../store/sidebar.tsx";
 
 const Home = () => {
     const { t } = useTranslation();
@@ -26,6 +28,7 @@ const Home = () => {
         return '1';
     });
     const openSettingsButtonRef = useRef<HTMLButtonElement>(null);
+    const { setSidebarOpened, setXOffset } = useSidebar();
 
     const activeChat = chats.find(c => c.id === activeChatId)!;
 
@@ -113,12 +116,38 @@ const Home = () => {
         }
     };
 
+    const handlers = useSwipeable({
+        onSwipeStart: () => {
+            setSidebarOpened(true);
+        },
+        onSwiping: (eventData) => {
+            const minX = -(18.125 * 16);
+            const newX = Math.min(0, minX + eventData.deltaX);
+
+            setXOffset(newX / 16);
+        },
+        onSwiped: (eventData) => {
+            const minX = -(18.125 * 16);
+            const newX = Math.min(0, minX + eventData.deltaX);
+            const velocity = eventData.velocity;
+
+            if (newX > -110 || velocity > 0.3) {
+                setXOffset(0);
+                setSidebarOpened(true);
+            } else {
+                setXOffset(minX / 16);
+                setSidebarOpened(false);
+            }
+        },
+        trackMouse: false,
+    });
+
     return (
         <motion.div className={styles.home}>
             <SettingsModal openSettingsButtonRef={openSettingsButtonRef} />
             <Sidebar chats={chats} updateChats={updateChats} setActiveChatId={setActiveChatId} activeChatId={activeChatId} />
 
-            <main>
+            <main {...handlers}>
                 <Header openSettingsButtonRef={openSettingsButtonRef} />
 
                 <AnimatePresence>

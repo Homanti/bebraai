@@ -18,9 +18,10 @@ type SidebarProps = {
 const Sidebar = ({ chats, updateChats, setActiveChatId, activeChatId }: SidebarProps) => {
     const { t } = useTranslation();
     const [width, setWidth] = useState(window.innerWidth);
-    const { sidebarOpened, setSidebarOpened } = useSidebar();
+    const { sidebarOpened, setSidebarOpened, xOffset } = useSidebar();
     const sidebarRef = useRef<HTMLDivElement>(null);
     const [isSidebarOpening, setIsSidebarOpening] = useState(false);
+    const isMobile = width <= 768;
 
     useClickOutside(sidebarRef, () => setSidebarOpened(false), (width / 16) < 48);
 
@@ -58,18 +59,18 @@ const Sidebar = ({ chats, updateChats, setActiveChatId, activeChatId }: SidebarP
         return () => window.removeEventListener('resize', handleResize);
     }, []);
 
-    const motionProps = width <= 768
+    const motionProps = isMobile
         ? {
-            initial: { opacity: 0, x: -200 },
-            animate: { opacity: 1, x: 0 },
-            exit: { opacity: 0, x: -200 },
+            initial: { x: "-18.125rem" },
+            animate: { x: xOffset != false ? `${xOffset}rem` : 0 },
+            exit: { x: "-18.125rem" },
             transition: { type: "spring", stiffness: 500, damping: 40 },
         }
         : {
             initial: { width: "0rem" },
             animate: { width: "18.125rem" },
             exit: { width: "0rem" }
-    };
+        };
 
     useEffect(() => {
         setSidebarOpened(window.innerWidth > 768);
@@ -104,11 +105,11 @@ const Sidebar = ({ chats, updateChats, setActiveChatId, activeChatId }: SidebarP
                                             key={chat.id}
                                             className={chat.id === activeChatId ? styles.active : ''}
                                             onClick={() => setActiveChatId(chat.id)}
-                                            initial={isSidebarOpening ? false : { opacity: 0, x: -300 }}
-                                            animate={{ opacity: 1, x: 0 }}
-                                            exit={{ opacity: 0, x: -300 }}
-                                            layout
-                                            transition={{
+                                            initial={isSidebarOpening ? undefined : { opacity: 0, x: -300 }}
+                                            animate={isSidebarOpening ? undefined : { opacity: 1, x: 0 }}
+                                            exit={isSidebarOpening ? undefined : { opacity: 0, x: -300 }}
+                                            layout={isSidebarOpening ? undefined : "position"}
+                                            transition={ isSidebarOpening ? undefined : {
                                                 layout: { type: "spring", stiffness: 500, damping: 40 },
                                                 x: { type: "spring", stiffness: 500, damping: 30 },
                                                 opacity: { duration: 0.2 }
