@@ -206,6 +206,8 @@
     resize: none;
     font-size: 1rem;
 
+    color: var(--text-color);
+
     padding: 0;
 
     &::placeholder {
@@ -233,12 +235,14 @@
         padding: 0;
 
         & > svg {
+            opacity: 0.5;
             color: var(--secondary-color);
         }
 
         &.active {
             & > svg {
-                color: var(--primary-color);
+                opacity: 1;
+                color: var(--text-color);
             }
         }
     }

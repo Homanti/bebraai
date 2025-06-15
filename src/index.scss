@@ -2,15 +2,14 @@
 
 :root {
     --color-scheme: light;
-    --text-color: black;
+    --text-color: #333333;
+    --secondary-color: #686c6c;
     --background-color: #ffffff;
     --surface-color: #e9eef6;
     --border-radius: 0.625rem;
     --main-gradient: linear-gradient(to right, #4b83f0, #a071c3, #ca6887, #d46678);
     --secondary-gradient: linear-gradient(90deg, #007AFF, #FF2D55, #FF9500);
     --nav-color: #f0f4f9;
-    --primary-color: #36383a;
-    --secondary-color: #505353;
     --second-surface-color: #e0e3e8;
     --third-surface-color: #e0e3e8;
 }
@@ -18,14 +17,13 @@
 [data-theme="dark"] {
     --color-scheme: dark;
     --text-color: white;
+    --secondary-color: darkgray;
     --background-color: #1b1c1d;
     --surface-color: #232425;
     --border-radius: 0.625rem;
     --main-gradient: linear-gradient(to right, #4b83f0, #a071c3, #ca6887, #d46678);
     --secondary-gradient: linear-gradient(90deg, #007AFF, #FF2D55, #FF9500);
     --nav-color: #171717;
-    --primary-color: white;
-    --secondary-color: darkgray;
     --second-surface-color: #2f2f2f;
     --third-surface-color: #424242;
 }
