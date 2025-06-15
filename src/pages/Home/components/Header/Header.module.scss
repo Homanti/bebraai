@@ -30,8 +30,10 @@
     &Button {
         background: transparent !important;
 
-        &:hover {
-            background: var(--surface-color) !important;
+        @media (hover: hover) and (pointer: fine) {
+            &:hover {
+                background: var(--surface-color) !important;
+            }
         }
     }
 
@@ -61,8 +63,10 @@
 
         justify-content: space-between;
 
-        &:hover {
-            background: var(--second-surface-color);
+        @media (hover: hover) and (pointer: fine) {
+            &:hover {
+                background: var(--second-surface-color);
+            }
         }
 
         &__text {

@@ -71,8 +71,10 @@
 
     justify-content: space-between;
 
-    &:hover {
-        background: var(--second-surface-color);
+    @media (hover: hover) and (pointer: fine) {
+        &:hover {
+            background: var(--second-surface-color);
+        }
     }
 
     &__text {

@@ -18,8 +18,10 @@
         align-items: center;
         justify-content: center;
 
-        &:hover {
-            background: var(--second-surface-color);
+        @media (hover: hover) and (pointer: fine) {
+            &:hover {
+                background: var(--second-surface-color);
+            }
         }
 
         &:active {

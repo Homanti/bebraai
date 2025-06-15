@@ -65,9 +65,3 @@ select {
 .katex-display > .katex {
     min-width: max-content;
 }
-
-@media (hover: none) {
-    *:hover {
-        opacity: 1;
-    }
-}

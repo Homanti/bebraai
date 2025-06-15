@@ -78,8 +78,10 @@
         }
     }
 
-    li:hover {
-        opacity: 0.7;
+    @media (hover: hover) and (pointer: fine) {
+        li:hover {
+            opacity: 0.7;
+        }
     }
 
     .button {
@@ -90,8 +92,11 @@
         background: var(--surface-color);
         cursor: pointer;
 
-        &:hover {
-            opacity: 0.7;
+
+        @media (hover: hover) and (pointer: fine) {
+            &:hover {
+                opacity: 0.7;
+            }
         }
 
         &:active {
