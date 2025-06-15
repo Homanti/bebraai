@@ -124,12 +124,22 @@ const Home = () => {
             const minX = -(18.125 * 16);
             const newX = Math.min(0, minX + eventData.deltaX);
 
+            const absX = Math.abs(eventData.deltaX);
+            const absY = Math.abs(eventData.deltaY);
+
+            if (absY > absX) return;
+
             setXOffset(newX / 16);
         },
-        onSwiped: (eventData) => {
+        onSwipedRight: (eventData) => {
             const minX = -(18.125 * 16);
             const newX = Math.min(0, minX + eventData.deltaX);
             const velocity = eventData.velocity;
+
+            const absX = Math.abs(eventData.deltaX);
+            const absY = Math.abs(eventData.deltaY);
+
+            if (absY > absX) return;
 
             if (newX > -110 || velocity > 0.3) {
                 setXOffset(0);
