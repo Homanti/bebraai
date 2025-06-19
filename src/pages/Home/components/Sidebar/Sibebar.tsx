@@ -18,12 +18,12 @@ type SidebarProps = {
 const Sidebar = ({ chats, updateChats, setActiveChatId, activeChatId }: SidebarProps) => {
     const { t } = useTranslation();
     const [width, setWidth] = useState(window.innerWidth);
-    const { isSidebarOpened, setIsSidebarOpened, xOffset } = useSidebar();
+    const { isSidebarOpened, setIsSidebarOpened, setXOffset, xOffset } = useSidebar();
     const sidebarRef = useRef<HTMLDivElement>(null);
     const [isSidebarOpening, setIsSidebarOpening] = useState(false);
     const isMobile = width <= 768;
 
-    useClickOutside(sidebarRef, () => setIsSidebarOpened(false), (width / 16) < 48);
+    useClickOutside(sidebarRef, () => {setIsSidebarOpened(false); setXOffset(false)}, isMobile);
 
     const createNewChat = () => {
         setIsSidebarOpening(false);

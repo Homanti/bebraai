@@ -14,7 +14,7 @@ type HeaderProps = {
 };
 
 const Header = ({ openSettingsButtonRef }: HeaderProps) => {
-    const { isSidebarOpened, setIsSidebarOpened } = useSidebar();
+    const { isSidebarOpened, setIsSidebarOpened, setXOffset } = useSidebar();
     const { modelName, setModelName } = useSettingsStore();
     const [isOpen, setIsOpen] = useState(false);
     const { settingsOpened, setSettingsOpened } = useSettings();
@@ -40,7 +40,10 @@ const Header = ({ openSettingsButtonRef }: HeaderProps) => {
                     <>
                         {!isSidebarOpened && (
                             <div>
-                                <SvgButton onClick={() => setIsSidebarOpened(!isSidebarOpened)} aria-expanded={isSidebarOpened} aria-label={t("aria.button_open_sidebar")} title={t("aria.button_open_sidebar")} aria-controls={"sidebar-content"}>
+                                <SvgButton onClick={() => {
+                                    setIsSidebarOpened(!isSidebarOpened);
+                                    setXOffset(false);
+                                }} aria-expanded={isSidebarOpened} aria-label={t("aria.button_open_sidebar")} title={t("aria.button_open_sidebar")} aria-controls={"sidebar-content"}>
                                     <Menu />
                                 </SvgButton>
                             </div>
@@ -49,7 +52,10 @@ const Header = ({ openSettingsButtonRef }: HeaderProps) => {
                 ) : (
                     <>
                         <div>
-                            <SvgButton onClick={() => setIsSidebarOpened(!isSidebarOpened)} aria-expanded={isSidebarOpened} aria-label={t("aria.button_open_sidebar")} title={t("aria.button_open_sidebar")} aria-controls={"sidebar-content"}>
+                            <SvgButton onClick={() => {
+                                setIsSidebarOpened(!isSidebarOpened);
+                                setXOffset(false);
+                            }} aria-expanded={isSidebarOpened} aria-label={t("aria.button_open_sidebar")} title={t("aria.button_open_sidebar")} aria-controls={"sidebar-content"}>
                                 <Menu />
                             </SvgButton>
                         </div>

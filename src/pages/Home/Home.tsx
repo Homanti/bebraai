@@ -116,61 +116,61 @@ const Home = () => {
         }
     };
 
+    const minX = -(18.125 * 16);
+
     const handlers = useSwipeable({
-        onSwipeStart: (eventData) => {
-            if (isSwipingAllowed) {
-                const absX = Math.abs(eventData.deltaX);
-                const absY = Math.abs(eventData.deltaY);
+        onSwipeStart: isSwipingAllowed ? (eventData) => {
+            const deltaX = eventData.deltaX;
+            const deltaY = eventData.deltaY;
 
-                if (absY > absX) return;
+            const absX = Math.abs(deltaX);
+            const absY = Math.abs(deltaY);
 
+            if (absY > absX) return;
+            if (deltaX < minX) return;
+
+            setIsSidebarOpened(true);
+        } : undefined,
+        onSwiping: isSwipingAllowed ? (eventData) => {
+            const deltaX = eventData.deltaX;
+            const deltaY = eventData.deltaY;
+
+            const absX = Math.abs(deltaX);
+            const absY = Math.abs(deltaY);
+
+            const newX = Math.min(0, minX + deltaX);
+
+            if (absY > absX) return;
+            if (deltaX < minX) return;
+
+            setXOffset(newX / 16);
+        } : undefined,
+        onSwipedRight: isSwipingAllowed ? (eventData) => {
+            const deltaX = eventData.deltaX;
+            const deltaY = eventData.deltaY;
+
+            const absX = Math.abs(deltaX);
+            const absY = Math.abs(deltaY);
+
+            const newX = Math.min(0, minX + deltaX);
+            const velocity = eventData.velocity;
+
+            if (absY > absX) return;
+            if (deltaX < minX) return;
+
+            if (newX > -110 || velocity > 0.3) {
+                setXOffset(0);
                 setIsSidebarOpened(true);
             } else {
                 setXOffset(false);
-                setIsSidebarOpened(false);
-            }
-        },
-        onSwiping: (eventData) => {
-            if (isSwipingAllowed) {
-                const minX = -(18.125 * 16);
-                const newX = Math.min(0, minX + eventData.deltaX);
-
-                const absX = Math.abs(eventData.deltaX);
-                const absY = Math.abs(eventData.deltaY);
-
-                if (absY > absX) return;
-
-                setXOffset(newX / 16);
-            } else {
-                setXOffset(false);
-                setIsSidebarOpened(false);
-            }
-        },
-        onSwipedRight: (eventData) => {
-            if (isSwipingAllowed) {
-                const minX = -(18.125 * 16);
-                const newX = Math.min(0, minX + eventData.deltaX);
-                const velocity = eventData.velocity;
-
-                const absX = Math.abs(eventData.deltaX);
-                const absY = Math.abs(eventData.deltaY);
-
-                if (absY > absX) return;
-
-                if (newX > -110 || velocity > 0.3) {
-                    setXOffset(0);
-                    setIsSidebarOpened(true);
-                    return;
-                } else {
-                    setXOffset(minX / 16);
-                    setIsSidebarOpened(false);
-                    return;
-                }
-            } else {
-                setXOffset(false);
-                setIsSidebarOpened(false);
-            }
-        },
+                setTimeout(() => {
+                    setIsSidebarOpened(false); // костыль не бейте
+                }, 1);}
+        } : undefined,
+        onSwipedLeft: isSwipingAllowed ? () => {
+            setXOffset(false);
+            setIsSidebarOpened(false);
+        } : undefined,
         trackMouse: false,
     });
 
@@ -180,7 +180,7 @@ const Home = () => {
             <ImageViewer />
             <Sidebar chats={chats} updateChats={updateChats} setActiveChatId={setActiveChatId} activeChatId={activeChatId} />
 
-            <main {...handlers}>
+            <main {...(isSwipingAllowed ? handlers : {})}>
                 <Header openSettingsButtonRef={openSettingsButtonRef} />
 
                 <AnimatePresence>

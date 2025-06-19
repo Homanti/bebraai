@@ -1,4 +1,4 @@
-import React, {type ReactElement, type ReactNode, useEffect, useState} from 'react';
+import React, {type ReactElement, type ReactNode, useEffect, useRef, useState} from 'react';
 import ReactMarkdown from 'react-markdown';
 import rehypeHighlight from 'rehype-highlight';
 import rehypeKatex from 'rehype-katex';
@@ -12,6 +12,7 @@ import remarkGfm from "remark-gfm";
 import { remarkStripFilename } from './remark-strip-filename';
 import type { Element } from 'hast';
 import {useSidebar} from "../../../../store/sidebar.tsx";
+import {useClickOutside} from "../../../../hooks/useClickOutside.tsx";
 
 type MarkdownRendererProps = {
     content: string;
@@ -196,6 +197,19 @@ const CodeBlock: React.FC<CodeProps> = ({ inline, className, children, ...props 
 
 
 export const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({ content }) => {
+    const { setIsSwipingAllowed } = useSidebar();
+    const tableRef = useRef<HTMLDivElement>(null);
+    const [width, setWidth] = useState(window.innerWidth);
+    const isMobile = width <= 768;
+
+    useClickOutside(tableRef, () => setIsSwipingAllowed(true), isMobile);
+
+    useEffect(() => {
+        const handleResize = () => setWidth(window.innerWidth);
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
+
     useEffect(() => {
         const applyHighlightTheme = (theme: string) => {
             const existingLink = document.querySelector('link[data-hljs-theme]');
@@ -241,7 +255,7 @@ export const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({ content }) =
             components={{
                 code: CodeBlock,
                 table: ({ children }) => (
-                    <div className={styles.tableContainer}>
+                    <div ref={tableRef} tabIndex={0} className={styles.tableContainer} onFocus={() => setIsSwipingAllowed(false)}>
                         <table className={styles.table}>{children}</table>
                     </div>
                 ),
