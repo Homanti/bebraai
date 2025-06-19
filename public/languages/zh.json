@@ -24,7 +24,8 @@
     "button_drawing_mode": "绘图模式",
     "button_download_code": "下载代码",
     "button_toggle_code_visibility": "切换代码显示",
-    "button_web_search": "网络搜索"
+    "button_web_search": "网络搜索",
+    "button_voice_message": "语音消息"
   },
   "error": {
     "max_files_exceeded": "一次最多只能上传10个文件",

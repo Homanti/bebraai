@@ -1,6 +1,6 @@
 import styles from './PromptForm.module.scss';
 import { useEffect, useRef, useState } from "react";
-import {Send, Plus, X, Brush, Globe, File as Document} from "lucide-react";
+import {Send, Plus, X, Brush, Globe, File as Document, Mic} from "lucide-react";
 import SvgButton from "../../../../components/SvgButton/SvgButton.tsx";
 import type {Message, MessageFile} from "../../../../types/chat.tsx";
 import { AnimatePresence, motion } from "motion/react";
@@ -9,7 +9,7 @@ import { models } from "../../../../data/models.tsx";
 import { useMessageStore } from "../../../../store/messages.tsx";
 import { useTranslation } from "react-i18next";
 import { useImageViewerStore } from "../../../../store/imageviewer.tsx";
-import {uploadFile} from "../../../../api/messages.tsx";
+import {transcriptAudio, uploadFile} from "../../../../api/messages.tsx";
 import ImageWithLoader from "../../../../components/ImageWithLoader/ImageWithLoader.tsx";
 
 type Modes = {
@@ -30,6 +30,9 @@ const PromptForm = ({ onSubmit }: { onSubmit: (message: Message, setFormIsDisabl
     const [isDragOver, setIsDragOver] = useState(false);
     const [formIsDisabled, setFormIsDisabled] = useState(false);
     const { setImageViewer } = useImageViewerStore();
+    const [mediaRecorder, setMediaRecorder] = useState<MediaRecorder | null>(null);
+    const [isRecording, setIsRecording] = useState(false);
+    const [mediaStream, setMediaStream] = useState<MediaStream | null>(null);
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement> | React.KeyboardEvent<HTMLTextAreaElement>) => {
         e.preventDefault();
@@ -211,6 +214,50 @@ const PromptForm = ({ onSubmit }: { onSubmit: (message: Message, setFormIsDisabl
             draw: key === 'draw' ? !isActive : false,
             web_search: key === 'web_search' ? !isActive : false,
         });
+    };
+
+    const startRecording = async () => {
+        try {
+            const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+            const recorder = new MediaRecorder(stream, {
+                mimeType: "audio/webm;codecs=opus"
+            });
+
+            setIsRecording(true);
+            setFormIsDisabled(true);
+            setMediaStream(stream);
+
+            recorder.ondataavailable = async (event) => {
+                if (event.data.size > 0) {
+                    const file = new File([event.data], 'recording.webm', { type: 'audio/webm' });
+
+                    try {
+                        const text = await transcriptAudio(file);
+                        setInputValue((prev) => prev + (prev ? '\n' : '') + text);
+                    } catch (err) {
+                        console.error(err);
+                    } finally {
+                        setFormIsDisabled(false);
+                        setIsRecording(false);
+                    }
+                }
+            };
+
+            recorder.start();
+            setMediaRecorder(recorder);
+        } catch (err) {
+            console.error(err);
+        }
+    };
+
+    const stopRecording = () => {
+        if (mediaRecorder) {
+            mediaRecorder.stop();
+            setIsRecording(false);
+        }
+        if (mediaStream) {
+            mediaStream.getTracks().forEach(track => track.stop());
+        }
     };
 
     return (
@@ -409,15 +456,31 @@ const PromptForm = ({ onSubmit }: { onSubmit: (message: Message, setFormIsDisabl
                         </SvgButton>
                     </div>
 
-                    <SvgButton
-                        type="submit"
-                        className={styles.sendButton}
-                        disabled={formIsDisabled || (!inputValue.trim() && !(message.files?.length && message.files.length > 0))}
-                        aria-label={t('aria.button_send_message')}
-                        title={t('aria.button_send_message')}
-                    >
-                        <Send />
-                    </SvgButton>
+                    <div className={styles.toolbarButtons}>
+                        <SvgButton
+                            className={`${styles.toolButton} ${isRecording ? styles.active : ''}`}
+                            aria-label={t('aria.button_voice_message')}
+                            title={t('aria.button_voice_message')}
+                            onClick={() => {
+                                if (isRecording) {
+                                    stopRecording();
+                                } else {
+                                    startRecording();
+                                }
+                            }}
+                        >
+                            <Mic />
+                        </SvgButton>
+                        <SvgButton
+                            type="submit"
+                            className={`${styles.toolButton} ${styles.active}`}
+                            disabled={formIsDisabled || (!inputValue.trim() && !(message.files?.length && message.files.length > 0))}
+                            aria-label={t('aria.button_send_message')}
+                            title={t('aria.button_send_message')}
+                        >
+                            <Send />
+                        </SvgButton>
+                    </div>
                 </div>
             </form>
         </div>

@@ -1,8 +1,8 @@
 import type { Message } from "../types/chat.tsx";
 import { models } from "../data/models.tsx";
 
-const url = "https://bebraai-fastapi-production.up.railway.app"
-// const url = "http://127.0.0.1:8000"
+// const url = "https://bebraai-fastapi-production.up.railway.app"
+const url = "http://127.0.0.1:8000"
 
 export const generateText = async (
     messages: Message[],
@@ -116,6 +116,27 @@ const compressImage = (file: File, quality = 0.7): Promise<File> => {
     });
 };
 
+export const transcriptAudio = async (file: File): Promise<string> => {
+    const formData = new FormData();
+    formData.append('audio', file);
+
+    const response = await fetch(url + '/api/audio/transcript', {
+        method: 'POST',
+        body: formData
+    });
+
+    if (!response.ok) {
+        throw new Error('Failed to upload audio file');
+    }
+
+    const data = await response.json();
+
+    if (!data || !data.text) {
+        throw new Error(response.status + response.statusText || 'Invalid response from server');
+    }
+
+    return data.text;
+}
 
 export const uploadFile = async (file: File): Promise<string> => {
     const compressedFile = file.type.startsWith('image/')
@@ -125,7 +146,7 @@ export const uploadFile = async (file: File): Promise<string> => {
     const formData = new FormData();
     formData.append('file', compressedFile);
 
-    const response = await fetch(url + '/files/upload/', {
+    const response = await fetch(url + '/files/upload', {
         method: 'POST',
         body: formData
     });

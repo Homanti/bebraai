@@ -245,10 +245,6 @@
                 color: var(--text-color);
             }
         }
-    }
-
-    .sendButton {
-        padding: 0;
 
         &:disabled {
             cursor: not-allowed;

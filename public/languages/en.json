@@ -24,7 +24,8 @@
         "button_drawing_mode": "Drawing mode",
         "button_download_code": "Download code",
         "button_toggle_code_visibility": "Toggle code visibility",
-        "button_web_search": "Web search"
+        "button_web_search": "Web search",
+        "button_voice_message": "Voice message"
     },
     "error": {
         "max_files_exceeded": "You can only upload up to 10 files at a time",

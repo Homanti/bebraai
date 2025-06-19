@@ -24,7 +24,8 @@
         "button_drawing_mode": "Режим рисования",
         "button_download_code": "Скачать код",
         "button_toggle_code_visibility": "Показать/скрыть код",
-        "button_web_search": "Поиск в интернете"
+        "button_web_search": "Поиск в интернете",
+        "button_voice_message": "Голосовое сообщение"
     },
     "error": {
         "max_files_exceeded": "Вы можете загрузить только до 10 файлов за раз",

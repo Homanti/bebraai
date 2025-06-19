@@ -24,7 +24,8 @@
         "button_drawing_mode": "Mode dessin",
         "button_download_code": "Télécharger le code",
         "button_toggle_code_visibility": "Basculer la visibilité du code",
-        "button_web_search": "Rechercher sur le web"
+        "button_web_search": "Rechercher sur le web",
+        "button_voice_message": "Message vocal"
     },
     "error": {
         "max_files_exceeded": "Vous ne pouvez télécharger que 10 fichiers à la fois",
