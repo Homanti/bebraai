@@ -23,7 +23,8 @@
         "button_open_settings": "Відкрити налаштування",
         "button_drawing_mode": "Режим малювання",
         "button_download_code": "Завантажити код",
-        "button_toggle_code_visibility": "Перемкнути видимість коду"
+        "button_toggle_code_visibility": "Перемкнути видимість коду",
+        "button_web_search": "Пошук в Інтернеті"
     },
     "error": {
         "max_files_exceeded": "Ви можете завантажити не більше 10 файлів одночасно",

@@ -23,7 +23,8 @@
     "button_open_settings": "設定を開く",
     "button_drawing_mode": "描画モード",
     "button_download_code": "コードをダウンロード",
-    "button_toggle_code_visibility": "コードの表示/非表示"
+    "button_toggle_code_visibility": "コードの表示/非表示",
+    "button_web_search": "ウェブ検索"
   },
   "error": {
     "max_files_exceeded": "一度にアップロードできるファイルは最大10個までです",

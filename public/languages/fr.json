@@ -23,7 +23,8 @@
         "button_open_settings": "Ouvrir les paramètres",
         "button_drawing_mode": "Mode dessin",
         "button_download_code": "Télécharger le code",
-        "button_toggle_code_visibility": "Basculer la visibilité du code"
+        "button_toggle_code_visibility": "Basculer la visibilité du code",
+        "button_web_search": "Rechercher sur le web"
     },
     "error": {
         "max_files_exceeded": "Vous ne pouvez télécharger que 10 fichiers à la fois",

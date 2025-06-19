@@ -23,7 +23,8 @@
         "button_open_settings": "Einstellungen öffnen",
         "button_drawing_mode": "Zeichenmodus",
         "button_download_code": "Code herunterladen",
-        "button_toggle_code_visibility": "Code-Anzeige umschalten"
+        "button_toggle_code_visibility": "Code-Anzeige umschalten",
+        "button_web_search": "Websuche"
     },
     "error": {
         "max_files_exceeded": "Du kannst nur bis zu 10 Dateien gleichzeitig hochladen",

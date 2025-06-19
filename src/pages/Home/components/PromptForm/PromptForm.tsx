@@ -391,6 +391,7 @@ const PromptForm = ({ onSubmit }: { onSubmit: (message: Message, setFormIsDisabl
                             onClick={() => toggleMode('draw')}
                             aria-label={t('aria.button_drawing_mode')}
                             title={t('aria.button_drawing_mode')}
+                            aria-pressed={message.draw ? 'true' : 'false'}
                         >
                             <Brush />
                         </SvgButton>
@@ -398,6 +399,9 @@ const PromptForm = ({ onSubmit }: { onSubmit: (message: Message, setFormIsDisabl
                         <SvgButton
                             className={`${styles.toolButton} ${message.web_search ? styles.active : ''}`}
                             onClick={() => toggleMode('web_search')}
+                            aria-label={t('aria.button_web_search')}
+                            title={t('aria.button_web_search')}
+                            aria-pressed={message.web_search ? 'true' : 'false'}
                         >
                             <Globe />
                         </SvgButton>
