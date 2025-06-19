@@ -50,6 +50,7 @@
         overflow-y: auto;
 
         max-height: 60vh !important;
+        min-width: 18.75rem;
     }
 
     &Item {
@@ -88,9 +89,26 @@
     }
 }
 
-.description {
+.name {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    min-width: 0;
+    min-height: 0;
+    gap: 0.3125rem;
+}
+
+.developer {
     padding: 0;
     margin: 0.3125rem 0 0;
+    font-size: 0.8rem;
+    color: var(--secondary-color);
+}
+
+.provider {
+    padding: 0;
+    margin: 0;
     font-size: 0.8rem;
     color: var(--secondary-color);
 }
@@ -106,5 +124,11 @@
 
     .toolbar {
         display: contents;
+    }
+}
+
+@media (width < 18.75rem) {
+    .dropdownContent {
+        min-width: 0;
     }
 }

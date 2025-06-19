@@ -3,59 +3,6 @@
     "prompt_placeholder": "Por favor, escribe tu pregunta aquí.",
     "new_chat": "Nuevo chat",
     "select_language": "Selecciona tu idioma",
-    "models": {
-        "gpt-4o": {
-            "description": "Muy rápido e inteligente. Lo mejor en este momento."
-        },
-        "gpt-4o-mini": {
-            "description": "Una versión más rápida pero más pequeña de GPT-4o."
-        },
-        "o1-mini": {
-            "description": "Más inteligente que 4o, pero más lento. Modelo ligero y simple."
-        },
-        "o3-mini": {
-            "description": "Más inteligente que o1, pero más lento. Modelo equilibrado para texto."
-        },
-        "o4-mini": {
-            "description": "Más inteligente que o3, pero más lento. Modelo compacto de OpenAI."
-        },
-        "gemini-2.5-flash": {
-            "description": "Modelo muy rápido de Google."
-        },
-        "gemini-2.0-flash-thinking": {
-            "description": "Ideal para lógica y planificación."
-        },
-        "qwen-2.5-coder-32b": {
-            "description": "Modelo potente para programación de Alibaba."
-        },
-        "llama-3.3-70b": {
-            "description": "Modelo grande de Meta."
-        },
-        "llama-4-scout": {
-            "description": "Modelo de prueba temprano de LLaMA 4."
-        },
-        "llama-4-scout-17b": {
-            "description": "Versión más pequeña del LLaMA 4 Scout."
-        },
-        "mistral-small-3.1-24b": {
-            "description": "Rápido y versátil."
-        },
-        "deepseek-r1": {
-            "description": "Bueno para código y texto general."
-        },
-        "deepseek-r1-distill-llama-70b": {
-            "description": "Versión simplificada de DeepSeek basada en LLaMA."
-        },
-        "deepseek-r1-distill-qwen-32b": {
-            "description": "Otra versión de DeepSeek basada en Qwen."
-        },
-        "phi-4": {
-            "description": "Modelo pequeño y preciso de Microsoft."
-        },
-        "qwq-32b": {
-            "description": "Modelo de texto de alta capacidad."
-        }
-    },
     "drag_files_here": "Arrastra los archivos aquí para subirlos",
     "copied": "¡Copiado!",
     "settings": {

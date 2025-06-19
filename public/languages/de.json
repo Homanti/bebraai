@@ -3,59 +3,6 @@
     "prompt_placeholder": "Bitte gib hier deine Frage ein.",
     "new_chat": "Neuer Chat",
     "select_language": "Sprache auswählen",
-    "models": {
-        "gpt-4o": {
-            "description": "Sehr schnell und intelligent. Das Beste im Moment."
-        },
-        "gpt-4o-mini": {
-            "description": "Eine schnellere, aber kleinere Version von GPT-4o."
-        },
-        "o1-mini": {
-            "description": "Kluger als 4o, aber langsamer. Einfaches, leichtgewichtiges Modell."
-        },
-        "o3-mini": {
-            "description": "Kluger als o1, aber langsamer. Ausgewogenes Mini-Modell für Text."
-        },
-        "o4-mini": {
-            "description": "Kluger als o3, aber langsamer. Kompaktes Modell von OpenAI."
-        },
-        "gemini-2.5-flash": {
-            "description": "Sehr schnelles Modell von Google."
-        },
-        "gemini-2.0-flash-thinking": {
-            "description": "Am besten für Logik und Planung."
-        },
-        "qwen-2.5-coder-32b": {
-            "description": "Leistungsstarkes Codierungsmodell von Alibaba."
-        },
-        "llama-3.3-70b": {
-            "description": "Großes Modell von Meta."
-        },
-        "llama-4-scout": {
-            "description": "Frühes Testmodell von LLaMA 4."
-        },
-        "llama-4-scout-17b": {
-            "description": "Kleinere Version des LLaMA 4 Scout."
-        },
-        "mistral-small-3.1-24b": {
-            "description": "Schnell und vielseitig."
-        },
-        "deepseek-r1": {
-            "description": "Gut für Code und allgemeinen Text."
-        },
-        "deepseek-r1-distill-llama-70b": {
-            "description": "Vereinfachte DeepSeek-Version basierend auf LLaMA."
-        },
-        "deepseek-r1-distill-qwen-32b": {
-            "description": "Eine weitere DeepSeek-Version basierend auf Qwen."
-        },
-        "phi-4": {
-            "description": "Kleines und genaues Modell von Microsoft."
-        },
-        "qwq-32b": {
-            "description": "Hochkapazitätsmodell für Text."
-        }
-    },
     "drag_files_here": "Dateien hierher ziehen zum Hochladen",
     "copied": "Kopiert!",
     "settings": {

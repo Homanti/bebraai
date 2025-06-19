@@ -3,59 +3,6 @@
   "prompt_placeholder": "Por favor, digite sua pergunta aqui.",
   "new_chat": "Nova conversa",
   "select_language": "Selecione seu idioma",
-  "models": {
-    "gpt-4o": {
-      "description": "Muito rápido e inteligente. O melhor no momento."
-    },
-    "gpt-4o-mini": {
-      "description": "Uma versão mais rápida, porém menor, do GPT-4o."
-    },
-    "o1-mini": {
-      "description": "Mais inteligente que o 4o, mas mais lento. Modelo leve e simples."
-    },
-    "o3-mini": {
-      "description": "Mais inteligente que o o1, mas mais lento. Modelo mini equilibrado para texto."
-    },
-    "o4-mini": {
-      "description": "Mais inteligente que o o3, mas mais lento. Modelo compacto da OpenAI."
-    },
-    "gemini-2.5-flash": {
-      "description": "Modelo muito rápido da Google."
-    },
-    "gemini-2.0-flash-thinking": {
-      "description": "Melhor para lógica e planejamento."
-    },
-    "qwen-2.5-coder-32b": {
-      "description": "Poderoso modelo de codificação da Alibaba."
-    },
-    "llama-3.3-70b": {
-      "description": "Grande modelo da Meta."
-    },
-    "llama-4-scout": {
-      "description": "Modelo experimental inicial do LLaMA 4."
-    },
-    "llama-4-scout-17b": {
-      "description": "Versão menor do LLaMA 4 Scout."
-    },
-    "mistral-small-3.1-24b": {
-      "description": "Rápido e de uso geral."
-    },
-    "deepseek-r1": {
-      "description": "Bom para código e texto geral."
-    },
-    "deepseek-r1-distill-llama-70b": {
-      "description": "Versão simplificada do DeepSeek baseada no LLaMA."
-    },
-    "deepseek-r1-distill-qwen-32b": {
-      "description": "Outra versão DeepSeek baseada no Qwen."
-    },
-    "phi-4": {
-      "description": "Pequeno e preciso da Microsoft."
-    },
-    "qwq-32b": {
-      "description": "Modelo de texto de alta capacidade."
-    }
-  },
   "drag_files_here": "Arraste os arquivos aqui para enviar",
   "copied": "Copiado!",
   "settings": {

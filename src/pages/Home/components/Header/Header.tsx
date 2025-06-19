@@ -60,8 +60,11 @@ const Header = ({ openSettingsButtonRef }: HeaderProps) => {
                     {models.map((item, index) => (
                         <li onClick={() => handleSelect(item.name)} key={index} className={styles.dropdownItem}>
                             <div className={styles.dropdownItem__text}>
-                                {item.name}
-                                {<p className={styles.description}>{t(item.description)}</p>}
+                                <div className={styles.name}>
+                                    {item.name}
+                                    {<p className={styles.provider}>({item.provider})</p>}
+                                </div>
+                                {<p className={styles.developer}>{item.developer}</p>}
                             </div>
                             {item.visionSupport ? (
                                 <Image />
