@@ -70,7 +70,7 @@ const Home = () => {
 
         let assistantAdded = false;
 
-        const modelName = getSettings().modelName || 'ChatGPT 4o';
+        const modelName: { "modelName": string, "providerName": string } = getSettings().modelName || { modelName: 'ChatGPT 4o', providerName: 'PollinationsAI' };
 
         try {
             if (!message.draw) {

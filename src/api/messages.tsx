@@ -6,7 +6,7 @@ const url = "http://127.0.0.1:8000"
 
 export const generateText = async (
     messages: Message[],
-    modelName: string = "ChatGPT 4o",
+    modelName: { modelName: string; providerName: string },
     web_search: boolean = false,
     onChunk: (chunk: string) => void,
 ): Promise<void | string> => {
@@ -20,8 +20,10 @@ export const generateText = async (
         }))
     ));
 
-    const model = models.find((m) => m.name === modelName)?.model || "gpt-4o";
+    const model = models.find((m) => m.name === modelName.modelName && m.provider === modelName.providerName)?.model || "gpt-4o";
     formData.append('model', model);
+
+    formData.append('provider', modelName.providerName);
 
     formData.append('web_search', web_search ? 'true' : 'false');
 

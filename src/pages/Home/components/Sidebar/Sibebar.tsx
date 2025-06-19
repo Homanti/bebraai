@@ -39,9 +39,9 @@ const Sidebar = ({ chats, updateChats, setActiveChatId, activeChatId }: SidebarP
     };
 
     const deleteChat = (id: string) => {
-        if (chats.length === 1) {
-            setIsSidebarOpening(false);
+        setIsSidebarOpening(false);
 
+        if (chats.length === 1) {
             const defaultChat: Chat = { id: '1', title: 'new_chat', messages: [] };
             updateChats([defaultChat]);
             setActiveChatId('1');

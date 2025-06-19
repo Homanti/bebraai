@@ -1,6 +1,6 @@
 import styles from './PromptForm.module.scss';
 import { useEffect, useRef, useState } from "react";
-import {Send, Plus, X, Brush, File as Document} from "lucide-react";
+import {Send, Plus, X, Brush, Globe, File as Document} from "lucide-react";
 import SvgButton from "../../../../components/SvgButton/SvgButton.tsx";
 import type {Message, MessageFile} from "../../../../types/chat.tsx";
 import { AnimatePresence, motion } from "motion/react";
@@ -72,7 +72,7 @@ const PromptForm = ({ onSubmit }: { onSubmit: (message: Message, setFormIsDisabl
     const processFiles = async (
         files: File[] | DataTransferItem[],
     ) => {
-        if (!models.find((m) => m.name === modelName)?.visionSupport) return;
+        if (!models.find((m) => m.name === modelName.modelName && m.provider === modelName.providerName)?.visionSupport) return;
 
         if ((message.files && message.files?.length > 10) || files.length > 10) return alert(t('error.max_files_exceeded'));
 
@@ -358,10 +358,10 @@ const PromptForm = ({ onSubmit }: { onSubmit: (message: Message, setFormIsDisabl
 
                 <div className={styles.toolbar}>
                     <div className={styles.toolbarButtons}>
-                        <label className={`${styles.addButton} ${!((models.find((m) => m.name === modelName)?.visionSupport) && !(message.draw)) ? styles.disabled : ''}`} aria-label={t('aria.button_add_files')} title={t('aria.button_add_files')}>
+                        <label className={`${styles.addButton} ${!((models.find((m) => m.name === modelName.modelName && m.provider === modelName.providerName)?.visionSupport) && !(message.draw) && !(message.web_search)) ? styles.disabled : ''}`} aria-label={t('aria.button_add_files')} title={t('aria.button_add_files')}>
                             <Plus />
                             <input
-                                disabled={!models.find((m) => m.name === modelName)?.visionSupport || message.draw}
+                                disabled={!models.find((m) => m.name === modelName.modelName && m.provider === modelName.providerName)?.visionSupport || message.draw}
                                 type="file"
                                 accept="
                                     image/png,image/jpeg,.jpeg,.bmp,.webp,.svg,
@@ -395,12 +395,12 @@ const PromptForm = ({ onSubmit }: { onSubmit: (message: Message, setFormIsDisabl
                             <Brush />
                         </SvgButton>
 
-                        {/*<SvgButton*/}
-                        {/*    className={`${styles.toolButton} ${message.web_search ? styles.active : ''}`}*/}
-                        {/*    onClick={() => toggleMode('web_search')}*/}
-                        {/*>*/}
-                        {/*    <Globe />*/}
-                        {/*</SvgButton>*/}
+                        <SvgButton
+                            className={`${styles.toolButton} ${message.web_search ? styles.active : ''}`}
+                            onClick={() => toggleMode('web_search')}
+                        >
+                            <Globe />
+                        </SvgButton>
                     </div>
 
                     <SvgButton

@@ -1,3 +1,3 @@
 export type Settings = {
-    modelName: string;
+    modelName: {"modelName": string, "providerName": string};
 }

@@ -7,16 +7,16 @@ type SettingsState = {
 };
 
 export interface SettingsStore {
-    modelName: string;
-    setModelName: (name: string) => void;
+    modelName: {modelName: string, providerName: string};
+    setModelName: (modelName: string, providerName: string) => void;
 }
 
 export const useSettingsStore = create<SettingsStore>((set) => ({
-    modelName: getSettings().modelName,
-    setModelName: (name: string) => {
-        const updated = { ...getSettings(), modelName: name };
+    modelName: getSettings().modelName || { modelName: "ChatGPT 4o", providerName: "PollinationsAI" },
+    setModelName: (modelName, providerName) => {
+        const updated = { ...getSettings(), modelName: { modelName: modelName, providerName: providerName } };
         saveSettings(updated);
-        set({ modelName: name });
+        set({ modelName: updated.modelName });
     }
 }));
 

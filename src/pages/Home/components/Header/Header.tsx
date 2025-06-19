@@ -22,9 +22,9 @@ const Header = ({ openSettingsButtonRef }: HeaderProps) => {
     const [width, setWidth] = useState(window.innerWidth);
     const isMobile = width <= 768;
 
-    const handleSelect = (value: string) => {
+    const handleSelect = (model: string, provider: string) => {
         setIsOpen(false);
-        setModelName(value);
+        setModelName(model, provider);
     };
 
     useEffect(() => {
@@ -56,9 +56,9 @@ const Header = ({ openSettingsButtonRef }: HeaderProps) => {
                     </>
                 )}
 
-                <Dropdown isOpen={isOpen} setIsOpen={setIsOpen} buttonContent={modelName} customButtonClass={styles.dropdownButton} customContentClass={styles.dropdownContent}>
+                <Dropdown isOpen={isOpen} setIsOpen={setIsOpen} buttonContent={modelName.modelName} customButtonClass={styles.dropdownButton} customContentClass={styles.dropdownContent}>
                     {models.map((item, index) => (
-                        <li onClick={() => handleSelect(item.name)} key={index} className={styles.dropdownItem}>
+                        <li onClick={() => handleSelect(item.name, item.provider)} key={index} className={styles.dropdownItem}>
                             <div className={styles.dropdownItem__text}>
                                 <div className={styles.name}>
                                     {item.name}

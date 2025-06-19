@@ -7,9 +7,9 @@ export const saveSettings = (settings: Settings) => {
 export const getSettings = (): Settings => {
     const raw = localStorage.getItem("settings");
     try {
-        return raw ? JSON.parse(raw) : { modelName: "ChatGPT 4o" };
+        return raw ? JSON.parse(raw) : { modelName: { modelName: "ChatGPT 4o", providerName: "PollinationsAI" }};
     } catch (error) {
         console.warn("localStorage error:", error);
-        return { modelName: "ChatGPT 4o" };
+        return { modelName: { modelName: "ChatGPT 4o", providerName: "PollinationsAI" } };
     }
 };
