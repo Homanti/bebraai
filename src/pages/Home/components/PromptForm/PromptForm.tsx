@@ -391,6 +391,7 @@ const PromptForm = ({ onSubmit }: { onSubmit: (message: Message, setFormIsDisabl
                             onClick={() => toggleMode('draw')}
                             aria-label={t('aria.button_drawing_mode')}
                             title={t('aria.button_drawing_mode')}
+                            role={"switch"}
                             aria-pressed={message.draw ? 'true' : 'false'}
                         >
                             <Brush />
@@ -401,6 +402,7 @@ const PromptForm = ({ onSubmit }: { onSubmit: (message: Message, setFormIsDisabl
                             onClick={() => toggleMode('web_search')}
                             aria-label={t('aria.button_web_search')}
                             title={t('aria.button_web_search')}
+                            role={"switch"}
                             aria-pressed={message.web_search ? 'true' : 'false'}
                         >
                             <Globe />
