@@ -126,6 +126,13 @@ const Sidebar = ({ chats, updateChats, setActiveChatId, activeChatId }: SidebarP
                                                 opacity: { duration: 0.2 }
                                             }}
                                         >
+                                            {chat.id === activeChatId && (
+                                                <motion.div
+                                                    layoutId="activeBackground"
+                                                    className={styles.liBackground}
+                                                    transition={{ type: "spring", stiffness: 500, damping: 40 }}
+                                                />
+                                            )}
                                             <span>{t(chat.title)}</span>
                                             <SvgButton className={styles.trashButton} onClick={() => deleteChat(chat.id)} aria-label={t("aria.button_delete_chat")} title={t("aria.button_delete_chat")}>
                                                 <Trash />
