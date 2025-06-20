@@ -1,7 +1,7 @@
 import type { Message } from "../types/chat.tsx";
 import { models } from "../data/models.tsx";
 
-const url = "https://bebraai-fastapi-production.up.railway.app"
+const url = "https://api.bebraai.com"
 // const url = "http://127.0.0.1:8000"
 
 export const generateText = async (
